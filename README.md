@@ -1,6 +1,6 @@
 # WoWs data for AIs
 
-A static website with complete World of Warships ship data, made for AI agents rather than people. It's plain JSON, CSV and Markdown, with units in every field name and an `llms.txt` entry point. It rebuilds itself every day, so new patches show up automatically.
+A static website with complete World of Warships ship data, made for AI agents rather than people. It's plain JSON, CSV and Markdown, with units in every field name and an `llms.txt` entry point. It checks for new game data every 6 hours, so new patches show up automatically.
 
 **AI agents: start at `/llms.txt`.**
 
@@ -42,4 +42,4 @@ python3 -I tools/crosscheck.py dist wiki-cache verification/wiki-crosscheck.json
 
 ## Hosting
 
-GitHub Pages: in the repo, go to Settings → Pages → Source and choose **GitHub Actions**. The workflow in `.github/workflows/build.yml` then builds and deploys every day.
+GitHub Pages: in the repo, go to Settings → Pages → Source and choose **GitHub Actions**. The workflow in `.github/workflows/build.yml` then builds and deploys every 6 hours.

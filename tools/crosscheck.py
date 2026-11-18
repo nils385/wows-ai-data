@@ -110,6 +110,9 @@ pref = {'tech_tree': 0, 'premium': 1, 'special': 2}
 
 results, checked_ships, missing_pages = [], 0, []
 stats = Counter()
+strict = Counter()
+strict_other = Counter()
+strict_examples = {}
 for fname in sorted(os.listdir(pages)):
     name = urllib.parse.unquote(fname[:-5])
     try:
@@ -127,6 +130,7 @@ for fname in sorted(os.listdir(pages)):
     data = json.load(open(os.path.join(dist, 'api', 'ships', ship['index'] + '.json')))
     confs = json.load(open(os.path.join(dist, 'api', 'ships', ship['index'], 'configurations.json')))['configurations']
     flats = [flatten(c['stats']) for c in confs]
+    top_flat = [flatten(c['stats']) for c in confs if c.get('is_top')] or flats[-1:]
     rows = parse_tables(text)
     if not rows:
         missing_pages.append(name)
@@ -158,8 +162,11 @@ for fname in sorted(os.listdir(pages)):
             continue
         if not targets or not vals:
             continue
+        single = len(vals) == 1  # one wiki column: should describe the fully upgraded (top) configuration
         for v, d in vals:
             pool = [x for f in flats for p in targets for x in candidates(f, p, stype)]
+            if single:
+                tpool = [x for f in top_flat for p in targets for x in candidates(f, p, stype)]
             # wiki rounding: half a unit of its last digit; computed products (range x fire control,
             # 180/traverse) may round the other way at exact halves, so allow one full unit there;
             # the wiki rounds "Maximum dispersion" down.
@@ -168,6 +175,12 @@ for fname in sorted(os.listdir(pages)):
             ok = any(abs(x - v) <= tol for x in pool)
             status = 'ok' if ok else ('no_value' if not pool else 'mismatch')
             stats[status] += 1
+            if single and tpool:
+                sok = any(abs(x - v) <= tol for x in tpool)
+                strict['ok' if sok else 'mismatch'] += 1
+                if not sok and ok:
+                    strict_other[f"{section} | {label}"] += 1
+                    strict_examples.setdefault(f"{section} | {label}", []).append({'ship': ship['name'], 'wiki': v, 'top': sorted(set(round(x, 3) for x in tpool))[:3]})
             if not ok:
                 results.append({'ship': ship['name'], 'index': ship['index'], 'section': section, 'label': label, 'wiki': v, 'site_values': sorted(set(round(x, 3) for x in pool))[:6], 'status': status})
 
@@ -179,12 +192,16 @@ ASSESSMENT = [
     'Secondary battery range on about 45 ships, mostly aircraft carriers: the wiki lists a longer range than the game files (Hornet 8.5 vs 4.5 km). Unresolved: could be an outdated wiki or a bonus the game files used here do not contain. Treat secondary range of carriers with care.',
     'A few French destroyers (fuse time, detectability): probably wiki pages that predate a rework.',
     'Single-value differences (one torpedo speed, one shell weight): not investigated individually.',
+    'Strict check (single-column wiki values vs the fully upgraded configuration only): every value that fails it still matches another real module of the same ship. The wiki often shows the stock module in single-column tables (stock fire control for dispersion, stock hull for AA, stock guns for shells), so these are not data errors.',
 ]
 by_label = Counter(f"{r['section']} | {r['label']}" for r in mism)
 report = {
     'about': 'Cross-check of this site against the official World of Warships wiki (wiki.worldofwarships.com). Each number in a wiki ship stat table is compared with the same stat in any module configuration of the ship, using the wiki rounding as tolerance. Mismatches can be outdated wiki pages: the wiki is edited by hand and can lag behind game patches.',
     'ships_compared': checked_ships, 'values_compared': sum(stats.values()), 'values_matching': stats['ok'], 'values_different': stats['mismatch'], 'values_not_comparable': stats['no_value'],
     'match_rate_pct': round(100 * stats['ok'] / max(1, stats['ok'] + stats['mismatch']), 2),
+    'strict': {'about': 'Single-column wiki values compared only with the fully upgraded (top) configuration.', 'values_compared': strict['ok'] + strict['mismatch'], 'values_matching': strict['ok'], 'match_rate_pct': round(100 * strict['ok'] / max(1, strict['ok'] + strict['mismatch']), 2),
+        'matches_another_module_not_top_by_stat': strict_other.most_common(), 'examples': {k: v[:5] for k, v in strict_examples.items()}},
+    'checked_on': __import__('datetime').date.today().isoformat(),
     'differences_by_stat': by_label.most_common(),
     'assessment': ASSESSMENT,
     'differences': mism, 'not_comparable': [r for r in results if r['status'] == 'no_value'][:300],

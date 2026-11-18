@@ -6,6 +6,580 @@
  "values_different": 154,
  "values_not_comparable": 0,
  "match_rate_pct": 99.52,
+ "strict": {
+  "about": "Single-column wiki values compared only with the fully upgraded (top) configuration.",
+  "values_compared": 22255,
+  "values_matching": 21491,
+  "match_rate_pct": 96.57,
+  "matches_another_module_not_top_by_stat": [
+   [
+    "DISPERSION | Maximum dispersion (m)",
+    254
+   ],
+   [
+    "RANGE | Short-range",
+    178
+   ],
+   [
+    "RANGE | Mid-range",
+    167
+   ],
+   [
+    "RANGE | Long-range",
+    56
+   ],
+   [
+    "HE SHELL | Shell velocity (m/s)",
+    9
+   ],
+   [
+    "HE SHELL | Shell weight (kg)",
+    7
+   ],
+   [
+    "HE SHELL | Fire chance (%)",
+    6
+   ],
+   [
+    "AP SHELL | Maximum damage",
+    6
+   ],
+   [
+    "AP SHELL | Shell velocity (m/s)",
+    6
+   ],
+   [
+    "HE SHELL | Maximum damage",
+    5
+   ],
+   [
+    "AP SHELL | Shell weight (kg)",
+    5
+   ],
+   [
+    "HE SHELL | Penetration (mm)",
+    3
+   ],
+   [
+    "MAIN BATTERY | Reload time (sec)",
+    2
+   ],
+   [
+    "MAIN BATTERY | 180° turn time (sec)",
+    1
+   ],
+   [
+    "AP SHELL | Fuse time (sec)",
+    1
+   ],
+   [
+    "SURVIVABILITY | Hit Points",
+    1
+   ],
+   [
+    "TORPEDO LAUNCHERS | Reload time (sec)",
+    1
+   ],
+   [
+    "AP SHELL | Arming threshold (mm)",
+    1
+   ]
+  ],
+  "examples": {
+   "DISPERSION | Maximum dispersion (m)": [
+    {
+     "ship": "Émile Bertin",
+     "wiki": 126.0,
+     "top": [
+      136.01
+     ]
+    },
+    {
+     "ship": "Öland",
+     "wiki": 83.0,
+     "top": [
+      90.57
+     ]
+    },
+    {
+     "ship": "Östergötland",
+     "wiki": 84.0,
+     "top": [
+      91.48
+     ]
+    },
+    {
+     "ship": "Acasta",
+     "wiki": 90.0,
+     "top": [
+      98.32
+     ]
+    },
+    {
+     "ship": "Adatara",
+     "wiki": 240.0,
+     "top": [
+      256.26
+     ]
+    }
+   ],
+   "RANGE | Short-range": [
+    {
+     "ship": "Émile Bertin",
+     "wiki": 77.0,
+     "top": [
+      133
+     ]
+    },
+    {
+     "ship": "Adatara",
+     "wiki": 137.0,
+     "top": [
+      122.5
+     ]
+    },
+    {
+     "ship": "Adriatico",
+     "wiki": 46.0,
+     "top": [
+      80.5
+     ]
+    },
+    {
+     "ship": "Agano",
+     "wiki": 88.0,
+     "top": [
+      182
+     ]
+    },
+    {
+     "ship": "Akatsuki",
+     "wiki": 21.0,
+     "top": [
+      56
+     ]
+    }
+   ],
+   "RANGE | Mid-range": [
+    {
+     "ship": "Émile Bertin",
+     "wiki": 28.0,
+     "top": [
+      119
+     ]
+    },
+    {
+     "ship": "Öland",
+     "wiki": 84.0,
+     "top": [
+      94.5
+     ]
+    },
+    {
+     "ship": "Östergötland",
+     "wiki": 109.0,
+     "top": [
+      329
+     ]
+    },
+    {
+     "ship": "Acasta",
+     "wiki": 25.0,
+     "top": [
+      35
+     ]
+    },
+    {
+     "ship": "Adatara",
+     "wiki": 119.0,
+     "top": [
+      231
+     ]
+    }
+   ],
+   "RANGE | Long-range": [
+    {
+     "ship": "Émile Bertin",
+     "wiki": 21.0,
+     "top": [
+      7
+     ]
+    },
+    {
+     "ship": "Algérie",
+     "wiki": 67.0,
+     "top": [
+      59.5
+     ]
+    },
+    {
+     "ship": "Alsace",
+     "wiki": 130.0,
+     "top": [
+      234.5
+     ]
+    },
+    {
+     "ship": "Amalfi",
+     "wiki": 151.0,
+     "top": [
+      147
+     ]
+    },
+    {
+     "ship": "Bayern",
+     "wiki": 18.0,
+     "top": [
+      140
+     ]
+    }
+   ],
+   "HE SHELL | Maximum damage": [
+    {
+     "ship": "Chester",
+     "wiki": 1450.0,
+     "top": [
+      1700
+     ]
+    },
+    {
+     "ship": "HSF Harekaze",
+     "wiki": 2150.0,
+     "top": [
+      1800
+     ]
+    },
+    {
+     "ship": "Phoenix",
+     "wiki": 1700.0,
+     "top": [
+      1750
+     ]
+    },
+    {
+     "ship": "V-25",
+     "wiki": 1000.0,
+     "top": [
+      1200
+     ]
+    },
+    {
+     "ship": "Wakeful",
+     "wiki": 1500.0,
+     "top": [
+      1700
+     ]
+    }
+   ],
+   "HE SHELL | Fire chance (%)": [
+    {
+     "ship": "Chester",
+     "wiki": 4.0,
+     "top": [
+      7
+     ]
+    },
+    {
+     "ship": "Nicholas",
+     "wiki": 4.0,
+     "top": [
+      5
+     ]
+    },
+    {
+     "ship": "Phoenix",
+     "wiki": 7.0,
+     "top": [
+      12
+     ]
+    },
+    {
+     "ship": "V-25",
+     "wiki": 3.0,
+     "top": [
+      5
+     ]
+    },
+    {
+     "ship": "Wakeful",
+     "wiki": 6.0,
+     "top": [
+      9
+     ]
+    }
+   ],
+   "HE SHELL | Shell velocity (m/s)": [
+    {
+     "ship": "Chester",
+     "wiki": 914.0,
+     "top": [
+      853
+     ]
+    },
+    {
+     "ship": "HSF Harekaze",
+     "wiki": 915.0,
+     "top": [
+      808
+     ]
+    },
+    {
+     "ship": "Kawachi",
+     "wiki": 810.0,
+     "top": [
+      869
+     ]
+    },
+    {
+     "ship": "Medea",
+     "wiki": 664.0,
+     "top": [
+      811
+     ]
+    },
+    {
+     "ship": "Nicholas",
+     "wiki": 960.0,
+     "top": [
+      792
+     ]
+    }
+   ],
+   "HE SHELL | Shell weight (kg)": [
+    {
+     "ship": "Chester",
+     "wiki": 22.7,
+     "top": [
+      47.7
+     ]
+    },
+    {
+     "ship": "HSF Harekaze",
+     "wiki": 23.0,
+     "top": [
+      31.75
+     ]
+    },
+    {
+     "ship": "Medea",
+     "wiki": 14.1,
+     "top": [
+      15.88
+     ]
+    },
+    {
+     "ship": "Nicholas",
+     "wiki": 22.7,
+     "top": [
+      24.5
+     ]
+    },
+    {
+     "ship": "V-25",
+     "wiki": 9.5,
+     "top": [
+      18.2
+     ]
+    }
+   ],
+   "HE SHELL | Penetration (mm)": [
+    {
+     "ship": "Chester",
+     "wiki": 21.0,
+     "top": [
+      25
+     ]
+    },
+    {
+     "ship": "V-25",
+     "wiki": 15.0,
+     "top": [
+      26
+     ]
+    },
+    {
+     "ship": "Wakeful",
+     "wiki": 17.0,
+     "top": [
+      20
+     ]
+    }
+   ],
+   "MAIN BATTERY | Reload time (sec)": [
+    {
+     "ship": "HSF Harekaze",
+     "wiki": 7.0,
+     "top": [
+      4
+     ]
+    },
+    {
+     "ship": "Nicholas",
+     "wiki": 6.5,
+     "top": [
+      4
+     ]
+    }
+   ],
+   "MAIN BATTERY | 180° turn time (sec)": [
+    {
+     "ship": "HSF Harekaze",
+     "wiki": 26.1,
+     "top": [
+      5.29
+     ]
+    }
+   ],
+   "AP SHELL | Maximum damage": [
+    {
+     "ship": "HSF Harekaze",
+     "wiki": 2200.0,
+     "top": [
+      2400
+     ]
+    },
+    {
+     "ship": "Kawachi",
+     "wiki": 6700.0,
+     "top": [
+      6900
+     ]
+    },
+    {
+     "ship": "Kongō",
+     "wiki": 9000.0,
+     "top": [
+      9200
+     ]
+    },
+    {
+     "ship": "Nicholas",
+     "wiki": 2200.0,
+     "top": [
+      2100
+     ]
+    },
+    {
+     "ship": "Phoenix",
+     "wiki": 2400.0,
+     "top": [
+      2500
+     ]
+    }
+   ],
+   "AP SHELL | Shell velocity (m/s)": [
+    {
+     "ship": "HSF Harekaze",
+     "wiki": 915.0,
+     "top": [
+      808
+     ]
+    },
+    {
+     "ship": "Kawachi",
+     "wiki": 810.0,
+     "top": [
+      869
+     ]
+    },
+    {
+     "ship": "Kongō",
+     "wiki": 790.0,
+     "top": [
+      775
+     ]
+    },
+    {
+     "ship": "Nicholas",
+     "wiki": 960.0,
+     "top": [
+      792
+     ]
+    },
+    {
+     "ship": "Phoenix",
+     "wiki": 853.0,
+     "top": [
+      914
+     ]
+    }
+   ],
+   "AP SHELL | Shell weight (kg)": [
+    {
+     "ship": "HSF Harekaze",
+     "wiki": 23.0,
+     "top": [
+      31.75
+     ]
+    },
+    {
+     "ship": "Kongō",
+     "wiki": 635.5,
+     "top": [
+      673.5
+     ]
+    },
+    {
+     "ship": "Nicholas",
+     "wiki": 22.7,
+     "top": [
+      25
+     ]
+    },
+    {
+     "ship": "Phoenix",
+     "wiki": 47.7,
+     "top": [
+      47.6
+     ]
+    },
+    {
+     "ship": "Wakeful",
+     "wiki": 17.35,
+     "top": [
+      28.12
+     ]
+    }
+   ],
+   "AP SHELL | Fuse time (sec)": [
+    {
+     "ship": "HSF Harekaze",
+     "wiki": 0.01,
+     "top": [
+      0.03
+     ]
+    }
+   ],
+   "SURVIVABILITY | Hit Points": [
+    {
+     "ship": "Harbin",
+     "wiki": 23800.0,
+     "top": [
+      26500
+     ]
+    }
+   ],
+   "TORPEDO LAUNCHERS | Reload time (sec)": [
+    {
+     "ship": "Minsk",
+     "wiki": 93.0,
+     "top": [
+      80
+     ]
+    }
+   ],
+   "AP SHELL | Arming threshold (mm)": [
+    {
+     "ship": "Wakeful",
+     "wiki": 17.0,
+     "top": [
+      20
+     ]
+    }
+   ]
+  }
+ },
+ "checked_on": "2026-11-18",
  "differences_by_stat": [
   [
    "SECONDARY BATTERY | Secondary battery range (km)",
@@ -93,7 +667,8 @@
   "Long-range flak bursts on about 30 ships: game files have more bursts than the wiki (Aki: 8 vs 4) while continuous AA damage matches. Probably wiki pages not updated after AA changes.",
   "Secondary battery range on about 45 ships, mostly aircraft carriers: the wiki lists a longer range than the game files (Hornet 8.5 vs 4.5 km). Unresolved: could be an outdated wiki or a bonus the game files used here do not contain. Treat secondary range of carriers with care.",
   "A few French destroyers (fuse time, detectability): probably wiki pages that predate a rework.",
-  "Single-value differences (one torpedo speed, one shell weight): not investigated individually."
+  "Single-value differences (one torpedo speed, one shell weight): not investigated individually.",
+  "Strict check (single-column wiki values vs the fully upgraded configuration only): every value that fails it still matches another real module of the same ship. The wiki often shows the stock module in single-column tables (stock fire control for dispersion, stock hull for AA, stock guns for shells), so these are not data errors."
  ],
  "differences": [
   {

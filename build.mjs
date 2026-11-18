@@ -7,7 +7,7 @@
 // Env: SITE_URL (absolute links), WOWS_SERVER (live|pts), OUT_DIR. Needs Node 18+, no packages.
 // Behind an HTTPS proxy, run with NODE_USE_ENV_PROXY=1.
 
-import { mkdir, writeFile, rm, readFile } from "node:fs/promises";
+import { mkdir, writeFile, rm, readFile, rename } from "node:fs/promises";
 import path from "node:path";
 import { loadGameData } from "./lib/data.mjs";
 import { allConfigurations, computeConfiguration, specialAbility, shellStats, weaponStats, cvPlane, describeModifier, slug, consumableSlots } from "./lib/ship.mjs";
@@ -15,11 +15,12 @@ import { flatten, metricInfo } from "./lib/metrics.mjs";
 import { eligibleModernizations, skillsFor, signalFlags, changesWith, bestWithUpgrades, describeEffects, clean, upgradeName } from "./lib/analysis.mjs";
 import { toMarkdown } from "./lib/markdown.mjs";
 import { validate } from "./lib/validate.mjs";
-import { buildKnowledge, buildChanges } from "./lib/knowledge.mjs";
+import { buildKnowledge } from "./lib/knowledge.mjs";
 
 const args = process.argv.slice(2);
 const argVal = (n) => (args.includes(n) ? args[args.indexOf(n) + 1] : null);
-const OUT = path.resolve(process.env.OUT_DIR || "dist");
+const FINAL_OUT = path.resolve(process.env.OUT_DIR || "dist");
+const OUT = `${FINAL_OUT}.staging`; // build here; replace FINAL_OUT only if everything succeeds
 const SITE_URL = (process.env.SITE_URL || "").replace(/\/$/, "");
 const SERVER = process.env.WOWS_SERVER || "live";
 const abs = (p) => `${SITE_URL}/${p}`;
@@ -59,7 +60,9 @@ const previousHistory = await fetchPrev("changes/history.json", JSON.parse);
 log(previousRows ? `previous build found: ${previousRows.length} ships` : "no previous build reachable");
 await rm(OUT, { recursive: true, force: true });
 await mkdir(OUT, { recursive: true });
+const SCHEMA_VERSION = "2.0.0";
 const meta = {
+  schema_version: SCHEMA_VERSION,
   generated_at: new Date().toISOString(), game_version: ctx.gameVersion, server: SERVER,
   data_source: "WoWs ShipBuilder public game data (https://app.wowssb.com), extracted from the World of Warships game client every patch",
   calculations: "Stat formulas are a line-by-line port of WoWs ShipBuilder's open-source calculations (MIT license).",
@@ -110,9 +113,7 @@ for (const s of ships) {
   const armor = wikiArmor[s.index] ?? null;
   if (armor) for (const [k, v] of Object.entries(armor)) if (typeof v === "number") topFlatRaw[`armor.${k}`] = v;
   // alphabetical, so two ships' stat lists line up line by line
-  const topFlat = Object.fromEntries(Object.entries(topFlatRaw).sort(([a], [b]) => a.localeCompare(b)));
-  const shipChanges = changesSincePrevious(s.index, topFlat);
-  if (shipChanges.length && s.shipCategory !== "TestShip") changedShips.push({ index: s.index, name: shipName(s.index), tier: s.tier, class: classId(s.shipClass), nation: nationId(s.shipNation), changes: shipChanges });
+  let topFlat = Object.fromEntries(Object.entries(topFlatRaw).sort(([a], [b]) => a.localeCompare(b)));
 
   // upgrades
   const slots = eligibleModernizations(ctx, s);
@@ -135,9 +136,37 @@ for (const s of ships) {
   }));
   const flags = signalFlags(ctx).map((f) => ({ name: f.name, description: f.description, effects: describeEffects(L, f.mods), stat_changes: changesWith(ctx, s, top.cfg, topFlat, f.mods) }));
 
+  // Derived stats players ask for most, computed with the same formulas (not hand math):
+  const derived = {}, derivedNotes = {};
+  for (const [t, sh] of Object.entries(top.stats.main_battery?.shells ?? {})) {
+    for (const row of sh.ballistics_by_range ?? []) {
+      if (![5, 10, 15, 20].includes(row.range_km)) continue;
+      if (t.startsWith("ap")) derived[`main_battery.shells.${t}.penetration_at_${row.range_km}km_mm`] = row.penetration_mm;
+      if (row.range_km === 10 || row.range_km === 15) derived[`main_battery.shells.${t}.flight_time_at_${row.range_km}km_s`] = row.flight_time_s;
+    }
+  }
+  const allSkills = skillsFor(ctx, s);
+  const ifhe = allSkills.find((k) => k.name === "Inertia Fuse for HE Shells");
+  if (ifhe && topFlat["main_battery.shells.he.penetration_mm"] !== undefined) {
+    const c = changesWith(ctx, s, top.cfg, topFlat, ifhe.mods).find((x) => x.metric === "main_battery.shells.he.penetration_mm");
+    if (c) { derived["main_battery.shells.he.penetration_with_ifhe_mm"] = c.after; derivedNotes.ifhe = "with the captain skill Inertia Fuse for HE Shells"; }
+  }
+  const ce = allSkills.find((k) => k.name === "Concealment Expert");
+  const csm = slots.flatMap((sl) => sl.options).find((o) => upgradeName(L, o) === "Concealment System Modification 1");
+  const concMods = [...(ce?.mods ?? []), ...(csm?.modifiers ?? [])];
+  if (concMods.length) {
+    const f = flatten(computeConfiguration(ctx, s, top.cfg, concMods, { tables: false, accel: false }));
+    derived["concealment.min_detectability_by_ships_km"] = f["concealment.detectability_by_ships_km"];
+    derived["concealment.min_detectability_by_planes_km"] = f["concealment.detectability_by_planes_km"];
+    derivedNotes.min_detectability = `with ${[ce ? "Concealment Expert (captain skill)" : null, csm ? "Concealment System Modification 1 (upgrade)" : null].filter(Boolean).join(" + ")}; no camouflage`;
+  }
+  topFlat = Object.fromEntries(Object.entries({ ...topFlat, ...derived }).sort(([a], [b]) => a.localeCompare(b)));
+  const shipChanges = changesSincePrevious(s.index, topFlat);
+  if (shipChanges.length && s.shipCategory !== "TestShip") changedShips.push({ index: s.index, name: shipName(s.index), tier: s.tier, class: classId(s.shipClass), nation: nationId(s.shipNation), changes: shipChanges });
+
   const record = {
     about: `World of Warships ship data for ${name}. ${COMMON_NOTE} "configurations.top" is fully researched modules (what players normally use); "configurations.stock" is unresearched.`,
-    game_version: ctx.gameVersion,
+    game_version: ctx.gameVersion, schema_version: SCHEMA_VERSION,
     ...base,
     description: clean(L[`${s.index}_DESCR`]),
     price_credits: info.costCredits || null, price_doubloons: info.costGold || null, research_xp: info.costXp || null,
@@ -151,16 +180,17 @@ for (const s of ships) {
     upgrades: {
       about: "Upgrades (modernizations) this ship can mount, per slot. One per slot. stat_changes = exact effect on the top configuration alone.",
       slots: upgradeSlots,
-      best_possible_values: { about: "For each stat an upgrade can improve: base value, best value with the best upgrade in each slot, and which upgrades give it.", metrics: best },
+      best_possible_values: { about: "For each stat separately: base value, and the best value reachable for THAT stat with one upgrade per slot, plus which upgrades give it. Each stat may need a different set of upgrades, so these are not one combined build.", metrics: best },
     },
     captain_skills: { about: "Captain skills for this ship's class. stat_changes = effect of that one skill alone on the top configuration.", skills },
     signal_flags: { about: "Signal flags (all ships can mount any of these). stat_changes = effect of that one flag alone on the top configuration.", flags },
     all_metrics_top_configuration: topFlat,
+    derived_metric_notes: Object.keys(derivedNotes).length ? derivedNotes : undefined,
   };
   await out(`api/ships/${s.index}.json`, record);
   await out(`api/ships/${s.index}/configurations.json`, {
     about: `Every module combination for ${name} with full stats. ${COMMON_NOTE}`, game_version: ctx.gameVersion, index: s.index, name,
-    configurations: configs.map((c) => ({ id: c.id, is_stock: c.stock, is_top: c.top, stats: computeConfiguration(ctx, s, c.cfg, [], { tables: false, accel: true }) })),
+    configurations: configs.map((c) => ({ id: c.id, is_stock: c.stock, is_top: c.top, module_ids: Object.fromEntries(Object.entries(c.cfg).sort(([a], [b]) => a.localeCompare(b)).map(([t, u]) => [slug(t), u.name])), stats: computeConfiguration(ctx, s, c.cfg, [], { tables: false, accel: true }) })),
   });
   // Small pages so AI fetch tools (which often cut pages at ~50-100 KB) can read them whole.
   const title = `${name} (tier ${base.tier_roman} ${base.nation} ${base.class}, ${base.category})`;
@@ -181,6 +211,11 @@ for (const s of ships) {
   const summaryMd = md(title, `${COMMON_NOTE} Values are the top (fully researched) configuration.`,
     `game version: ${ctx.gameVersion} (data updated ${meta.generated_at.slice(0, 10)})\n` +
     `index: ${s.index}\nname: ${name}\nfull name: ${record.full_name}\ntier: ${base.tier}\nclass: ${base.class}\nnation: ${base.nation}\ncategory: ${base.category}\n` +
+    `detectability: ${topFlat["concealment.detectability_by_ships_km"]} km by ships, ${topFlat["concealment.detectability_by_planes_km"]} km by planes` +
+    (derivedNotes.min_detectability ? `; best ${topFlat["concealment.min_detectability_by_ships_km"]} km / ${topFlat["concealment.min_detectability_by_planes_km"]} km ${derivedNotes.min_detectability}` : "") + "\n" +
+    (topFlat["main_battery.reload_s"] !== undefined ? `main battery: ${topFlat["main_battery.range_km"]} km range, ${topFlat["main_battery.reload_s"]} s reload, ${top.stats.main_battery.layout} ${top.stats.main_battery.caliber_mm} mm\n` : "") +
+    (topFlat["main_battery.shells.he.penetration_mm"] !== undefined ? `HE penetration: ${topFlat["main_battery.shells.he.penetration_mm"]} mm${topFlat["main_battery.shells.he.penetration_with_ifhe_mm"] !== undefined ? ` (${topFlat["main_battery.shells.he.penetration_with_ifhe_mm"]} mm with Inertia Fuse for HE Shells)` : ""}\n` : "") +
+    (topFlat["main_battery.shells.ap.penetration_at_10km_mm"] !== undefined ? `AP penetration: ${[5, 10, 15, 20].filter((k) => topFlat[`main_battery.shells.ap.penetration_at_${k}km_mm`] !== undefined).map((k) => `${topFlat[`main_battery.shells.ap.penetration_at_${k}km_mm`]} mm at ${k} km`).join(", ")}\n` : "") +
     (armor ? `armor (official wiki): belt ${armor.belt_mm ?? "n/a"} mm, deck ${armor.deck_mm ?? "n/a"} mm, extremities ${armor.extremities_mm ?? "n/a"} mm, superstructure ${armor.superstructure_mm ?? "n/a"} mm\n` : "armor: not available\n") +
     `price: ${record.price_credits ? record.price_credits + " credits" : record.price_doubloons ? record.price_doubloons + " doubloons" : "n/a"}\n` +
     `researched from: ${record.previous_ship?.name ?? "n/a"}\nleads to: ${record.next_ships.map((n) => n.name).join(", ") || "n/a"}\n` +
@@ -194,7 +229,7 @@ for (const s of ships) {
   const optMd = (o) => `### ${o.name}\n\n${o.description ? o.description + "\n\n" : ""}effects: ${(o.effects ?? []).map((e) => `${e.display} ${e.label}`).join("; ") || "none listed"}\n\n${o.stat_changes?.length ? "stat changes on this ship:\n" + o.stat_changes.map((c) => "- " + changeLine(c)).join("\n") : o.note ?? "no stat this site calculates changes (the effect is listed above)"}\n${o.conditional_effects ? "\nconditional effects:\n" + o.conditional_effects.map((g) => `- when ${g.trigger}: ${g.effects.map((e) => `${e.display} ${e.label}`).join("; ")}`).join("\n") + "\n" : ""}`;
   await out(`${sp}/upgrades.md`, md(`${title}: upgrades`, `One upgrade per slot. Stat changes are for that upgrade alone on the top configuration. Combine multiplier effects by multiplying. Summary: ${abs(`${sp}.md`)}`,
     upgradeSlots.map((sl) => `## Slot ${sl.slot}\n\n${sl.options.map(optMd).join("\n")}`).join("\n") +
-    `\n## Best reachable value per stat (one upgrade per slot)\n\n${Object.entries(best).map(([k, b]) => `- ${k}: ${b.base} -> ${b.best} with ${b.upgrades.map((u) => `${u.name} (slot ${u.slot + 1})`).join(" + ")}`).join("\n")}`));
+    `\n## Best reachable value per stat (one upgrade per slot)\n\nEach line is the best for that stat alone; different stats may need different upgrades, so this is not one combined build.\n\n${Object.entries(best).map(([k, b]) => `- ${k}: ${b.base} -> ${b.best} with ${b.upgrades.map((u) => `${u.name} (slot ${u.slot + 1})`).join(" + ")}`).join("\n")}`));
   await out(`${sp}/captain-skills.md`, md(`${title}: captain skills`, `Each skill alone on the top configuration. A captain has 21 points. Summary: ${abs(`${sp}.md`)}`,
     skills.map((k) => optMd({ ...k, name: `${k.name} (cost ${k.point_cost}, row ${k.row}, column ${k.column})` })).join("\n")));
   await out(`${sp}/signal-flags.md`, md(`${title}: signal flags`, `Each flag alone on the top configuration. Summary: ${abs(`${sp}.md`)}`, flags.map(optMd).join("\n")));
@@ -270,7 +305,9 @@ await out("ships.csv", [[...infoCols, ...allMetrics].join(","), ...rows.map((r) 
 await out("ships.jsonl", rows.map((r) => JSON.stringify({ ...listEntry(r), game_version: ctx.gameVersion, metrics: r.metrics })).join("\n") + "\n");
 // ---------- knowledge pages and change history ----------
 const wikiTerms = JSON.parse(await readFile(new URL("./verification/wiki-terminology.json", import.meta.url), "utf8").catch(() => "{}")).terms ?? [];
-const communityMd = (await readFile(new URL("./lib/community.md", import.meta.url), "utf8").catch(() => "")).replaceAll("{BASE}", SITE_URL).replaceAll("{VERSION}", ctx.gameVersion);
+const COMMUNITY_VERSION = "15.10.1"; // game version when lib/community.md was last collected
+let communityMd = (await readFile(new URL("./lib/community.md", import.meta.url), "utf8").catch(() => "")).replaceAll("{BASE}", SITE_URL).replaceAll("{VERSION}", COMMUNITY_VERSION);
+if (communityMd && COMMUNITY_VERSION !== ctx.gameVersion) communityMd = communityMd.replace(/^(# .*\n)/, `$1\n**Warning: collected for game version ${COMMUNITY_VERSION}; the game is now on ${ctx.gameVersion}. Ships, skills or upgrades may have changed since. Check ${abs("changes/index.md")} and say the advice may be outdated.**\n`);
 const knowledge = buildKnowledge({ ctx, rows, abs, md, slug, terms: wikiTerms, community: communityMd });
 for (const [rel, body] of knowledge.pages) await out(rel, body);
 if (knowledge.dropped.length) log("glossary entries dropped (not found in game data):", knowledge.dropped.join(", "));
@@ -290,10 +327,12 @@ for (const e of history.entries) {
   await out(`changes/${e.game_version}.md`, md(`Changes in game version ${e.game_version}`, `Compared with ${e.previous_game_version}. Base stats, top configuration.`, entryMd(e)));
 }
 await out("changes/history.json", { about: "Stat changes detected between builds of this site (each build uses the newest game data). Newest first.", ...history });
-const entryMd = (e) => `## ${e.previous_game_version ?? "?"} -> ${e.game_version} (detected ${e.detected_at.slice(0, 10)})\n\n` +
+function entryMd(e) {
+  return `## ${e.previous_game_version ?? "?"} -> ${e.game_version} (detected ${e.detected_at.slice(0, 10)})\n\n` +
   (e.ships_added.length ? `New ships: ${e.ships_added.map((x) => `${x.name} (tier ${x.tier} ${x.nation} ${x.class})`).join(", ")}\n\n` : "") +
   (e.ships_removed.length ? `Removed ships: ${e.ships_removed.map((x) => x.name).join(", ")}\n\n` : "") +
   e.ships_changed.map((c) => `### ${c.name} (tier ${c.tier} ${c.nation} ${c.class})\n\n${c.changes.map((d) => `- ${d.metric}: ${d.before} -> ${d.after}`).join("\n")}`).join("\n\n");
+}
 await out("changes/index.md", md("What changed between game versions", `Detected by comparing each build of this site with the previous one. History started with game version ${history.started_with}. JSON: ${abs("changes/history.json")}`,
   history.entries.length ? history.entries.map(entryMd).join("\n\n") : `No changes recorded yet. The first change will appear here after the next patch.`));
 await out("llms-full.txt", `# All World of Warships ships with all their stats\n\nGame version ${ctx.gameVersion}. ${rows.length} ships. Top (fully researched) configuration, base values: ${COMMON_NOTE} Metric names are the same as in the rankings and ships.csv. Full details per ship: ${abs("api/ships/{index}.json")}\n\n` +
@@ -397,9 +436,39 @@ const report = validate({ rows, testShips, ctx, metricIndex });
 await out("api/validation.json", report);
 let verification = null;
 try { verification = JSON.parse(await readFile("verification/wiki-crosscheck.json", "utf8")); await out("api/verification.json", verification); } catch { /* optional */ }
+await out("api/status.json", {
+  about: "Read this to decide how much to trust the data right now.",
+  schema_version: SCHEMA_VERSION, game_version: ctx.gameVersion, server: SERVER, generated_at: meta.generated_at,
+  data_source: "game files via WoWs ShipBuilder, every file checksum-verified",
+  validation: { passed: report.passed, errors: report.error_count, warnings: report.warning_count, report: abs("api/validation.json") },
+  wiki_crosscheck: verification ? { checked_on: verification.checked_on ?? null, ships_compared: verification.ships_compared, values_compared: verification.values_compared,
+    match_rate_any_module_pct: verification.match_rate_pct, match_rate_top_configuration_pct: verification.strict?.match_rate_pct ?? null, report: abs("api/verification.json"),
+    note: "Most remaining differences are outdated wiki pages; see the report's assessment." } : null,
+  armor_source: "official wiki snapshot (not updated automatically)", community_page: "manually collected opinion, may be older than the current game version",
+});
 
 // ---------- schema, llms.txt, index ----------
-const metricDocs = allMetrics.map((m) => ({ metric: m, ...metricInfo(m), ships_with_value: rows.filter((r) => typeof r.metrics[m] === "number").length }));
+const UNIT_WORDS = { s: "seconds", km: "kilometres", m: "metres", mm: "millimetres", kg: "kilograms", knots: "knots", pct: "percent", pct_change: "percent change", deg: "degrees", deg_per_s: "degrees per second", m_per_s: "metres per second", m_s: "metres per second", hp: "hit points", hp_per_s: "hit points per second", t: "tonnes", per_s: "per second", per_min: "per minute" };
+function describeMetric(m) {
+  const { unit } = metricInfo(m);
+  const parts = m.split(".").map((x) => x.replace(unit ? new RegExp(`_${unit}$`) : /^$/, "").replace(/_/g, " "));
+  let text = `${parts.slice(0, -1).join(" > ")}${parts.length > 1 ? ": " : ""}${parts.at(-1)}${unit ? ` (${UNIT_WORDS[unit] ?? unit})` : ""}`;
+  if (m.startsWith("armor.")) text += ". Maximum armor thickness in that area, from the official wiki.";
+  if (m.startsWith("consumables.")) text += ". Only ships that carry this consumable have a value.";
+  if (m.endsWith("min_detectability_by_ships_km") || m.endsWith("min_detectability_by_planes_km")) text += ". With Concealment Expert and Concealment System Modification 1 where the ship can use them; no camouflage.";
+  if (m.endsWith("penetration_with_ifhe_mm")) text += ". With the captain skill Inertia Fuse for HE Shells.";
+  return text;
+}
+const metricKind = (m) => /damage_per_minute|potential_fires|salvo_damage/.test(m) ? "theoretical (every shell hits)" : /min_detectability|with_ifhe/.test(m) ? "with skills/upgrades as stated" : "base value";
+const metricDocs = allMetrics.map((m) => {
+  const have = rows.filter((r) => typeof r.metrics[m] === "number");
+  return { metric: m, description: describeMetric(m), ...metricInfo(m), value_kind: metricKind(m), source: m.startsWith("armor.") ? "official wiki (wiki.worldofwarships.com)" : "game files via WoWs ShipBuilder, ShipBuilder formulas",
+    ships_with_value: have.length, classes: [...new Set(have.map((r) => r.class))].sort(), ranking: abs(`api/rankings/${m}.json`) };
+});
+await out("api/metrics.json", { about: "Dictionary of every metric (stat name) used on ship pages, in rankings, ships.csv and all-stats files: description, unit, which direction is better, kind of value, source, and which ship classes have it.", schema_version: SCHEMA_VERSION, game_version: ctx.gameVersion, count: metricDocs.length, metrics: metricDocs });
+for (const g of [...new Set(metricDocs.map((d) => d.metric.split(".")[0]))].sort()) {
+  await out(`metrics/${g}.md`, md(`Metric dictionary: ${g}`, `Every "${g}" metric. Full JSON: ${abs("api/metrics.json")}`, metricDocs.filter((d) => d.metric.split(".")[0] === g).map((d) => `- ${d.metric}: ${d.description}. ${d.direction.replace(/_/g, " ")}; ${d.value_kind}; ${d.ships_with_value} ships (${d.classes.join(", ")})`).join("\n")));
+}
 await out("api/schema.json", {
   about: "How the data is organized. Every ship file has the same structure. Units are in field names: _s seconds, _km kilometres, _m metres, _mm millimetres, _kg kilograms, _knots knots, _pct percent, _pct_change percent change, _deg degrees, _per_s per second, _per_minute per minute, _hp hit points. null = not applicable.",
   ship_file: {
@@ -443,6 +512,8 @@ All pages in "Start here" are small enough to read whole. Files marked (large) a
 - [All rankings by topic](${abs("rankings/index.md")}): ${metricIndex.length} rankings, every metric with unit and better-direction
 - [All stats of all ships, split by class and tier](${abs("all-stats/index.md")})
 - [Name lookup](${abs("api/name-lookup.json")}): name -> ship index, for the JSON files ${abs("api/ships/{index}.json")}
+- [Metric dictionary](${abs("api/metrics.json")}): every stat name with description, unit, better-direction, source and which classes have it (Markdown per topic: ${abs("metrics/{topic}.md")})
+- [Status](${abs("api/status.json")}): game version, last update, validation and wiki cross-check results. Check this to judge freshness.
 - [Schema](${abs("api/schema.json")}): structure, units, how to combine upgrade effects, caveats
 
 - [Glossary](${abs("glossary.md")}): player abbreviations (CE, IFHE, DCP, GFCS...) and nicknames (Shima, DM...) mapped to exact game names
@@ -491,8 +562,16 @@ await out("index.html", `<!doctype html><html lang="en"><head><meta charset="utf
 <p>${meta.data_source}. ${meta.calculations} ${meta.license_note}</p></body></html>
 `);
 await out("robots.txt", `# AI crawlers and agents are welcome.\nUser-agent: *\nAllow: /\n${SITE_URL ? `Sitemap: ${SITE_URL}/sitemap.xml\n` : ""}`);
-if (SITE_URL) await out("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${["", "llms.txt", "api/index.json", "api/schema.json", "api/rankings/index.json", ...rows.map((r) => `api/ships/${r.index}.json`), ...rows.map((r) => `ships/${r.slug}.md`), "ships.md", "rankings/index.md", "all-stats/index.md"].map((u) => `<url><loc>${abs(u)}</loc></url>`).join("\n")}\n</urlset>\n`);
+if (SITE_URL) await out("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${["", "llms.txt", "api/index.json", "api/schema.json", "api/rankings/index.json", ...rows.map((r) => `api/ships/${r.index}.json`), ...rows.map((r) => `ships/${r.slug}.md`), ...[...new Set(rows.map((r) => `ship/${slug(r.name) || r.index.toLowerCase()}.md`))], "ships.md", "rankings/index.md", "all-stats/index.md"].map((u) => `<url><loc>${abs(u)}</loc></url>`).join("\n")}\n</urlset>\n`);
 await out(".nojekyll", "");
 
 log(`built ${rows.length} ships (+${testShips.length} test), ${metricIndex.length} rankings, ${fileCount} files into ${OUT}`);
-if (report.errors.length) { console.error(`VALIDATION FAILED: ${report.errors.length} errors, first: ${JSON.stringify(report.errors.slice(0, 5))}`); process.exit(1); }
+if (report.errors.length) { console.error(`VALIDATION FAILED: ${report.errors.length} errors, first: ${JSON.stringify(report.errors.slice(0, 5))}. Previous output in ${FINAL_OUT} left untouched.`); process.exit(1); }
+for (const must of ["llms.txt", "index.html", "api/index.json", "api/schema.json", "api/rankings/index.json", "ships.md"]) {
+  try { await readFile(path.join(OUT, must)); } catch { console.error(`BUILD INCOMPLETE: ${must} missing. Previous output left untouched.`); process.exit(1); }
+}
+await rm(`${FINAL_OUT}.old`, { recursive: true, force: true });
+await rename(FINAL_OUT, `${FINAL_OUT}.old`).catch(() => {});
+await rename(OUT, FINAL_OUT);
+await rm(`${FINAL_OUT}.old`, { recursive: true, force: true });
+log(`published to ${FINAL_OUT}`);
