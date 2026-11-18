@@ -1,0 +1,1911 @@
+{
+ "about": "Cross-check of this site against the official World of Warships wiki (wiki.worldofwarships.com). Each number in a wiki ship stat table is compared with the same stat in any module configuration of the ship, using the wiki rounding as tolerance. Mismatches can be outdated wiki pages: the wiki is edited by hand and can lag behind game patches.",
+ "ships_compared": 845,
+ "values_compared": 32085,
+ "values_matching": 31931,
+ "values_different": 154,
+ "values_not_comparable": 0,
+ "match_rate_pct": 99.52,
+ "differences_by_stat": [
+  [
+   "SECONDARY BATTERY | Secondary battery range (km)",
+   46
+  ],
+  [
+   "EXPLOSIONS / SALVO | anti_air.long_range.flak_bursts_per_salvo",
+   30
+  ],
+  [
+   "MAIN BATTERY | Firing range (km)",
+   13
+  ],
+  [
+   "MAIN BATTERY | Reload time (sec)",
+   10
+  ],
+  [
+   "DISPERSION | Maximum dispersion (m)",
+   6
+  ],
+  [
+   "CONCEALMENT | Detectability after firing main guns in smoke (km)",
+   6
+  ],
+  [
+   "CONCEALMENT | Detectability by depths (km)",
+   6
+  ],
+  [
+   "AP SHELL | Maximum damage",
+   5
+  ],
+  [
+   "AP SHELL | Shell velocity (m/s)",
+   5
+  ],
+  [
+   "AP SHELL | Shell weight (kg)",
+   5
+  ],
+  [
+   "AP SHELL | Fuse time (sec)",
+   5
+  ],
+  [
+   "RANGE | Long-range",
+   5
+  ],
+  [
+   "EXPLOSIONS / SALVO | anti_air.long_range.flak_damage",
+   3
+  ],
+  [
+   "CONCEALMENT | Detectability by sea (km)",
+   2
+  ],
+  [
+   "RANGE | Short-range",
+   2
+  ],
+  [
+   "SAP SHELL | Shell weight (kg)",
+   1
+  ],
+  [
+   "RANGE | Medium-range",
+   1
+  ],
+  [
+   "CONCEALMENT | Detectability by air (km)",
+   1
+  ],
+  [
+   "RANGE | Mid-range",
+   1
+  ],
+  [
+   "TORPEDO LAUNCHERS | Speed (kt)",
+   1
+  ]
+ ],
+ "assessment": [
+  "Main battery range, reload, dispersion and AP shell values on ARP, AL, HSF and other collaboration copies (about -9% range): the wiki pages leave out the fire control bonus or predate buffs. The game files say otherwise; this site follows the game files.",
+  "Long-range flak bursts on about 30 ships: game files have more bursts than the wiki (Aki: 8 vs 4) while continuous AA damage matches. Probably wiki pages not updated after AA changes.",
+  "Secondary battery range on about 45 ships, mostly aircraft carriers: the wiki lists a longer range than the game files (Hornet 8.5 vs 4.5 km). Unresolved: could be an outdated wiki or a bonus the game files used here do not contain. Treat secondary range of carriers with care.",
+  "A few French destroyers (fuse time, detectability): probably wiki pages that predate a rework.",
+  "Single-value differences (one torpedo speed, one shell weight): not investigated individually."
+ ],
+ "differences": [
+  {
+   "ship": "AL Bismarck",
+   "index": "PGSB898",
+   "section": "MAIN BATTERY",
+   "label": "Firing range (km)",
+   "wiki": 19.28,
+   "site_values": [
+    21.21
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "AL Hornet",
+   "index": "PASA898",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 8.5,
+   "site_values": [
+    4.5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "AL Richelieu",
+   "index": "PFSB908",
+   "section": "MAIN BATTERY",
+   "label": "Firing range (km)",
+   "wiki": 22.97,
+   "site_values": [
+    25.27
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "AL Shinano",
+   "index": "PJSA920",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 9.5,
+   "site_values": [
+    5.9
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "AL Shinano",
+   "index": "PJSA920",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_bursts_per_salvo",
+   "wiki": 4.0,
+   "site_values": [
+    8
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "AL Tashkent",
+   "index": "PRSD919",
+   "section": "MAIN BATTERY",
+   "label": "Firing range (km)",
+   "wiki": 11.53,
+   "site_values": [
+    12.68
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "ARP Haruna",
+   "index": "PJSB707",
+   "section": "MAIN BATTERY",
+   "label": "Firing range (km)",
+   "wiki": 19.27,
+   "site_values": [
+    21.2
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "ARP Haruna",
+   "index": "PJSB707",
+   "section": "MAIN BATTERY",
+   "label": "Reload time (sec)",
+   "wiki": 31.0,
+   "site_values": [
+    30
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "ARP Haruna",
+   "index": "PJSB707",
+   "section": "MAIN BATTERY",
+   "label": "Reload time (sec)",
+   "wiki": 31.0,
+   "site_values": [
+    30
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "ARP Haruna",
+   "index": "PJSB707",
+   "section": "DISPERSION",
+   "label": "Maximum dispersion (m)",
+   "wiki": 222.0,
+   "site_values": [
+    236.63
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "ARP Haruna",
+   "index": "PJSB707",
+   "section": "AP SHELL",
+   "label": "Maximum damage",
+   "wiki": 9000.0,
+   "site_values": [
+    9200
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "ARP Haruna",
+   "index": "PJSB707",
+   "section": "AP SHELL",
+   "label": "Shell velocity (m/s)",
+   "wiki": 790.0,
+   "site_values": [
+    775
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "ARP Haruna",
+   "index": "PJSB707",
+   "section": "AP SHELL",
+   "label": "Shell weight (kg)",
+   "wiki": 635.5,
+   "site_values": [
+    673.5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "ARP Hiei",
+   "index": "PJSB708",
+   "section": "MAIN BATTERY",
+   "label": "Firing range (km)",
+   "wiki": 19.27,
+   "site_values": [
+    21.2
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "ARP Hiei",
+   "index": "PJSB708",
+   "section": "MAIN BATTERY",
+   "label": "Reload time (sec)",
+   "wiki": 31.0,
+   "site_values": [
+    30
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "ARP Hiei",
+   "index": "PJSB708",
+   "section": "MAIN BATTERY",
+   "label": "Reload time (sec)",
+   "wiki": 31.0,
+   "site_values": [
+    30
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "ARP Hiei",
+   "index": "PJSB708",
+   "section": "DISPERSION",
+   "label": "Maximum dispersion (m)",
+   "wiki": 222.0,
+   "site_values": [
+    236.63
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "ARP Hiei",
+   "index": "PJSB708",
+   "section": "AP SHELL",
+   "label": "Maximum damage",
+   "wiki": 9000.0,
+   "site_values": [
+    9200
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "ARP Hiei",
+   "index": "PJSB708",
+   "section": "AP SHELL",
+   "label": "Shell velocity (m/s)",
+   "wiki": 790.0,
+   "site_values": [
+    775
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "ARP Hiei",
+   "index": "PJSB708",
+   "section": "AP SHELL",
+   "label": "Shell weight (kg)",
+   "wiki": 635.5,
+   "site_values": [
+    673.5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "ARP Kirishima",
+   "index": "PJSB706",
+   "section": "MAIN BATTERY",
+   "label": "Firing range (km)",
+   "wiki": 19.27,
+   "site_values": [
+    21.2
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "ARP Kirishima",
+   "index": "PJSB706",
+   "section": "MAIN BATTERY",
+   "label": "Reload time (sec)",
+   "wiki": 31.0,
+   "site_values": [
+    30
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "ARP Kirishima",
+   "index": "PJSB706",
+   "section": "MAIN BATTERY",
+   "label": "Reload time (sec)",
+   "wiki": 31.0,
+   "site_values": [
+    30
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "ARP Kirishima",
+   "index": "PJSB706",
+   "section": "DISPERSION",
+   "label": "Maximum dispersion (m)",
+   "wiki": 222.0,
+   "site_values": [
+    236.63
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "ARP Kirishima",
+   "index": "PJSB706",
+   "section": "AP SHELL",
+   "label": "Maximum damage",
+   "wiki": 9000.0,
+   "site_values": [
+    9200
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "ARP Kirishima",
+   "index": "PJSB706",
+   "section": "AP SHELL",
+   "label": "Shell velocity (m/s)",
+   "wiki": 790.0,
+   "site_values": [
+    775
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "ARP Kirishima",
+   "index": "PJSB706",
+   "section": "AP SHELL",
+   "label": "Shell weight (kg)",
+   "wiki": 635.5,
+   "site_values": [
+    673.5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "ARP Kongō",
+   "index": "PJSB705",
+   "section": "MAIN BATTERY",
+   "label": "Firing range (km)",
+   "wiki": 19.27,
+   "site_values": [
+    21.2
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "ARP Kongō",
+   "index": "PJSB705",
+   "section": "MAIN BATTERY",
+   "label": "Reload time (sec)",
+   "wiki": 31.0,
+   "site_values": [
+    30
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "ARP Kongō",
+   "index": "PJSB705",
+   "section": "MAIN BATTERY",
+   "label": "Reload time (sec)",
+   "wiki": 31.0,
+   "site_values": [
+    30
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "ARP Kongō",
+   "index": "PJSB705",
+   "section": "DISPERSION",
+   "label": "Maximum dispersion (m)",
+   "wiki": 222.0,
+   "site_values": [
+    236.63
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "ARP Kongō",
+   "index": "PJSB705",
+   "section": "AP SHELL",
+   "label": "Maximum damage",
+   "wiki": 9000.0,
+   "site_values": [
+    9200
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "ARP Kongō",
+   "index": "PJSB705",
+   "section": "AP SHELL",
+   "label": "Shell velocity (m/s)",
+   "wiki": 790.0,
+   "site_values": [
+    775
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "ARP Kongō",
+   "index": "PJSB705",
+   "section": "AP SHELL",
+   "label": "Shell weight (kg)",
+   "wiki": 635.5,
+   "site_values": [
+    673.5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Aki",
+   "index": "PJSB720",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_bursts_per_salvo",
+   "wiki": 4.0,
+   "site_values": [
+    8
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Aquila",
+   "index": "PISA508",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 8.5,
+   "site_values": [
+    4.5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Ark Royal",
+   "index": "PBSA518",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 7.5,
+   "site_values": [
+    4
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Audacious",
+   "index": "PBSA210",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 9.0,
+   "site_values": [
+    5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Béarn",
+   "index": "PFSA506",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 8.5,
+   "site_values": [
+    5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "BA Takahashi",
+   "index": "PJSC819",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_bursts_per_salvo",
+   "wiki": 4.0,
+   "site_values": [
+    8
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Baleares",
+   "index": "PSSC106",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_bursts_per_salvo",
+   "wiki": 1.0,
+   "site_values": [
+    4
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Baleares",
+   "index": "PSSC106",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_bursts_per_salvo",
+   "wiki": 1.0,
+   "site_values": [
+    4
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Baotou",
+   "index": "PZSC729",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_bursts_per_salvo",
+   "wiki": 4.0,
+   "site_values": [
+    8
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Barfleur",
+   "index": "PBSD719",
+   "section": "CONCEALMENT",
+   "label": "Detectability after firing main guns in smoke (km)",
+   "wiki": 2.44,
+   "site_values": [
+    2.55
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Barfleur",
+   "index": "PBSD719",
+   "section": "CONCEALMENT",
+   "label": "Detectability by depths (km)",
+   "wiki": 3.34,
+   "site_values": [
+    3.46
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Barfleur",
+   "index": "PBSD719",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_bursts_per_salvo",
+   "wiki": 2.0,
+   "site_values": [
+    3
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Bird Cry",
+   "index": "PASB909",
+   "section": "MAIN BATTERY",
+   "label": "Firing range (km)",
+   "wiki": 19.62,
+   "site_values": [
+    21.58
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Bismarck '41",
+   "index": "PGSB708",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 8.9,
+   "site_values": [
+    7.6
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Bourgogne",
+   "index": "PFSB510",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_bursts_per_salvo",
+   "wiki": 1.0,
+   "site_values": [
+    8
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Cassard",
+   "index": "PFSD010",
+   "section": "CONCEALMENT",
+   "label": "Detectability after firing main guns in smoke (km)",
+   "wiki": 2.9,
+   "site_values": [
+    2.98
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Cassard",
+   "index": "PFSD010",
+   "section": "CONCEALMENT",
+   "label": "Detectability by depths (km)",
+   "wiki": 3.8,
+   "site_values": [
+    3.94
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Cassard",
+   "index": "PFSD010",
+   "section": "AP SHELL",
+   "label": "Fuse time (sec)",
+   "wiki": 0.03,
+   "site_values": [
+    0.01
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Chkalov B",
+   "index": "PRSA598",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 8.5,
+   "site_values": [
+    4.5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Chkalov",
+   "index": "PRSA508",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 8.5,
+   "site_values": [
+    4.5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Cursed Fang",
+   "index": "PBSC909",
+   "section": "MAIN BATTERY",
+   "label": "Firing range (km)",
+   "wiki": 15.04,
+   "site_values": [
+    16.54
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Cursed Fang",
+   "index": "PBSC909",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_bursts_per_salvo",
+   "wiki": 4.0,
+   "site_values": [
+    9
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "De Grasse",
+   "index": "PFSC506",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_bursts_per_salvo",
+   "wiki": 1.0,
+   "site_values": [
+    2
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Delny",
+   "index": "PRSD410",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_damage",
+   "wiki": 960.0,
+   "site_values": [
+    1680
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Desert Falcon",
+   "index": "PJSC905",
+   "section": "MAIN BATTERY",
+   "label": "Firing range (km)",
+   "wiki": 12.62,
+   "site_values": [
+    13.88
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Deutschland",
+   "index": "PGSC016",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 6.0,
+   "site_values": [
+    5.6
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Dresden",
+   "index": "PGSC002",
+   "section": "CONCEALMENT",
+   "label": "Detectability by sea (km)",
+   "wiki": 9.2,
+   "site_values": [
+    9.26
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Eagle",
+   "index": "PBSA111",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 9.0,
+   "site_values": [
+    5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Eiserner Kanzler",
+   "index": "PGSB928",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 8.9,
+   "site_values": [
+    7.6
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Enterprise",
+   "index": "PASA518",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 8.5,
+   "site_values": [
+    4.5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Essex",
+   "index": "PASA020",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 9.0,
+   "site_values": [
+    5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Foca",
+   "index": "PISS106",
+   "section": "SAP SHELL",
+   "label": "Shell weight (kg)",
+   "wiki": 13.5,
+   "site_values": [
+    14.9
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Friedrich Carl",
+   "index": "PGSB719",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 8.6,
+   "site_values": [
+    7.95
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Furious",
+   "index": "PBSA106",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 7.5,
+   "site_values": [
+    4
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Fuyutsuki",
+   "index": "PJSD710",
+   "section": "CONCEALMENT",
+   "label": "Detectability after firing main guns in smoke (km)",
+   "wiki": 2.47,
+   "site_values": [
+    2.53
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Graf Zeppelin B",
+   "index": "PGSA598",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 9.5,
+   "site_values": [
+    6.25
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Graf Zeppelin",
+   "index": "PGSA518",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 9.5,
+   "site_values": [
+    6.25
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Hōshō",
+   "index": "PJSA104",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 7.0,
+   "site_values": [
+    3.5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "HSF Hiei",
+   "index": "PJSB715",
+   "section": "MAIN BATTERY",
+   "label": "Firing range (km)",
+   "wiki": 19.27,
+   "site_values": [
+    21.2
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "HSF Hiei",
+   "index": "PJSB715",
+   "section": "MAIN BATTERY",
+   "label": "Reload time (sec)",
+   "wiki": 31.0,
+   "site_values": [
+    30
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "HSF Hiei",
+   "index": "PJSB715",
+   "section": "MAIN BATTERY",
+   "label": "Reload time (sec)",
+   "wiki": 31.0,
+   "site_values": [
+    30
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "HSF Hiei",
+   "index": "PJSB715",
+   "section": "DISPERSION",
+   "label": "Maximum dispersion (m)",
+   "wiki": 222.0,
+   "site_values": [
+    236.64
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "HSF Hiei",
+   "index": "PJSB715",
+   "section": "AP SHELL",
+   "label": "Maximum damage",
+   "wiki": 9000.0,
+   "site_values": [
+    9200
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "HSF Hiei",
+   "index": "PJSB715",
+   "section": "AP SHELL",
+   "label": "Shell velocity (m/s)",
+   "wiki": 790.0,
+   "site_values": [
+    775
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "HSF Hiei",
+   "index": "PJSB715",
+   "section": "AP SHELL",
+   "label": "Shell weight (kg)",
+   "wiki": 635.5,
+   "site_values": [
+    673.5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Hakuryū",
+   "index": "PJSA110",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 9.0,
+   "site_values": [
+    5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Hermes",
+   "index": "PBSA204",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 7.0,
+   "site_values": [
+    3.5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Hood",
+   "index": "PBSB507",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_bursts_per_salvo",
+   "wiki": 2.0,
+   "site_values": [
+    5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Hornet B",
+   "index": "PASA918",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 8.5,
+   "site_values": [
+    4.5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Hornet",
+   "index": "PASA538",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 8.5,
+   "site_values": [
+    4.5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Illinois",
+   "index": "PASB539",
+   "section": "DISPERSION",
+   "label": "Maximum dispersion (m)",
+   "wiki": 181.0,
+   "site_values": [
+    203.23
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Implacable",
+   "index": "PBSA108",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 8.5,
+   "site_values": [
+    4.5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Indomitable",
+   "index": "PBSA508",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 8.5,
+   "site_values": [
+    4.5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Ise",
+   "index": "PJSB526",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_bursts_per_salvo",
+   "wiki": 2.0,
+   "site_values": [
+    6
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Izmail",
+   "index": "PRSB106",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_damage",
+   "wiki": 150.0,
+   "site_values": [
+    1050,
+    1330
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Izmail",
+   "index": "PRSB106",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_damage",
+   "wiki": 760.0,
+   "site_values": [
+    1050,
+    1330
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Kaga B",
+   "index": "PJSA598",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 8.5,
+   "site_values": [
+    4.5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Kaga",
+   "index": "PJSA518",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 8.5,
+   "site_values": [
+    4.5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Kawachi",
+   "index": "PJSB001",
+   "section": "RANGE",
+   "label": "Medium-range",
+   "wiki": 8.0,
+   "site_values": [
+    10.5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Knesebeck",
+   "index": "PGSC018",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 8.2,
+   "site_values": [
+    7.6
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Komsomolets",
+   "index": "PRSA104",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 7.0,
+   "site_values": [
+    3.5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "L'Adroit",
+   "index": "PFSD015",
+   "section": "AP SHELL",
+   "label": "Fuse time (sec)",
+   "wiki": 0.025,
+   "site_values": [
+    0.01
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "L'Aventurier",
+   "index": "PFSD018",
+   "section": "CONCEALMENT",
+   "label": "Detectability by sea (km)",
+   "wiki": 6.6,
+   "site_values": [
+    7.37
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "L'Aventurier",
+   "index": "PFSD018",
+   "section": "CONCEALMENT",
+   "label": "Detectability by air (km)",
+   "wiki": 2.9,
+   "site_values": [
+    3.26
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "L'Aventurier",
+   "index": "PFSD018",
+   "section": "CONCEALMENT",
+   "label": "Detectability by depths (km)",
+   "wiki": 2.9,
+   "site_values": [
+    3.26
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "L'Aventurier",
+   "index": "PFSD018",
+   "section": "CONCEALMENT",
+   "label": "Detectability by depths (km)",
+   "wiki": 2.9,
+   "site_values": [
+    3.26
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "L'Aventurier",
+   "index": "PFSD018",
+   "section": "AP SHELL",
+   "label": "Fuse time (sec)",
+   "wiki": 0.03,
+   "site_values": [
+    0.01
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Langley",
+   "index": "PASA104",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 7.0,
+   "site_values": [
+    3.5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Le Hardi",
+   "index": "PFSD017",
+   "section": "AP SHELL",
+   "label": "Fuse time (sec)",
+   "wiki": 0.03,
+   "site_values": [
+    0.01
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Lexington",
+   "index": "PASA108",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 8.5,
+   "site_values": [
+    4.5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Malta",
+   "index": "PBSA510",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 9.0,
+   "site_values": [
+    5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Manteuffel",
+   "index": "PGSC019",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 8.6,
+   "site_values": [
+    7.95
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Messina",
+   "index": "PISC729",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_bursts_per_salvo",
+   "wiki": 2.0,
+   "site_values": [
+    10
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Midway",
+   "index": "PASA110",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 9.0,
+   "site_values": [
+    5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Myōgi",
+   "index": "PJSB003",
+   "section": "RANGE",
+   "label": "Short-range",
+   "wiki": 65.0,
+   "site_values": [
+    77
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Myōgi",
+   "index": "PJSB003",
+   "section": "RANGE",
+   "label": "Long-range",
+   "wiki": 24.0,
+   "site_values": [
+    31.5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Nassau",
+   "index": "PGSB103",
+   "section": "RANGE",
+   "label": "Long-range",
+   "wiki": 5.0,
+   "site_values": [
+    7
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Neptune",
+   "index": "PBSC109",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_bursts_per_salvo",
+   "wiki": 4.0,
+   "site_values": [
+    9
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Neptune",
+   "index": "PBSC109",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_bursts_per_salvo",
+   "wiki": 4.0,
+   "site_values": [
+    9
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Orage",
+   "index": "PFSD019",
+   "section": "AP SHELL",
+   "label": "Fuse time (sec)",
+   "wiki": 0.03,
+   "site_values": [
+    0.01
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Orkan",
+   "index": "PWSD508",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_bursts_per_salvo",
+   "wiki": 1.0,
+   "site_values": [
+    2
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Patrie",
+   "index": "PFSB111",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_bursts_per_salvo",
+   "wiki": 10.0,
+   "site_values": [
+    12
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Pobeda",
+   "index": "PRSA108",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 8.5,
+   "site_values": [
+    4.5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Prince of Wales",
+   "index": "PBSB708",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_bursts_per_salvo",
+   "wiki": 1.0,
+   "site_values": [
+    5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Prinz Adalbert",
+   "index": "PGSC010",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 9.0,
+   "site_values": [
+    8.3
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "République",
+   "index": "PFSB110",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_bursts_per_salvo",
+   "wiki": 1.0,
+   "site_values": [
+    8
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Rahmat",
+   "index": "PZSC106",
+   "section": "RANGE",
+   "label": "Long-range",
+   "wiki": 119.0,
+   "site_values": [
+    56,
+    63
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Rahmat",
+   "index": "PZSC106",
+   "section": "RANGE",
+   "label": "Long-range",
+   "wiki": 119.0,
+   "site_values": [
+    56,
+    63
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Ranger",
+   "index": "PASA106",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 7.5,
+   "site_values": [
+    4
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Rhein",
+   "index": "PGSA104",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 8.0,
+   "site_values": [
+    4.5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Riga",
+   "index": "PRSC209",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_bursts_per_salvo",
+   "wiki": 1.0,
+   "site_values": [
+    4,
+    5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Roussillon",
+   "index": "PFSB709",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_bursts_per_salvo",
+   "wiki": 1.0,
+   "site_values": [
+    6
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Ryūjō",
+   "index": "PJSA106",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 7.5,
+   "site_values": [
+    4
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Scarlet Storm",
+   "index": "PWSD907",
+   "section": "MAIN BATTERY",
+   "label": "Firing range (km)",
+   "wiki": 9.93,
+   "site_values": [
+    10.92
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Sekiryu",
+   "index": "PJSA111",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 9.0,
+   "site_values": [
+    5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Serov",
+   "index": "PRSA106",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 7.5,
+   "site_values": [
+    4
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Shōkaku",
+   "index": "PJSA108",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 8.5,
+   "site_values": [
+    4.5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Shimanto",
+   "index": "PJSC208",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_bursts_per_salvo",
+   "wiki": 4.0,
+   "site_values": [
+    8
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Shimanto",
+   "index": "PJSC208",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_bursts_per_salvo",
+   "wiki": 4.0,
+   "site_values": [
+    8
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Shinano",
+   "index": "PJSA710",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 9.5,
+   "site_values": [
+    5.9
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Shinano",
+   "index": "PJSA710",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_bursts_per_salvo",
+   "wiki": 4.0,
+   "site_values": [
+    8
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Takahashi",
+   "index": "PJSC209",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_bursts_per_salvo",
+   "wiki": 4.0,
+   "site_values": [
+    8
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Takahashi",
+   "index": "PJSC209",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_bursts_per_salvo",
+   "wiki": 4.0,
+   "site_values": [
+    8
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Thor",
+   "index": "PWSB010",
+   "section": "CONCEALMENT",
+   "label": "Detectability after firing main guns in smoke (km)",
+   "wiki": 15.1,
+   "site_values": [
+    15.56
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Tokachi",
+   "index": "PJSC507",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_bursts_per_salvo",
+   "wiki": 3.0,
+   "site_values": [
+    4
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Triunfante",
+   "index": "PSSB709",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_bursts_per_salvo",
+   "wiki": 3.0,
+   "site_values": [
+    9
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Turgut Reis",
+   "index": "PWSB718",
+   "section": "RANGE",
+   "label": "Short-range",
+   "wiki": 423.0,
+   "site_values": [
+    402.5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Turgut Reis",
+   "index": "PWSB718",
+   "section": "RANGE",
+   "label": "Mid-range",
+   "wiki": 328.0,
+   "site_values": [
+    311.5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Turgut Reis",
+   "index": "PWSB718",
+   "section": "RANGE",
+   "label": "Long-range",
+   "wiki": 44.0,
+   "site_values": [
+    42
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "United States",
+   "index": "PASA111",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 9.0,
+   "site_values": [
+    5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Velos",
+   "index": "PWSD509",
+   "section": "TORPEDO LAUNCHERS",
+   "label": "Speed (kt)",
+   "wiki": 73.0,
+   "site_values": [
+    66
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Wahnsinn",
+   "index": "PGSB908",
+   "section": "MAIN BATTERY",
+   "label": "Firing range (km)",
+   "wiki": 16.36,
+   "site_values": [
+    18
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Weser",
+   "index": "PGSA106",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 8.5,
+   "site_values": [
+    5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Willem de Eerste",
+   "index": "PHSB710",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_bursts_per_salvo",
+   "wiki": 3.0,
+   "site_values": [
+    7
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Yodo",
+   "index": "PJSC210",
+   "section": "EXPLOSIONS / SALVO",
+   "label": "anti_air.long_range.flak_bursts_per_salvo",
+   "wiki": 4.0,
+   "site_values": [
+    8
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Yorktown",
+   "index": "PASA028",
+   "section": "SECONDARY BATTERY",
+   "label": "Secondary battery range (km)",
+   "wiki": 8.5,
+   "site_values": [
+    4.5
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Z-44",
+   "index": "PGSD519",
+   "section": "CONCEALMENT",
+   "label": "Detectability after firing main guns in smoke (km)",
+   "wiki": 2.81,
+   "site_values": [
+    2.72
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Z-44",
+   "index": "PGSD519",
+   "section": "CONCEALMENT",
+   "label": "Detectability by depths (km)",
+   "wiki": 3.5,
+   "site_values": [
+    3.39
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Z-57",
+   "index": "PGSD111",
+   "section": "CONCEALMENT",
+   "label": "Detectability after firing main guns in smoke (km)",
+   "wiki": 3.34,
+   "site_values": [
+    2.93
+   ],
+   "status": "mismatch"
+  },
+  {
+   "ship": "Z-57",
+   "index": "PGSD111",
+   "section": "CONCEALMENT",
+   "label": "Detectability by depths (km)",
+   "wiki": 4.14,
+   "site_values": [
+    3.71
+   ],
+   "status": "mismatch"
+  }
+ ],
+ "not_comparable": [],
+ "pages_without_stat_tables": [
+  "A. Regolo",
+  "A. da Barbiano",
+  "A. Nevsky",
+  "A. Parseval",
+  "AL P. Heinrich",
+  "Abruzzi",
+  "Aki G",
+  "Alm. Abreu",
+  "Alm. Barroso",
+  "Almte. Cochrane",
+  "Almte. Grau",
+  "Almte. Irízar",
+  "Almte. Villar",
+  "Almte. Cervera",
+  "Almte. Oquendo",
+  "Arkansas B",
+  "BA Utnapishtim...",
+  "Bremen G",
+  "C. Aguirre",
+  "C. Colombo",
+  "Cavour",
+  "Chao Heng",
+  "Chikuma II G",
+  "Cnel. Bolognesi",
+  "Conqueror CLR",
+  "D. Pozharsky",
+  "D. Alighieri",
+  "De 7 Provinciën",
+  "Diana L",
+  "Dm. Donskoi",
+  "Dragon",
+  "E. Dragon",
+  "E. Loewenhardt",
+  "En. Gabolde",
+  "F. Ferruccio",
+  "F. Gonzaga",
+  "F. Sherman",
+  "F. der Grosse",
+  "F. Caracciolo",
+  "F. D. Roosevelt",
+  "F. Schultz",
+  "Fort Worth G",
+  "G. Hoffmann G",
+  "G. Hoffmann",
+  "G. J. Maerker",
+  "G. Kurfürst",
+  "Gaede",
+  "Giussano",
+  "Graf Spee",
+  "HSF Graf Spee",
+  "Hawaii G",
+  "Hel",
+  "I. Allende",
+  "Iwaki A",
+  "J. Humphreys",
+  "Jurien",
+  "K. Albert",
+  "K. Schönberg",
+  "Kralj Petar I",
+  "Kriti",
+  "Kutuzov",
+  "L. Katsonis",
+  "L. Tarigo",
+  "M. van Coehoorn",
+  "M. Colonna",
+  "M. Immelmann",
+  "M. Richthofen",
+  "Maass",
+  "Makarov",
+  "Marblehead L",
+  "Montecuccoli",
+  "N. Carolina CLR",
+  "N. Carolina",
+  "N. Sauro",
+  "Nakhimov",
+  "Nikolai I",
+  "Okt. Revolutsiya",
+  "Oväsen",
+  "P. Bagration",
+  "P. E. Friedrich",
+  "P. Heinrich",
+  "P. Rupprecht",
+  "Ph. van Almonde",
+  "Piñatapolis",
+  "Pr. van Oranje G",
+  "R. Lauria",
+  "Süsshofen",
+  "S. Carolina",
+  "S. Dragon",
+  "S. Thunder",
+  "Scheer",
+  "Schröder",
+  "Sinann",
+  "Sov. Rossiya",
+  "Sov. Soyuz",
+  "Suzuya G",
+  "Tachibana L",
+  "Tirfing",
+  "Tre Kronor",
+  "Ushakov",
+  "V. Cuniberti",
+  "V. Guerrero",
+  "V. Veneto",
+  "Vanadis",
+  "W. Virginia '44",
+  "Wisconsin G",
+  "Yavuz",
+  "ZF-6 G",
+  "Zarya S."
+ ]
+}

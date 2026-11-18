@@ -1,464 +1,334 @@
 #!/usr/bin/env node
-// Builds a static, machine-readable World of Warships data site for AI agents.
+// Builds a static World of Warships data site made for AI agents (not people).
 //
-//   node build.mjs                       download the latest data, then build into ./dist
-//   node build.mjs --data-dir path       build from files you already downloaded
+//   node build.mjs                    download the newest game data, build into ./dist
+//   node build.mjs --data-dir DIR     build from already downloaded data files
 //
-// Data comes from the public data server of WoWs ShipBuilder (https://app.wowssb.com),
-// which extracts it from the game client every patch. No account or key needed.
-// No dependencies: needs Node 18+. Behind an HTTPS proxy, run with NODE_USE_ENV_PROXY=1.
+// Env: SITE_URL (absolute links), WOWS_SERVER (live|pts), OUT_DIR. Needs Node 18+, no packages.
+// Behind an HTTPS proxy, run with NODE_USE_ENV_PROXY=1.
 
-import { mkdir, writeFile, readFile, rm } from "node:fs/promises";
-import { createHash } from "node:crypto";
+import { mkdir, writeFile, rm, readFile } from "node:fs/promises";
 import path from "node:path";
+import { loadGameData } from "./lib/data.mjs";
+import { allConfigurations, computeConfiguration, specialAbility, shellStats, weaponStats, cvPlane, describeModifier, slug, consumableSlots } from "./lib/ship.mjs";
+import { flatten, metricInfo } from "./lib/metrics.mjs";
+import { eligibleModernizations, skillsFor, signalFlags, changesWith, bestWithUpgrades, describeEffects, clean, upgradeName } from "./lib/analysis.mjs";
+import { toMarkdown } from "./lib/markdown.mjs";
+import { validate } from "./lib/validate.mjs";
 
 const args = process.argv.slice(2);
-const argVal = (name) => (args.includes(name) ? args[args.indexOf(name) + 1] : null);
-const DATA_DIR = argVal("--data-dir");
+const argVal = (n) => (args.includes(n) ? args[args.indexOf(n) + 1] : null);
 const OUT = path.resolve(process.env.OUT_DIR || "dist");
-const SERVER = process.env.WOWS_SERVER || "live"; // "live" or "pts"
-const CDN = `https://cdn.wowssb.com/api/${SERVER}`;
 const SITE_URL = (process.env.SITE_URL || "").replace(/\/$/, "");
-const CATEGORIES = ["Ship", "Summary", "Projectile", "Aircraft", "Ability"];
+const SERVER = process.env.WOWS_SERVER || "live";
+const abs = (p) => `${SITE_URL}/${p}`;
+const t0 = Date.now();
+const log = (...a) => console.log(`[${((Date.now() - t0) / 1000).toFixed(0)}s]`, ...a);
 
-// ---------- load ----------
-async function getText(rel) {
-  if (DATA_DIR) return readFile(path.join(DATA_DIR, rel), "utf8");
-  for (let attempt = 1; ; attempt++) {
-    try {
-      const res = await fetch(`${CDN}/${rel}`);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      return await res.text();
-    } catch (e) {
-      if (attempt >= 4) throw new Error(`download ${rel} failed: ${e.message}`);
-      await new Promise((r) => setTimeout(r, 1000 * 2 ** attempt));
-    }
-  }
-}
+const ctx = await loadGameData({ server: SERVER, dataDir: argVal("--data-dir") });
+log("data loaded, game version", ctx.gameVersion);
+const L = ctx.L;
 
-async function loadData() {
-  const version = JSON.parse(await getText("VersionInfo.json"));
-  const data = {};
-  for (const cat of CATEGORIES) {
-    data[cat] = {};
-    await Promise.all(version.categories[cat].map(async (f) => {
-      const text = await getText(`${cat}/${f.fileName}`);
-      const sum = createHash("sha256").update(text).digest("hex");
-      if (sum !== f.checksum) throw new Error(`checksum mismatch for ${cat}/${f.fileName}`);
-      data[cat][f.fileName] = JSON.parse(text);
-    }));
-  }
-  const merge = (cat) => Object.assign({}, ...Object.values(data[cat]));
-  return {
-    version,
-    ships: merge("Ship"),
-    summary: Object.values(data.Summary).flat(),
-    projectiles: merge("Projectile"),
-    aircraft: merge("Aircraft"),
-    abilities: merge("Ability"),
-    loc: JSON.parse(await getText("Localization/en.json")),
-  };
-}
-
-// ---------- helpers ----------
-const num = (v) => (typeof v === "number" && Number.isFinite(v) ? v : null);
-const r = (v, d = 2) => (num(v) === null ? null : Math.round(v * 10 ** d) / 10 ** d);
-const km = (m) => r(num(m) === null ? null : m / 1000, 2);
-const pct = (v) => r(num(v) === null ? null : v * 100, 1);
-const slugify = (s) => s.normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-const ROMAN = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI"];
-
-const NATIONS = {
-  Usa: ["usa", "U.S.A."], Japan: ["japan", "Japan"], Germany: ["germany", "Germany"], UnitedKingdom: ["united_kingdom", "U.K."],
-  Russia: ["ussr", "U.S.S.R."], France: ["france", "France"], Italy: ["italy", "Italy"], PanAsia: ["pan_asia", "Pan-Asia"],
-  Europe: ["europe", "Europe"], PanAmerica: ["pan_america", "Pan-America"], Netherlands: ["netherlands", "The Netherlands"],
-  Commonwealth: ["commonwealth", "Commonwealth"], Spain: ["spain", "Spain"],
-};
-const CLASSES = {
-  Destroyer: ["destroyer", "Destroyer"], Cruiser: ["cruiser", "Cruiser"], Battleship: ["battleship", "Battleship"],
-  AirCarrier: ["aircraft_carrier", "Aircraft Carrier"], Submarine: ["submarine", "Submarine"],
-};
+// ---------- names and ids ----------
+const NATIONS = { Usa: ["usa", "U.S.A."], Japan: ["japan", "Japan"], Germany: ["germany", "Germany"], UnitedKingdom: ["united_kingdom", "U.K."], Russia: ["ussr", "U.S.S.R."], France: ["france", "France"], Italy: ["italy", "Italy"], PanAsia: ["pan_asia", "Pan-Asia"], Europe: ["europe", "Europe"], PanAmerica: ["pan_america", "Pan-America"], Netherlands: ["netherlands", "The Netherlands"], Commonwealth: ["commonwealth", "Commonwealth"], Spain: ["spain", "Spain"] };
+const CLASSES = { Destroyer: ["destroyer", "Destroyer"], Cruiser: ["cruiser", "Cruiser"], Battleship: ["battleship", "Battleship"], AirCarrier: ["aircraft_carrier", "Aircraft Carrier"], Submarine: ["submarine", "Submarine"] };
 const CATEGORY = { TechTree: "tech_tree", Premium: "premium", Special: "special", TestShip: "test_ship" };
-const nationId = (n) => NATIONS[n]?.[0] ?? slugify(n).replace(/-/g, "_");
-const classId = (c) => CLASSES[c]?.[0] ?? slugify(c).replace(/-/g, "_");
-
-function build(raw) {
-  const L = raw.loc;
-  const name = (key) => (key ? L[key.toUpperCase()] ?? null : null);
-  const shipName = (index) => L[index] ?? L[index?.toUpperCase()] ?? index;
-  const summaryByIndex = Object.fromEntries(raw.summary.map((s) => [s.index, s]));
-
-  const shell = (id) => {
-    const p = raw.projectiles[id];
-    if (!p) return { id, name: name(id) };
-    const base = { id, name: name(id) ?? id, type: p.shellType ?? p.torpedoType ?? p.projectileType, damage: r(p.damage, 0) };
-    if (p.projectileType === "Artillery") return {
-      ...base,
-      caliber_mm: r(p.caliber * 1000, 0), mass_kg: num(p.mass), muzzle_velocity_m_s: num(p.muzzleVelocity),
-      fire_chance_pct: pct(p.fireChance) || null,
-      he_sap_penetration_mm: p.shellType !== "AP" && p.penetration ? num(p.penetration) : null,
-      ap_krupp: p.shellType === "AP" ? num(p.krupp) : null,
-      ricochet_angles_deg: p.shellType === "HE" ? null : [num(p.ricochetAngle), num(p.alwaysRicochetAngle)],
-      fuse_time_s: p.shellType === "AP" ? num(p.fuseTimer) : null, arming_threshold_mm: p.shellType === "AP" ? num(p.armingThreshold) : null,
-    };
-    if (p.projectileType === "Torpedo") return {
-      ...base, range_km: km(p.maxRange), speed_knots: num(p.speed), detectability_km: num(p.spottingRange),
-      caliber_mm: r(p.caliber * 1000, 0), can_not_hit_classes: (p.ignoreClasses ?? []).map(classId),
-    };
-    return { ...base, fire_chance_pct: pct(p.fireChance) || null };
-  };
-
-  // group identical guns/launchers: [{name, count, barrels_each, ...}]
-  const gunGroups = (guns) => {
-    const groups = {};
-    for (const g of guns ?? []) {
-      const k = g.name;
-      groups[k] ??= {
-        id: g.name, name: name(g.name) ?? g.name, mounts: 0, barrels_per_mount: g.numBarrels,
-        caliber_mm: r(g.barrelDiameter * 1000, 0), reload_s: num(g.reload),
-        traverse_180_s: g.horizontalRotationSpeed ? r(180 / g.horizontalRotationSpeed, 1) : null,
-        ammo: [...new Set(g.ammoList ?? [])],
-      };
-      groups[k].mounts++;
-    }
-    return Object.values(groups);
-  };
-
-  const aura = (a) => a ? { dps: num(a.constantDps), flak_damage: num(a.flakDamage) || null, flak_bursts: num(a.flakCloudsNumber) || null, hit_chance_pct: pct(a.hitChance), range_km: km(a.maxRange) } : null;
-
-  const consumables = (list) => {
-    const bySlot = {};
-    for (const c of list ?? []) {
-      const a = raw.abilities[`${c.consumableName} ${c.consumableVariantName}`];
-      (bySlot[c.slot] ??= []).push({
-        id: c.consumableName, variant: c.consumableVariantName,
-        name: L[`DOCK_CONSUME_TITLE_${c.consumableName.toUpperCase()}`] ?? c.consumableName,
-        charges: a ? (a.numConsumables === -1 ? "unlimited" : a.numConsumables) : null,
-        reload_s: num(a?.reloadTime), duration_s: num(a?.workTime) || null,
-      });
-    }
-    return Object.entries(bySlot).sort(([a], [b]) => a - b).map(([slot, options]) => ({ slot: Number(slot), options }));
-  };
-
-  // Choose modules for a configuration: "stock" = first module letter (A_), "top" = last (fully researched).
-  function configuration(s, which) {
-    const pick = (keys) => (keys.length ? [...keys].sort()[which === "stock" ? 0 : keys.length - 1] : null);
-    const hullKey = pick(Object.keys(s.hulls));
-    const hullUpgrade = s.shipUpgradeInfo?.shipUpgrades?.find((u) => u.ucType === "Hull" && u.components?.Hull?.includes(hullKey));
-    const compat = (type, all) => {
-      const allowed = hullUpgrade?.components?.[type];
-      const keys = Object.keys(all ?? {});
-      return pick(allowed?.length ? keys.filter((k) => allowed.includes(k)) : keys);
-    };
-    const hull = s.hulls[hullKey];
-    if (!hull) return null;
-    const engine = s.engines[pick(Object.keys(s.engines))];
-    const fc = s.fireControlList[pick(Object.keys(s.fireControlList))];
-    const artKey = compat("Artillery", s.mainBatteryModuleList), art = s.mainBatteryModuleList[artKey];
-    const torKey = compat("Torpedoes", s.torpedoModules), tor = s.torpedoModules[torKey];
-
-    const out = {
-      hull_module: hullUpgrade ? name(hullUpgrade.name) ?? hullUpgrade.name : hullKey,
-      hit_points: num(hull.health),
-      max_speed_knots: r(hull.maxSpeed * (1 + (engine?.speedCoef ?? 0)), 2),
-      rudder_shift_s: num(hull.rudderTime),
-      turning_radius_m: num(hull.turningRadius),
-      detectability_by_ship_km: num(hull.surfaceDetection),
-      detectability_by_plane_km: num(hull.airDetection),
-      tonnage_t: num(hull.tonnage),
-      length_m: num(hull.sizes?.length),
-      fire_spots: num(hull.fireSpots),
-      flooding_spots: num(hull.floodingSpots),
-      main_battery: null, secondaries: null, torpedoes: null, anti_air: null,
-    };
-    if (art) {
-      const groups = gunGroups(art.guns);
-      const ammo = [...new Set(groups.flatMap((g) => g.ammo))];
-      out.main_battery = {
-        range_km: km(art.maxRange * (fc?.maxRangeModifier ?? 1)),
-        sigma: num(art.sigma) && r(art.sigma * (fc?.sigmaModifier ?? 1), 2),
-        reload_s: groups[0]?.reload_s ?? null,
-        total_barrels: groups.reduce((n, g) => n + g.mounts * g.barrels_per_mount, 0),
-        guns: groups.map(({ ammo, ...g }) => g),
-        shells: ammo.map(shell),
-      };
-    }
-    if (hull.secondaryModule?.guns?.length) {
-      const groups = gunGroups(hull.secondaryModule.guns);
-      out.secondaries = {
-        range_km: km(hull.secondaryModule.maxRange),
-        guns: groups.map(({ ammo, ...g }) => g),
-        shells: [...new Set(groups.flatMap((g) => g.ammo))].map(shell),
-      };
-    }
-    if (tor?.torpedoLaunchers?.length) {
-      const groups = gunGroups(tor.torpedoLaunchers);
-      out.torpedoes = {
-        launchers: groups.map(({ ammo, ...g }) => g),
-        total_tubes: groups.reduce((n, g) => n + g.mounts * g.barrels_per_mount, 0),
-        reload_s: groups[0]?.reload_s ?? null,
-        torpedoes: [...new Set(groups.flatMap((g) => g.ammo))].map(shell),
-      };
-    }
-    const aa = hull.antiAir;
-    if (aa && (aa.longRangeAura || aa.mediumRangeAura || aa.shortRangeAura)) {
-      out.anti_air = { long_range: aura(aa.longRangeAura), medium_range: aura(aa.mediumRangeAura), short_range: aura(aa.shortRangeAura) };
-    }
-    if (hull.subBatteryCapacity) {
-      out.submarine = { battery_capacity: num(hull.subBatteryCapacity), battery_regen_per_s: num(hull.subBatteryRegenRate), dive_speed_m_s: num(hull.diveSpeed) };
-    }
-    return out;
-  }
-
-  const planes = (s) => Object.entries(s.cvPlanes ?? {}).flatMap(([slot, list]) => list.map((id) => {
-    const a = raw.aircraft[id.split("_")[0]];
-    return {
-      slot, id, name: name(id) ?? id, type: slot.replace(/^[A-Z]+\d*_/, ""),
-      squadron_size: num(a?.numPlanesInSquadron), attackers_per_attack: num(a?.attackData?.attackerSize),
-      plane_hp: num(a?.maxHealth), cruise_speed_knots: num(a?.speed), hangar: num(a?.maxPlaneInHangar),
-      restoration_time_s: num(a?.restorationTime), payload: a?.bombName ? shell(a.bombName) : null,
-    };
-  }));
-
-  const ships = Object.values(raw.ships).map((s) => {
-    const sum = summaryByIndex[s.index] ?? {};
-    const nm = shipName(s.index);
-    const info = s.shipUpgradeInfo ?? {};
-    return {
-      index: s.index,
-      id: s.id,
-      name: nm,
-      full_name: L[`${s.index}_FULL`] ?? nm,
-      slug: `${slugify(nm) || "ship"}-${s.index.toLowerCase()}`,
-      tier: s.tier,
-      tier_roman: ROMAN[s.tier] ?? String(s.tier),
-      class: classId(s.shipClass),
-      nation: nationId(s.shipNation),
-      category: CATEGORY[s.shipCategory] ?? s.shipCategory,
-      description: L[`${s.index}_DESCR`] ?? null,
-      price_credits: num(info.costCredits) || null,
-      price_doubloons: num(info.costGold) || null,
-      research_xp: num(info.costXp) || null,
-      previous_ship: sum.prevShipIndex ? { index: sum.prevShipIndex, name: shipName(sum.prevShipIndex) } : null,
-      next_ships: (sum.nextShipIndexes ?? []).map((i) => ({ index: i, name: shipName(i) })),
-      consumables: consumables(s.shipConsumable),
-      aircraft: planes(s),
-      stock: configuration(s, "stock"),
-      top: configuration(s, "top"),
-    };
-  }).sort((a, b) => a.nation.localeCompare(b.nation) || a.class.localeCompare(b.class) || a.tier - b.tier || a.name.localeCompare(b.name));
-  return ships;
-}
+const nationId = (n) => NATIONS[n]?.[0] ?? slug(n);
+const classId = (c) => CLASSES[c]?.[0] ?? slug(c);
+const ROMAN = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI"];
+const shipName = (i) => clean(L[i] ?? L[i?.toUpperCase()]) ?? i;
+const rawName = Object.fromEntries(Object.values(ctx.ships).map((s) => [s.name, s.index]));
+const summaryBy = Object.fromEntries(ctx.summary.map((s) => [s.index, s]));
+const COMMON_NOTE = "Base values: no captain skills, upgrades, signals or camouflage unless a section says otherwise. Units are in field names. null = not applicable.";
 
 // ---------- output ----------
-const abs = (p) => (SITE_URL ? `${SITE_URL}/${p}` : `/${p}`);
+let fileCount = 0;
 async function out(rel, data) {
   const file = path.join(OUT, rel);
   await mkdir(path.dirname(file), { recursive: true });
-  await writeFile(file, typeof data === "string" ? data : JSON.stringify(data) + "\n");
+  await writeFile(file, typeof data === "string" ? data : JSON.stringify(data));
+  fileCount++;
 }
-const csvCell = (v) => (v === null || v === undefined ? "" : /[",\n]/.test(String(v)) ? `"${String(v).replace(/"/g, '""')}"` : String(v));
-const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
-const fmt = (v, unit = "") => (v === null || v === undefined ? "n/a" : `${v}${unit}`);
-const get = (o, k) => k.split(".").reduce((a, p) => (a == null ? null : a[p]), o);
-const shellOf = (s, type) => s.top?.main_battery?.shells?.find((x) => x.type === type);
-
-const FLAT = {
-  index: (s) => s.index, name: (s) => s.name, tier: (s) => s.tier, class: (s) => s.class, nation: (s) => s.nation, category: (s) => s.category,
-  hit_points: (s) => get(s, "top.hit_points"), max_speed_knots: (s) => get(s, "top.max_speed_knots"),
-  rudder_shift_s: (s) => get(s, "top.rudder_shift_s"), turning_radius_m: (s) => get(s, "top.turning_radius_m"),
-  detectability_by_ship_km: (s) => get(s, "top.detectability_by_ship_km"), detectability_by_plane_km: (s) => get(s, "top.detectability_by_plane_km"),
-  main_battery_range_km: (s) => get(s, "top.main_battery.range_km"), main_battery_reload_s: (s) => get(s, "top.main_battery.reload_s"),
-  main_battery_caliber_mm: (s) => get(s, "top.main_battery.guns.0.caliber_mm"), main_battery_barrels: (s) => get(s, "top.main_battery.total_barrels"),
-  main_battery_traverse_180_s: (s) => get(s, "top.main_battery.guns.0.traverse_180_s"),
-  he_damage: (s) => shellOf(s, "HE")?.damage, he_fire_chance_pct: (s) => shellOf(s, "HE")?.fire_chance_pct,
-  ap_damage: (s) => shellOf(s, "AP")?.damage, sap_damage: (s) => shellOf(s, "SAP")?.damage,
-  torpedo_range_km: (s) => get(s, "top.torpedoes.torpedoes.0.range_km"), torpedo_damage: (s) => get(s, "top.torpedoes.torpedoes.0.damage"),
-  torpedo_speed_knots: (s) => get(s, "top.torpedoes.torpedoes.0.speed_knots"), torpedo_reload_s: (s) => get(s, "top.torpedoes.reload_s"),
-  torpedo_tubes: (s) => get(s, "top.torpedoes.total_tubes"),
-  secondary_range_km: (s) => get(s, "top.secondaries.range_km"),
-  price_credits: (s) => s.price_credits, price_doubloons: (s) => s.price_doubloons,
-};
-
-function shipMarkdown(s, meta) {
-  const c = s.top ?? {};
-  const row = (k, v) => `| ${k} | ${v} |`;
-  const lines = [
-    `## ${s.name} — tier ${s.tier_roman} ${s.nation} ${s.class} (${s.category})`, "",
-    `index: ${s.index} · json: ${abs(`api/ships/${s.index}.json`)}`, "",
-    s.description ? `> ${s.description.replace(/\s*\n+\s*/g, " ")}\n` : "",
-    `Fully upgraded (top) configuration, hull "${c.hull_module ?? "n/a"}". No upgrades, skills or signals applied. Stock values are in the JSON.`, "",
-    "| stat | value |", "|---|---|",
-    row("hit points", fmt(c.hit_points)), row("max speed", fmt(c.max_speed_knots, " kn")),
-    row("rudder shift", fmt(c.rudder_shift_s, " s")), row("turning radius", fmt(c.turning_radius_m, " m")),
-    row("detectability by ship", fmt(c.detectability_by_ship_km, " km")), row("detectability by plane", fmt(c.detectability_by_plane_km, " km")),
-  ];
-  const mb = c.main_battery;
-  if (mb) {
-    lines.push(row("main battery range", fmt(mb.range_km, " km")), row("main battery reload", fmt(mb.reload_s, " s")),
-      ...mb.guns.map((g) => row("main guns", `${g.mounts}× ${g.name} (${g.caliber_mm} mm, ${g.barrels_per_mount} barrels each, 180° in ${fmt(g.traverse_180_s, " s")})`)),
-      ...mb.shells.map((x) => row(`${x.type} shell`, `${x.name}: ${fmt(x.damage)} dmg, ${fmt(x.muzzle_velocity_m_s, " m/s")}${x.fire_chance_pct ? `, ${x.fire_chance_pct}% fire` : ""}${x.he_sap_penetration_mm ? `, ${x.he_sap_penetration_mm} mm pen` : ""}`)));
-  }
-  if (c.secondaries) lines.push(row("secondary range", fmt(c.secondaries.range_km, " km")));
-  if (c.torpedoes) lines.push(row("torpedo tubes", `${c.torpedoes.total_tubes}, reload ${fmt(c.torpedoes.reload_s, " s")}`),
-    ...c.torpedoes.torpedoes.map((t) => row("torpedo", `${t.name}: ${fmt(t.damage)} dmg, ${fmt(t.range_km, " km")}, ${fmt(t.speed_knots, " kn")}, seen at ${fmt(t.detectability_km, " km")}`)));
-  if (c.anti_air) for (const [k, a] of Object.entries(c.anti_air)) if (a) lines.push(row(`AA ${k.replace("_", " ")}`, `${a.dps} dps to ${a.range_km} km`));
-  for (const p of s.aircraft) lines.push(row(`aircraft (${p.type})`, `${p.name}: ${fmt(p.squadron_size)} per squadron, ${fmt(p.plane_hp)} HP each`));
-  for (const slot of s.consumables) lines.push(row(`consumable slot ${slot.slot}`, slot.options.map((o) => `${o.name} (${o.charges ?? "?"} charges, ${fmt(o.reload_s, " s")} reload)`).join(" or ")));
-  if (s.price_credits) lines.push(row("price", `${s.price_credits} credits`));
-  if (s.price_doubloons) lines.push(row("price", `${s.price_doubloons} doubloons`));
-  if (s.previous_ship) lines.push(row("researched from", s.previous_ship.name));
-  if (s.next_ships.length) lines.push(row("leads to", s.next_ships.map((n) => n.name).join(", ")));
-  lines.push("");
-  return lines.join("\n");
-}
-
-// ---------- main ----------
-const raw = await loadData();
-const all = build(raw);
-const ships = all.filter((s) => s.category !== "test_ship");
-const testShips = all.filter((s) => s.category === "test_ship");
-const cv = raw.version.currentVersion;
-const meta = {
-  generated_at: new Date().toISOString(),
-  game_version: `${cv.mainVersion}.${cv.dataIteration}`,
-  server: SERVER,
-  ship_count: ships.length,
-  source: "WoWs ShipBuilder public data (https://app.wowssb.com), extracted from the World of Warships game client",
-  license_note: "Game data © Wargaming.net. Unofficial site, not affiliated with Wargaming or WoWs ShipBuilder.",
-};
-const summary = (s) => ({ index: s.index, name: s.name, tier: s.tier, class: s.class, nation: s.nation, category: s.category, url: abs(`api/ships/${s.index}.json`) });
-const nationList = [...new Set(ships.map((s) => s.nation))].sort();
-const classList = [...new Set(ships.map((s) => s.class))].sort();
-const tiers = [...new Set(ships.map((s) => s.tier))].sort((a, b) => a - b);
-const label = (map, id) => Object.values(map).find(([i]) => i === id)?.[1] ?? id;
+const md = (title, intro, body) => `# ${title}\n\n${intro ? intro + "\n\n" : ""}${body}\n`;
 
 await rm(OUT, { recursive: true, force: true });
 await mkdir(OUT, { recursive: true });
+const meta = {
+  generated_at: new Date().toISOString(), game_version: ctx.gameVersion, server: SERVER,
+  data_source: "WoWs ShipBuilder public game data (https://app.wowssb.com), extracted from the World of Warships game client every patch",
+  calculations: "Stat formulas are a line-by-line port of WoWs ShipBuilder's open-source calculations (MIT license).",
+  license_note: "Game data © Wargaming.net. Unofficial site, not affiliated with Wargaming or WoWs ShipBuilder.",
+};
 
+// ---------- ships ----------
+const rows = [];            // one per released ship, used for lists, CSV and rankings
+const upgradedRows = [];    // best values reachable with upgrades
+const testShips = [];
+const ships = Object.values(ctx.ships).sort((a, b) => a.index.localeCompare(b.index));
+let done = 0;
+for (const s of ships) {
+  const sum = summaryBy[s.index] ?? {};
+  const info = s.shipUpgradeInfo ?? {};
+  const name = shipName(s.index);
+  const base = {
+    index: s.index, numeric_id: s.id, name, full_name: clean(L[`${s.index}_FULL`]) ?? name, slug: `${slug(name) || "ship"}-${s.index.toLowerCase()}`,
+    tier: s.tier, tier_roman: ROMAN[s.tier] ?? String(s.tier), class: classId(s.shipClass), nation: nationId(s.shipNation),
+    category: CATEGORY[s.shipCategory] ?? slug(s.shipCategory),
+  };
+  const configs = allConfigurations(s).map((c) => ({ ...c, stats: computeConfiguration(ctx, s, c.cfg, [], { tables: c.top || c.stock }) }));
+  const top = configs.find((c) => c.top) ?? configs[configs.length - 1];
+  const stock = configs.find((c) => c.stock) ?? configs[0];
+  const topFlat = flatten(top.stats);
+
+  // upgrades
+  const slots = eligibleModernizations(ctx, s);
+  const perOption = [];
+  const upgradeSlots = slots.map((sl) => ({
+    slot: sl.slot + 1,
+    options: sl.options.map((o) => {
+      const changes = changesWith(ctx, s, top.cfg, topFlat, o.modifiers);
+      perOption.push({ index: o.index, changes });
+      return { index: o.index, name: upgradeName(L, o), type: slug(o.type), effects: describeEffects(L, o.modifiers), stat_changes: changes };
+    }),
+  }));
+  const best = bestWithUpgrades(ctx, s, top.cfg, topFlat, slots, perOption);
+  const skills = skillsFor(ctx, s).map((k) => ({
+    name: k.name, point_cost: k.point_cost, row: k.row, column: k.column, epic: k.epic || undefined, description: k.description,
+    effects: describeEffects(L, k.all_mods.filter((x) => !x.name.includes("_") || x.name.includes("_" + s.shipClass) || x.name.includes("invisible_"))),
+    stat_changes: k.special ? undefined : changesWith(ctx, s, top.cfg, topFlat, k.mods),
+    note: k.special ? "Effect depends on battle conditions (for example remaining HP or activations), so no fixed stat change is shown. See effects." : undefined,
+    conditional_effects: k.conditional.length ? k.conditional : undefined,
+  }));
+  const flags = signalFlags(ctx).map((f) => ({ name: f.name, description: f.description, effects: describeEffects(L, f.mods), stat_changes: changesWith(ctx, s, top.cfg, topFlat, f.mods) }));
+
+  const record = {
+    about: `World of Warships ship data for ${name}. ${COMMON_NOTE} "configurations.top" is fully researched modules (what players normally use); "configurations.stock" is unresearched.`,
+    game_version: ctx.gameVersion,
+    ...base,
+    description: clean(L[`${s.index}_DESCR`]),
+    price_credits: info.costCredits || null, price_doubloons: info.costGold || null, research_xp: info.costXp || null,
+    previous_ship: sum.prevShipIndex ? { index: sum.prevShipIndex, name: shipName(sum.prevShipIndex) } : null,
+    next_ships: (sum.nextShipIndexes ?? []).map((i) => ({ index: i, name: shipName(i) })),
+    special_ability: specialAbility(ctx, s),
+    configurations: { top: top.stats, stock: stock.stats },
+    module_combinations: { count: configs.length, url: abs(`api/ships/${s.index}/configurations.json`), note: "Every combination of researchable modules, with full stats." },
+    upgrades: {
+      about: "Upgrades (modernizations) this ship can mount, per slot. One per slot. stat_changes = exact effect on the top configuration alone.",
+      slots: upgradeSlots,
+      best_possible_values: { about: "For each stat an upgrade can improve: base value, best value with the best upgrade in each slot, and which upgrades give it.", metrics: best },
+    },
+    captain_skills: { about: "Captain skills for this ship's class. stat_changes = effect of that one skill alone on the top configuration.", skills },
+    signal_flags: { about: "Signal flags (all ships can mount any of these). stat_changes = effect of that one flag alone on the top configuration.", flags },
+    all_metrics_top_configuration: topFlat,
+  };
+  await out(`api/ships/${s.index}.json`, record);
+  await out(`api/ships/${s.index}/configurations.json`, {
+    about: `Every module combination for ${name} with full stats. ${COMMON_NOTE}`, game_version: ctx.gameVersion, index: s.index, name,
+    configurations: configs.map((c) => ({ id: c.id, is_stock: c.stock, is_top: c.top, stats: computeConfiguration(ctx, s, c.cfg, [], { tables: false, accel: true }) })),
+  });
+  await out(`ships/${base.slug}.md`, md(`${name} (tier ${base.tier_roman} ${base.nation} ${base.class}, ${base.category})`, `${COMMON_NOTE} JSON: ${abs(`api/ships/${s.index}.json`)}`, toMarkdown(record)));
+
+  const row = { ...base, url: abs(`api/ships/${s.index}.json`), metrics: topFlat };
+  if (s.shipCategory === "TestShip") testShips.push(row); else {
+    rows.push(row);
+    const up = { ...topFlat };
+    const via = {};
+    for (const [k, b] of Object.entries(best)) if (b.best !== null) { up[k] = b.best; via[k] = b.upgrades.map((u) => u.name); }
+    upgradedRows.push({ ...base, url: row.url, metrics: up, via });
+  }
+  if (++done % 100 === 0) log(`ships ${done}/${ships.length}`);
+}
+log("ships done");
+
+// ---------- lists ----------
+const listEntry = (r) => ({ index: r.index, name: r.name, tier: r.tier, class: r.class, nation: r.nation, category: r.category, url: r.url });
+const nations = [...new Set(rows.map((r) => r.nation))].sort();
+const classes = [...new Set(rows.map((r) => r.class))].sort();
+const tiers = [...new Set(rows.map((r) => r.tier))].sort((a, b) => a - b);
+meta.ship_count = rows.length;
+meta.test_ship_count = testShips.length;
 await out("api/meta.json", meta);
-await out("api/ships.json", { meta, ships });
-await out("api/index.json", { meta, ships: ships.map(summary) });
-await out("api/test-ships.json", { meta, note: "Ships marked TestShip in the game files: in testing or unreleased. Not normally available to players. Numbers may change.", ships: testShips });
-await out("api/nations.json", { meta, nations: nationList.map((id) => ({ id, label: label(NATIONS, id), count: ships.filter((s) => s.nation === id).length, url: abs(`api/by-nation/${id}.json`) })) });
-await out("api/classes.json", { meta, classes: classList.map((id) => ({ id, label: label(CLASSES, id), count: ships.filter((s) => s.class === id).length, url: abs(`api/by-class/${id}.json`) })) });
-for (const s of all) await out(`api/ships/${s.index}.json`, { meta, ship: s });
-for (const n of nationList) await out(`api/by-nation/${n}.json`, { meta, nation: n, ships: ships.filter((s) => s.nation === n) });
-for (const c of classList) await out(`api/by-class/${c}.json`, { meta, class: c, ships: ships.filter((s) => s.class === c) });
-for (const t of tiers) await out(`api/by-tier/${t}.json`, { meta, tier: t, ships: ships.filter((s) => s.tier === t) });
+await out("api/index.json", { about: "Every released ship. Fetch url for full data.", ...meta, ships: rows.map(listEntry) });
+await out("api/test-ships.json", { about: "Ships marked as test ships in the game files: in development or not normally available. Kept out of all lists and rankings. Numbers may change.", ships: testShips.map(listEntry) });
 const names = {};
-const addName = (k, s) => { const key = k.toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g, "").trim(); (names[key] ??= []).includes(s.index) || names[key].push(s.index); };
-for (const s of ships) { addName(s.name, s); addName(s.full_name, s); }
-await out("api/name-lookup.json", { meta, note: "Keys are lowercase names without accents. Values are ship indexes; use /api/ships/{index}.json. Several ships can share a name (e.g. event versions); check category and tier.", names });
+const addName = (k, i) => { const key = k.toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g, "").trim(); if (!(names[key] ??= []).includes(i)) names[key].push(i); };
+for (const r of rows) addName(r.name, r.index);
+for (const s of Object.values(ctx.ships)) if (s.shipCategory !== "TestShip") addName(clean(L[`${s.index}_FULL`]) ?? shipName(s.index), s.index);
+await out("api/name-lookup.json", { about: "Lowercase ship name (accents removed) -> ship indexes. Several ships can share a name (event or alternate versions): check tier and category in api/index.json.", names });
+for (const [kind, key, values] of [["by-nation", "nation", nations], ["by-class", "class", classes], ["by-tier", "tier", tiers]]) {
+  for (const v of values) {
+    const list = rows.filter((r) => r[key] === v);
+    await out(`api/${kind}/${v}.json`, { about: `All released ships where ${key} = ${v}, with every metric of the top configuration.`, game_version: ctx.gameVersion, [key]: v, ships: list.map((r) => ({ ...listEntry(r), metrics: r.metrics })) });
+  }
+}
+await out("api/nations.json", { nations: nations.map((n) => ({ id: n, label: Object.values(NATIONS).find(([i]) => i === n)?.[1] ?? n, ships: rows.filter((r) => r.nation === n).length, url: abs(`api/by-nation/${n}.json`) })) });
+await out("api/classes.json", { classes: classes.map((c) => ({ id: c, label: Object.values(CLASSES).find(([i]) => i === c)?.[1] ?? c, ships: rows.filter((r) => r.class === c).length, url: abs(`api/by-class/${c}.json`) })) });
 
-await out("ships.jsonl", ships.map((s) => JSON.stringify(s)).join("\n") + "\n");
-const cols = Object.keys(FLAT);
-await out("ships.csv", [cols.join(","), ...ships.map((s) => cols.map((k) => csvCell(FLAT[k](s))).join(","))].join("\n") + "\n");
-for (const s of all) await out(`ships/${s.slug}.md`, `---\nindex: ${s.index}\nname: ${JSON.stringify(s.name)}\ngame_version: ${meta.game_version}\n---\n\n` + shipMarkdown(s, meta));
+// ---------- bulk ----------
+const allMetrics = [...new Set(rows.flatMap((r) => Object.keys(r.metrics)))].sort();
+const csvCell = (v) => (v === null || v === undefined ? "" : /[",\n]/.test(String(v)) ? `"${String(v).replace(/"/g, '""')}"` : String(v));
+const infoCols = ["index", "name", "tier", "class", "nation", "category"];
+await out("ships.csv", [[...infoCols, ...allMetrics].join(","), ...rows.map((r) => [...infoCols.map((c) => csvCell(r[c])), ...allMetrics.map((m) => csvCell(r.metrics[m]))].join(","))].join("\n") + "\n");
+await out("ships.jsonl", rows.map((r) => JSON.stringify({ ...listEntry(r), metrics: r.metrics })).join("\n") + "\n");
+log("lists and bulk done");
 
-await out("api/schema.json", {
-  description: "Field reference for ship records in api/ships.json (ships[]), ships.jsonl (one per line) and api/ships/{index}.json (ship). Units are in field names. null = no value or the ship lacks that part.",
-  ship: {
-    index: "string, game ship code, primary key used in URLs (e.g. PJSB018 = Yamato)", id: "integer, numeric game id",
-    name: "string, English short name", full_name: "string, English full name", slug: "string, used for /ships/{slug}.md",
-    tier: "integer 1-11", tier_roman: "string", class: `one of: ${classList.join(", ")}`, nation: `one of: ${nationList.join(", ")}`,
-    category: "tech_tree | premium | special (event, reward, coal/steel and similar ships)",
-    description: "string|null, in-game historical description", price_credits: "integer|null", price_doubloons: "integer|null", research_xp: "integer|null",
-    previous_ship: "{index,name}|null, tech-tree predecessor", next_ships: "[{index,name}], tech-tree successors",
-    consumables: "[{slot, options:[{id, variant, name, charges ('unlimited' or integer), reload_s, duration_s}]}]; options in one slot are alternatives",
-    aircraft: "[{slot, id, name, type, squadron_size, attackers_per_attack, plane_hp, cruise_speed_knots, hangar, restoration_time_s, payload}] (carriers and some hybrids)",
-    stock: "configuration object, first (unresearched) modules",
-    top: "configuration object, fully researched modules. Use this by default: it is what players normally compare.",
-  },
-  configuration: {
-    hull_module: "string", hit_points: "integer", max_speed_knots: "number", rudder_shift_s: "number", turning_radius_m: "number",
-    detectability_by_ship_km: "number, base surface detectability", detectability_by_plane_km: "number", tonnage_t: "number", length_m: "number",
-    fire_spots: "integer", flooding_spots: "integer",
-    main_battery: "{range_km, sigma, reload_s, total_barrels, guns:[{id,name,mounts,barrels_per_mount,caliber_mm,reload_s,traverse_180_s}], shells:[shell]}|null",
-    secondaries: "{range_km, guns:[...], shells:[shell]}|null",
-    torpedoes: "{launchers:[...], total_tubes, reload_s, torpedoes:[torpedo]}|null; several torpedoes = selectable alternatives",
-    anti_air: "{long_range, medium_range, short_range: {dps, flak_damage, flak_bursts, hit_chance_pct, range_km}|null}|null",
-    submarine: "{battery_capacity, battery_regen_per_s, dive_speed_m_s}|null",
-  },
-  shell: "{id, name, type: HE|AP|SAP, damage, caliber_mm, mass_kg, muzzle_velocity_m_s, fire_chance_pct, he_sap_penetration_mm, ap_krupp, ricochet_angles_deg:[start,always], fuse_time_s, arming_threshold_mm}",
-  torpedo: "{id, name, type, damage, range_km, speed_knots, detectability_km, caliber_mm, can_not_hit_classes}",
-  caveats: [
-    "Base values only: no commander skills, upgrades (modernizations), signals or camouflage applied.",
-    "stock/top picks modules by their letter (A_ = stock, last letter = top); ships with branching hulls use the last one.",
-    "No player statistics (win rate, average damage). This is ship data only.",
-    "Test ships (in development) are excluded from the main lists; see /api/test-ships.json.",
-  ],
+// ---------- rankings ----------
+function rank(list, metric, direction) {
+  const withV = list.filter((r) => typeof r.metrics[metric] === "number");
+  withV.sort((a, b) => (direction === "lower_is_better" ? a.metrics[metric] - b.metrics[metric] : b.metrics[metric] - a.metrics[metric]) || a.name.localeCompare(b.name));
+  let prev = null, prevRank = 0;
+  return withV.map((r, i) => {
+    const v = r.metrics[metric];
+    const rk = v === prev ? prevRank : i + 1;
+    prev = v; prevRank = rk;
+    return { rank: rk, index: r.index, name: r.name, tier: r.tier, class: r.class, nation: r.nation, category: r.category, value: v, ...(r.via?.[metric] ? { upgrades_used: r.via[metric] } : {}) };
+  });
+}
+const rankingRule = (d) => (d === "lower_is_better" ? "rank 1 = lowest value (lower is better)" : d === "higher_is_better" ? "rank 1 = highest value (higher is better)" : "rank 1 = highest value (no better/worse direction for this stat)");
+const metricIndex = [];
+for (const [family, list, label] of [["rankings", rows, "base stats, top configuration"], ["rankings-with-upgrades", upgradedRows, "best value reachable with upgrades, top configuration"]]) {
+  const metrics = family === "rankings" ? allMetrics : [...new Set(upgradedRows.flatMap((r) => Object.keys(r.via)))].sort();
+  for (const m of metrics) {
+    const { unit, direction } = metricInfo(m);
+    const all = rank(list, m, direction);
+    if (all.length < 2) continue;
+    const head = { metric: m, unit, direction, ranking_rule: rankingRule(direction), values: label, game_version: ctx.gameVersion };
+    await out(`api/${family}/${m}.json`, { about: `All released ships ranked by ${m}. To filter by several nations, classes or tiers, keep only matching rows: the order stays correct.`, ...head, count: all.length, ships: all });
+    await out(`${family}/${m}.md`, md(`Ranking: ${m}`, `${label}. ${rankingRule(direction)}. Unit: ${unit ?? "none"}. JSON: ${abs(`api/${family}/${m}.json`)}`,
+      `| rank | ship | tier | class | nation | category | value${family === "rankings" ? "" : " | upgrades used"} |\n|---|---|---|---|---|---|---${family === "rankings" ? "" : "|---"}|\n` + all.map((r) => `| ${r.rank} | ${r.name} | ${r.tier} | ${r.class} | ${r.nation} | ${r.category} | ${r.value}${family === "rankings" ? "" : ` | ${(r.upgrades_used ?? []).join(" + ") || "none"}`} |`).join("\n")));
+    const filtered = async (rel, rowsF, what) => {
+      const rk = rank(rowsF, m, direction);
+      if (rk.length >= 2) await out(`api/${family}/${m}/${rel}.json`, { about: `Ships ranked by ${m}, only ${what}.`, ...head, count: rk.length, ships: rk });
+      return rk.length >= 2;
+    };
+    const avail = { classes: [], class_tiers: [], tiers: [], nations: [] };
+    for (const c of classes) {
+      if (await filtered(`class/${c}`, list.filter((r) => r.class === c), `class ${c}`)) avail.classes.push(c);
+      for (const t of tiers) if (await filtered(`class/${c}/tier-${t}`, list.filter((r) => r.class === c && r.tier === t), `class ${c}, tier ${t}`)) avail.class_tiers.push(`${c}/tier-${t}`);
+    }
+    for (const t of tiers) if (await filtered(`tier/${t}`, list.filter((r) => r.tier === t), `tier ${t}`)) avail.tiers.push(t);
+    for (const n of nations) if (await filtered(`nation/${n}`, list.filter((r) => r.nation === n), `nation ${n}`)) avail.nations.push(n);
+    metricIndex.push({ family, metric: m, unit, direction, ships: all.length, url: abs(`api/${family}/${m}.json`), markdown: abs(`${family}/${m}.md`), filtered: avail });
+  }
+  log(`${family} done`);
+}
+await out("api/rankings/index.json", {
+  about: "Every ranking on this site. Every numeric stat of every ship is ranked (nothing hand-picked). 'rankings' = base stats; 'rankings-with-upgrades' = best value reachable with upgrades. Filtered lists: {url without .json}/class/{class}.json, /class/{class}/tier-{n}.json, /tier/{n}.json, /nation/{nation}.json. For several nations at once, filter the full list.",
+  game_version: ctx.gameVersion, count: metricIndex.length, rankings: metricIndex,
 });
 
-const base = SITE_URL;
-await out("llms.txt", `# World of Warships ship data for AI agents
+// ---------- extra datasets ----------
+const nationName = (n) => nationId(n);
+await out("api/upgrades.json", {
+  about: "Every upgrade (modernization) in the game, with its effects and which ships can mount it. Slot numbers start at 1.", game_version: ctx.gameVersion,
+  upgrades: Object.values(ctx.modernizations).sort((a, b) => a.slot - b.slot || a.index.localeCompare(b.index)).map((m) => ({
+    index: m.index, name: upgradeName(L, m), slot: m.slot + 1, type: slug(m.type), description: clean(L[`DESC_${m.name}`.toUpperCase()]),
+    tiers: m.shipLevel, classes: (m.shipClasses ?? []).map(classId), nations: (m.allowedNations ?? []).map(nationName),
+    also_on_ships: (m.additionalShips ?? []).map((n) => shipName(rawName[n] ?? n)), not_on_ships: (m.blacklistedShips ?? []).map((n) => shipName(rawName[n] ?? n)),
+    effects: describeEffects(L, m.modifiers ?? []),
+  })),
+});
+const captain = ctx.captains?.["Common.json"]?.Default;
+const skillsByClass = {};
+for (const c of Object.keys(CLASSES)) {
+  const fake = { shipClass: c, tier: 10, index: "", name: "" };
+  skillsByClass[classId(c)] = skillsFor(ctx, fake).map((k) => ({ name: k.name, point_cost: k.point_cost, row: k.row, column: k.column, epic: k.epic || undefined, description: k.description, effects: describeEffects(L, k.all_mods.filter((x) => !x.name.includes("_") || x.name.includes("_" + c) || x.name.includes("invisible_"))), conditional_effects: k.conditional.length ? k.conditional : undefined }));
+}
+await out("api/captain-skills.json", { about: "Captain skills per ship class: point cost, position in the skill grid (row/column), effects and conditional effects. A captain has 21 points.", game_version: ctx.gameVersion, skills_by_class: skillsByClass });
+await out("api/signal-flags.json", { about: "Signal flags and their effects.", game_version: ctx.gameVersion, flags: signalFlags(ctx).map((f) => ({ index: f.index, name: f.name, description: f.description, effects: describeEffects(L, f.mods) })) });
+const consumableList = Object.entries(ctx.abilities).map(([key, a]) => {
+  const [slotList] = consumableSlots(ctx, [{ slot: 0, consumableName: a.name, consumableVariantName: a.consumableVariantName }], [], a.group === "plane", 0, "Cruiser");
+  return { variant_key: key, ...slotList.options[0], used_by: a.group === "plane" ? "aircraft" : "ship" };
+}).sort((x, y) => x.variant_key.localeCompare(y.variant_key));
+await out("api/consumables.json", { about: "Every consumable variant: charges, reload, duration and effects (base values). Ships list their exact variants in their own file. Repair Party HP values need a ship's HP, so they are only in ship files.", game_version: ctx.gameVersion, consumables: consumableList });
+const projectiles = Object.keys(ctx.projectiles).sort().map((id) => {
+  const p = ctx.projectiles[id];
+  return p.projectileType === "Artillery" ? { kind: "shell", ...shellStats(ctx, id, [], 1, 1, "Main") } : weaponStats(ctx, id, [], p.projectileType !== "Torpedo" ? true : false);
+});
+await out("api/projectiles.json", { about: "Every shell, torpedo, bomb, rocket and depth charge in the game, base values. fire_chance_per_salvo_pct here assumes 1 barrel.", game_version: ctx.gameVersion, projectiles });
+await out("api/aircraft.json", { about: "Every aircraft type (carrier squadrons, airstrikes, consumable planes), base values.", game_version: ctx.gameVersion, aircraft: Object.values(ctx.aircraft).sort((a, b) => a.index.localeCompare(b.index)).map((a) => ({ category: slug(a.planeCategory), ...cvPlane(ctx, a.name, 10, []) })) });
+log("datasets done");
 
-> Machine-readable World of Warships ship stats: ${ships.length} ships, game version ${meta.game_version}, generated ${meta.generated_at}. Extracted from the game client (via WoWs ShipBuilder's public data). Static JSON, JSONL, CSV and Markdown. No auth, no JavaScript.
+// ---------- validation ----------
+const report = validate({ rows, testShips, ctx, metricIndex });
+await out("api/validation.json", report);
+let verification = null;
+try { verification = JSON.parse(await readFile("verification/wiki-crosscheck.json", "utf8")); await out("api/verification.json", verification); } catch { /* optional */ }
 
-How to answer common questions:
-- One ship by name: look it up in ${base}/api/name-lookup.json (lowercase name -> ship indexes), then fetch ${base}/api/ships/{index}.json
-- Compare or filter many ships: fetch ${base}/ships.csv (flat, ${cols.length} columns, top configuration) or ${base}/ships.jsonl (full records) once, then filter
-- All ships of one tier, nation or class: ${base}/api/by-tier/{1-11}.json, ${base}/api/by-nation/{nation}.json, ${base}/api/by-class/{class}.json
-- Field meanings and units: ${base}/api/schema.json. Units are in field names (max_speed_knots, reload_s, range_km).
-- Each ship has "stock" and "top" (fully researched) configurations. Use "top" unless asked about stock.
-- Values are base stats without skills, upgrades or signals. No player win rates here.
+// ---------- schema, llms.txt, index ----------
+const metricDocs = allMetrics.map((m) => ({ metric: m, ...metricInfo(m), ships_with_value: rows.filter((r) => typeof r.metrics[m] === "number").length }));
+await out("api/schema.json", {
+  about: "How the data is organized. Every ship file has the same structure. Units are in field names: _s seconds, _km kilometres, _m metres, _mm millimetres, _kg kilograms, _knots knots, _pct percent, _pct_change percent change, _deg degrees, _per_s per second, _per_minute per minute, _hp hit points. null = not applicable.",
+  ship_file: {
+    "index": "game ship code, primary key (e.g. PJSB018 = Yamato)", "name/full_name": "English names", "tier": "1-11", "class": classes.join(" | "), "nation": nations.join(" | "),
+    "category": "tech_tree | premium | special (event/reward/coal/steel/research-bureau ships)",
+    "configurations.top": "fully researched modules, base values. Use by default.", "configurations.stock": "unresearched modules",
+    "configurations.*.survivability": "hit points, fire and flooding, torpedo protection, HP per hit location", "configurations.*.maneuverability": "speed, rudder, turning circle, acceleration",
+    "configurations.*.concealment": "detectability", "configurations.*.main_battery": "guns, reload, range, dispersion, damage per minute, shells (with penetration and flight time per km in ballistics_by_range), burst fire mode",
+    "configurations.*.secondaries": "secondary guns", "configurations.*.torpedoes": "launchers and torpedo options", "configurations.*.anti_air": "AA auras, flak, aimed fire",
+    "configurations.*.aircraft": "carrier squadrons", "configurations.*.airstrikes": "airstrikes and ASW airstrikes", "configurations.*.depth_charges": "depth charges", "configurations.*.sonar": "submarine sonar",
+    "configurations.*.consumables": "consumable slots; options in one slot are alternatives; effects with values",
+    "upgrades.slots": "upgrades per slot with exact stat changes", "upgrades.best_possible_values": "best reachable value per stat with upgrades",
+    "captain_skills.skills": "each skill with its exact stat changes", "signal_flags.flags": "each flag with its exact stat changes",
+    "all_metrics_top_configuration": "every numeric stat of the top configuration as flat metric -> value (same names as rankings and ships.csv)",
+  },
+  combining_effects: "Effects stack by multiplying: a stat with base B under effects m1, m2... (multiplier kind) is B*m1*m2. Example: reload 30 s with -12% (x0.88) and -5% (x0.95) = 30*0.88*0.95 = 25.08 s. Each upgrade/skill/flag stat_changes shows its effect alone, so you can combine them: new = base * (after1/base) * (after2/base) for multiplier effects. Additive effects (raw_value with unit, e.g. +1 charge) add up.",
+  caveats: [
+    "Values are what WoWs ShipBuilder calculates from the game files. Things the game files do not expose (armor thickness, module HP) are not included.",
+    "concealment: detectability_by_ships_after_firing_main_battery_km = main battery range (firing outside smoke raises sea detectability to the guns' max range for 20 s, per the official wiki); detectability_when_firing_from_smoke_km comes from the game files; *_while_burning_km = +2 km by sea / +3 km by air while on fire.",
+    "Secondary battery range: for some ships (mostly aircraft carriers and a few secondary-focused battleships) the official wiki lists a longer secondary range than the game files used here. This is unresolved; see api/verification.json.",
+    "Penetration of HE/SAP shells is the exact game value (for example 54.9 mm); the game client may round it.",
+    "No player statistics (win rate, average damage).",
+    "Test ships are excluded from lists and rankings: api/test-ships.json.",
+  ],
+  metrics: metricDocs,
+});
 
-## API
+await out("llms.txt", await llmsTxt());
+async function llmsTxt() {
+  const guide = (await readFile(new URL("./lib/llms-guide.md", import.meta.url), "utf8").catch(() => "")).replaceAll("{BASE}", SITE_URL);
+  return `# World of Warships data for AI agents
 
-- [Ship index](${base}/api/index.json): index, name, tier, class, nation, category and URL for every ship
-- [Name lookup](${base}/api/name-lookup.json): name -> ship indexes
-- [All ships, full records](${base}/api/ships.json)
-- [Schema](${base}/api/schema.json): every field, unit and caveat
-- [Nations](${base}/api/nations.json): ${nationList.join(", ")}
-- [Classes](${base}/api/classes.json): ${classList.join(", ")}
-- [Build info](${base}/api/meta.json)
+> Complete World of Warships ship data: ${rows.length} ships, game version ${ctx.gameVersion}, generated ${meta.generated_at}. Every stat of every ship (all module combinations), what every upgrade, captain skill and signal flag changes, and ${metricIndex.length} rankings of every numeric stat with filters by class, tier and nation. Static JSON, CSV and Markdown. No auth, no JavaScript. Source: game files via WoWs ShipBuilder; calculations ported from ShipBuilder.
 
-## Bulk
+## Start here
 
-- [ships.csv](${base}/ships.csv): columns ${cols.join(", ")}
-- [ships.jsonl](${base}/ships.jsonl): one full ship record per line
+- [Ship index](${abs("api/index.json")}): every ship with index, name, tier, class, nation, category
+- [Name lookup](${abs("api/name-lookup.json")}): ship name -> index. Then fetch ${abs("api/ships/{index}.json")} (or ${abs("ships/{name-index}.md")})
+- [Rankings index](${abs("api/rankings/index.json")}): every ranking and its filtered versions
+- [Schema](${abs("api/schema.json")}): structure, units, how to combine upgrade effects, every metric with its unit and better-direction
 
-## Optional
+${guide}
+## Data sets
 
-- [All ships as Markdown](${base}/llms-full.txt): readable stat sheet for every ship in one file
-- [Test ships](${base}/api/test-ships.json): ${testShips.length} unreleased or in-testing ships, kept separate on purpose
-`);
-await out("llms-full.txt", `# World of Warships ship data (all ships)\n\nGame version ${meta.game_version}. Generated ${meta.generated_at}. Source: ${meta.source}. Top configuration, base values.\n\n` + ships.map((s) => shipMarkdown(s, meta)).join("\n"));
+- [Upgrades](${abs("api/upgrades.json")}), [Captain skills](${abs("api/captain-skills.json")}), [Signal flags](${abs("api/signal-flags.json")}), [Consumables](${abs("api/consumables.json")})
+- [Shells, torpedoes, bombs, rockets, depth charges](${abs("api/projectiles.json")}), [Aircraft](${abs("api/aircraft.json")})
+- Lists: ${abs("api/by-tier/{1-11}.json")}, ${abs("api/by-nation/{nation}.json")} (${nations.join(", ")}), ${abs("api/by-class/{class}.json")} (${classes.join(", ")})
+- Bulk: [ships.csv](${abs("ships.csv")}) (one row per ship, ${allMetrics.length} metric columns), [ships.jsonl](${abs("ships.jsonl")})
 
-await out("robots.txt", `# AI crawlers and agents are welcome.\nUser-agent: *\nAllow: /\n${SITE_URL ? `Sitemap: ${SITE_URL}/sitemap.xml\n` : ""}`);
-if (SITE_URL) {
-  const urls = ["", "llms.txt", "llms-full.txt", "api/index.json", "api/schema.json", "ships.csv", ...ships.map((s) => `api/ships/${s.index}.json`), ...ships.map((s) => `ships/${s.slug}.md`)];
-  await out("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `<url><loc>${esc(`${SITE_URL}/${u}`)}</loc></url>`).join("\n")}\n</urlset>\n`);
+## Trust
+
+- [Validation report](${abs("api/validation.json")}): automatic checks run on every build
+${verification ? `- [Wiki cross-check](${abs("api/verification.json")}): values compared with the official World of Warships wiki\n` : ""}- [Build info](${abs("api/meta.json")})
+`;
 }
 
-const jsonld = {
-  "@context": "https://schema.org", "@type": "Dataset", name: "World of Warships ship data for AI agents",
-  description: `Base stats for ${ships.length} World of Warships ships (game version ${meta.game_version}) as JSON, JSONL, CSV and Markdown.`,
-  dateModified: meta.generated_at, version: meta.game_version, isAccessibleForFree: true,
-  distribution: [
-    { "@type": "DataDownload", encodingFormat: "application/json", contentUrl: abs("api/ships.json") },
-    { "@type": "DataDownload", encodingFormat: "application/jsonl", contentUrl: abs("ships.jsonl") },
-    { "@type": "DataDownload", encodingFormat: "text/csv", contentUrl: abs("ships.csv") },
-  ],
-};
-const tcols = ["index", "name", "tier", "class", "nation", "category", "hit_points", "max_speed_knots", "detectability_by_ship_km", "main_battery_range_km", "main_battery_reload_s", "torpedo_range_km"];
-await out("index.html", `<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>WoWs Data for AIs</title>
-<meta name="description" content="Machine-readable World of Warships ship data for AI agents. Start at /llms.txt">
+const tcols = ["survivability.hit_points", "maneuverability.max_speed_knots", "concealment.detectability_by_ships_km", "main_battery.range_km", "main_battery.reload_s"];
+await out("index.html", `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>WoWs Data for AIs</title>
+<meta name="description" content="Complete World of Warships ship data for AI agents. Start at /llms.txt">
 <link rel="alternate" type="text/plain" href="${abs("llms.txt")}" title="llms.txt">
-<link rel="alternate" type="application/json" href="${abs("api/ships.json")}" title="All ships (JSON)">
-<script type="application/ld+json">${JSON.stringify(jsonld)}</script>
-<style>body{font:13px/1.4 ui-monospace,monospace;margin:16px;background:#fff;color:#111}table{border-collapse:collapse}td,th{border:1px solid #ccc;padding:2px 6px;text-align:left;white-space:nowrap}.w{overflow-x:auto}@media(prefers-color-scheme:dark){body{background:#111;color:#ddd}td,th{border-color:#444}a{color:#8ab4f8}}</style>
-</head><body>
-<h1>World of Warships ship data for AI agents</h1>
-<p>This site is for machines. AI agents: read <a href="${abs("llms.txt")}">/llms.txt</a> first. Fields and units: <a href="${abs("api/schema.json")}">/api/schema.json</a>. Bulk: <a href="${abs("ships.csv")}">ships.csv</a>, <a href="${abs("ships.jsonl")}">ships.jsonl</a>, <a href="${abs("api/ships.json")}">api/ships.json</a>.</p>
-<p>ships=${ships.length}; game_version=${esc(meta.game_version)}; generated_at=${meta.generated_at}; configuration=top; values=base (no skills/upgrades)</p>
-<div class="w"><table><thead><tr>${tcols.map((c) => `<th>${c}</th>`).join("")}<th>json</th><th>md</th></tr></thead><tbody>
-${ships.map((s) => `<tr>${tcols.map((c) => `<td>${esc(fmt(FLAT[c](s)))}</td>`).join("")}<td><a href="${abs(`api/ships/${s.index}.json`)}">json</a></td><td><a href="${abs(`ships/${s.slug}.md`)}">md</a></td></tr>`).join("\n")}
-</tbody></table></div>
-<p>Source: ${esc(meta.source)}. ${esc(meta.license_note)}</p>
-</body></html>
+<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@type": "Dataset", name: "World of Warships ship data for AI agents", description: `Every stat of ${rows.length} World of Warships ships (game version ${ctx.gameVersion}), upgrades, skills, signals and rankings.`, dateModified: meta.generated_at, version: ctx.gameVersion, isAccessibleForFree: true, distribution: [{ "@type": "DataDownload", encodingFormat: "text/csv", contentUrl: abs("ships.csv") }, { "@type": "DataDownload", encodingFormat: "application/jsonl", contentUrl: abs("ships.jsonl") }] })}</script>
+<style>body{font:13px/1.4 ui-monospace,monospace;margin:16px;background:#fff;color:#111}table{border-collapse:collapse}td,th{border:1px solid #ccc;padding:2px 6px;text-align:left;white-space:nowrap}.w{overflow-x:auto}@media(prefers-color-scheme:dark){body{background:#111;color:#ddd}td,th{border-color:#444}a{color:#8ab4f8}}</style></head><body>
+<h1>World of Warships data for AI agents</h1>
+<p>This site is for AI agents. Read <a href="${abs("llms.txt")}">/llms.txt</a>. Structure and units: <a href="${abs("api/schema.json")}">/api/schema.json</a>. Rankings: <a href="${abs("api/rankings/index.json")}">/api/rankings/index.json</a>.</p>
+<p>ships=${rows.length}; game_version=${ctx.gameVersion}; generated_at=${meta.generated_at}; rankings=${metricIndex.length}</p>
+<div class="w"><table><thead><tr><th>index</th><th>name</th><th>tier</th><th>class</th><th>nation</th><th>category</th>${tcols.map((c) => `<th>${c}</th>`).join("")}<th>json</th><th>md</th></tr></thead><tbody>
+${rows.map((r) => `<tr><td>${r.index}</td><td>${r.name.replace(/</g, "&lt;")}</td><td>${r.tier}</td><td>${r.class}</td><td>${r.nation}</td><td>${r.category}</td>${tcols.map((c) => `<td>${r.metrics[c] ?? ""}</td>`).join("")}<td><a href="${r.url}">json</a></td><td><a href="${abs(`ships/${r.slug}.md`)}">md</a></td></tr>`).join("\n")}
+</tbody></table></div><p>${meta.data_source}. ${meta.calculations} ${meta.license_note}</p></body></html>
 `);
+await out("robots.txt", `# AI crawlers and agents are welcome.\nUser-agent: *\nAllow: /\n${SITE_URL ? `Sitemap: ${SITE_URL}/sitemap.xml\n` : ""}`);
+if (SITE_URL) await out("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${["", "llms.txt", "api/index.json", "api/schema.json", "api/rankings/index.json", ...rows.map((r) => `api/ships/${r.index}.json`), ...rows.map((r) => `ships/${r.slug}.md`)].map((u) => `<url><loc>${abs(u)}</loc></url>`).join("\n")}\n</urlset>\n`);
 await out(".nojekyll", "");
-console.log(`Built ${ships.length} ships (+${testShips.length} test ships), game version ${meta.game_version}, into ${OUT}`);
+
+log(`built ${rows.length} ships (+${testShips.length} test), ${metricIndex.length} rankings, ${fileCount} files into ${OUT}`);
+if (report.errors.length) { console.error(`VALIDATION FAILED: ${report.errors.length} errors, first: ${JSON.stringify(report.errors.slice(0, 5))}`); process.exit(1); }
