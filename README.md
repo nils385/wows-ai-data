@@ -1,8 +1,22 @@
 # WoWs data for AIs
 
-A static website with complete World of Warships ship data, made for AI agents rather than people. It's plain JSON, CSV and Markdown, with units in every field name and an `llms.txt` entry point. It checks for new game data every 6 hours, so new patches show up automatically.
+An unofficial, non-commercial World of Warships encyclopedia: a page for every ship, a searchable ship list, rankings, a comparison tool and guides. All of it is also published as structured data (JSON, CSV, Markdown, `llms.txt`) for AI tools and developers, generated from the same records so the numbers can never disagree. It checks for new game data every 6 hours, so new patches show up automatically.
 
-**AI agents: start at `/llms.txt`.**
+**Players: start at the homepage. AI agents and developers: start at `/llms.txt`.**
+
+## Pages for players
+
+| page | what |
+|---|---|
+| `/` | homepage with search, classes, nations and guides |
+| `/ships/` | every ship in one table, filterable by class, tier, nation and type |
+| `/ships/{name-index}/` | one ship: summary, armor, all stats, shells and ballistics, upgrades, commander skills, signals, modules, change history |
+| `/compare.html?ships=PJSB018,PASB018` | up to four ships side by side |
+| `/rankings/` and `/rankings/{metric}/` | leaderboards for every stat, filterable |
+| `/guides/…` | mechanics, glossary, tech trees, upgrades/skills/signals, changes, community opinion |
+| `/about/`, `/legal/` | data sources, checks, legal notice and attribution |
+
+Pages work without JavaScript; a small script (`/assets/site.js`) only adds filtering and the comparison tool. No frameworks, no tracking, no cookies.
 
 ## What's in it
 
@@ -20,11 +34,17 @@ A static website with complete World of Warships ship data, made for AI agents r
 
 Game data © Wargaming.net. Unofficial; not affiliated with Wargaming or WoWs ShipBuilder.
 
+## Legal
+
+Unofficial fan project, not endorsed by Wargaming (Player Content Policy disclaimer on every page). No ads or paid features, no Wargaming logos or artwork. Game data © Wargaming.net; formulas ported from WoWs ShipBuilder (MIT); armor values from the official wiki. See `/legal/`.
+
 ## Build it yourself
 
 ```bash
 node build.mjs
 ```
+
+Then run the tests (known values, page integrity, site size): `node tests/check-output.mjs dist`.
 
 This needs Node 18+ and no packages. Output goes to `dist/` (about 30,000 files, roughly 400 MB). Options: `SITE_URL=https://...` for absolute links, `WOWS_SERVER=pts` for public test server data, and `NODE_USE_ENV_PROXY=1` behind an HTTPS proxy.
 

@@ -14,6 +14,8 @@ import { setConsumableTitles, allConfigurations, computeConfiguration, specialAb
 import { flatten, metricInfo } from "./lib/metrics.mjs";
 import { eligibleModernizations, skillsFor, signalFlags, changesWith, bestWithUpgrades, describeEffects, clean, upgradeName } from "./lib/analysis.mjs";
 import { toMarkdown } from "./lib/markdown.mjs";
+import { makeLayout, renderShipPage, CSS, JS, esc, nationLabel as nationLabelOf } from "./lib/site.mjs";
+import { renderHome, renderShipsIndex, renderRankingsIndex, renderRankingPage, renderTextPage, renderGuidesIndex, renderUpgradesPage, renderCompare, renderAbout, renderLegal, redirectPage } from "./lib/pages.mjs";
 import { validate } from "./lib/validate.mjs";
 import { buildKnowledge } from "./lib/knowledge.mjs";
 
@@ -100,6 +102,12 @@ const rows = [];            // one per released ship, used for lists, CSV and ra
 const upgradedRows = [];    // best values reachable with upgrades
 const testShips = [];
 const shipPages = [];       // for name-based pages
+// Human pages: one HTML page per ship at /ships/{name-index}/, built from the same record as JSON/Markdown.
+const slugByIndex = Object.fromEntries(Object.values(ctx.ships).map((x) => [x.index, `${slug(shipName(x.index)) || "ship"}-${x.index.toLowerCase()}`]));
+const ORIGIN = SITE_URL ? new URL(SITE_URL).origin : "";
+const BASE_PATH = SITE_URL ? new URL(SITE_URL).pathname.replace(/\/$/, "") : ""; // e.g. "/wows-ai-data"
+const shipHtml = (index) => `${BASE_PATH}/ships/${slugByIndex[index]}/`;
+const layout = makeLayout({ base: BASE_PATH, site: SITE_URL, gameVersion: ctx.gameVersion, updated: meta.generated_at.slice(0, 10) });
 const ships = Object.values(ctx.ships).sort((a, b) => a.index.localeCompare(b.index));
 let done = 0;
 for (const s of ships) {
@@ -247,6 +255,7 @@ for (const s of ships) {
     (record.special_ability ? `special ability: ${record.special_ability.name}\n` : "") +
     `\n## More\n\n${links}\n\n## Changes between game versions\n\n${histMd}\n\n## All stats (metric: value)\n\nSorted alphabetically; metric names are the same on every ship page, in rankings and in ships.csv, so two ships can be compared line by line. Units are in the names.\n\n${Object.entries(topFlat).map(([k, v]) => `${k}: ${v}`).join("\n")}`);
   await out(`${sp}.md`, summaryMd);
+  await out(`${sp}/index.html`, renderShipPage({ layout, base: BASE_PATH, rec: { ...record, generated_at: meta.generated_at }, shipUrl: `${sp}/`, mdUrl: abs(`${sp}.md`), jsonUrl: abs(`api/ships/${s.index}.json`), configsUrl: abs(`api/ships/${s.index}/configurations.json`), related: shipHtml }));
   await out(`${sp}/details.md`, md(`${title}: full details`, `${COMMON_NOTE} Summary: ${abs(`${sp}.md`)}`, toMarkdown({ description: record.description, special_ability: record.special_ability, configurations: record.configurations })));
   const changeLine = (c) => `${c.metric}: ${c.before} -> ${c.after}${c.change_pct !== null ? ` (${c.change_pct > 0 ? "+" : ""}${c.change_pct}%)` : ""}${c.better === true ? " better" : c.better === false ? " worse" : ""}`;
   const optMd = (o) => `### ${o.name}\n\n${o.description ? o.description + "\n\n" : ""}effects: ${(o.effects ?? []).map((e) => `${e.display} ${e.label}`).join("; ") || "none listed"}\n\n${o.stat_changes?.length ? "stat changes on this ship:\n" + o.stat_changes.map((c) => "- " + changeLine(c)).join("\n") : o.note ?? "no stat this site calculates changes (the effect is listed above)"}\n${o.conditional_effects ? "\nconditional effects:\n" + o.conditional_effects.map((g) => `- when ${g.trigger}: ${g.effects.map((e) => `${e.display} ${e.label}`).join("; ")}`).join("\n") + "\n" : ""}`;
@@ -289,8 +298,11 @@ await out("api/name-lookup.json", { about: "Lowercase ship name (accents removed
 const byName = {};
 for (const p of shipPages.filter((p) => !p.test)) (byName[slug(p.name) || p.index.toLowerCase()] ??= []).push(p);
 for (const [n, list] of Object.entries(byName)) {
-  if (list.length === 1) await out(`ship/${n}.md`, list[0].summaryMd);
-  else await out(`ship/${n}.md`, md(`Several ships are called "${list[0].name}"`, "Pick one:", list.map((p) => `- [${p.name}, tier ${p.tier} ${p.nation} ${p.class}, ${p.category}](${abs(`ships/${p.slug}.md`)})`).join("\n")));
+  if (list.length === 1) { await out(`ship/${n}.md`, list[0].summaryMd); await out(`ship/${n}/index.html`, redirectPage({ to: ORIGIN + shipHtml(list[0].index), title: list[0].name })); }
+  else {
+    await out(`ship/${n}/index.html`, layout({ title: `${list[0].name}: several ships`, description: `Several World of Warships ships are called ${list[0].name}.`, path: `ship/${n}/`, crumbs: [["Ships", "ships/"]], body: `<h1>Several ships are called “${esc(list[0].name)}”</h1><ul>${list.map((p) => `<li><a href="${shipHtml(p.index)}">${esc(p.name)}</a>, tier ${p.tier} ${esc(p.nation)} ${esc(p.class)} (${esc(p.category)})</li>`).join("")}</ul>` }));
+    await out(`ship/${n}.md`, md(`Several ships are called "${list[0].name}"`, "Pick one:", list.map((p) => `- [${p.name}, tier ${p.tier} ${p.nation} ${p.class}, ${p.category}](${abs(`ships/${p.slug}.md`)})`).join("\n")));
+  }
 }
 const shipLine = (r) => `| ${r.name} | ${r.tier} | ${r.class} | ${r.nation} | ${r.category} | ${abs(`ship/${slug(r.name) || r.index.toLowerCase()}.md`)} |`;
 const shipTable = (list) => `| name | tier | class | nation | category | page |\n|---|---|---|---|---|---|\n${list.map(shipLine).join("\n")}`;
@@ -333,6 +345,7 @@ let communityMd = (await readFile(new URL("./lib/community.md", import.meta.url)
 if (communityMd && COMMUNITY_VERSION !== ctx.gameVersion) communityMd = communityMd.replace(/^(# .*\n)/, `$1\n**Warning: collected for game version ${COMMUNITY_VERSION}; the game is now on ${ctx.gameVersion}. Ships, skills or upgrades may have changed since. Check ${abs("changes/index.md")} and say the advice may be outdated.**\n`);
 const knowledge = buildKnowledge({ ctx, rows, abs, md, slug, terms: wikiTerms, community: communityMd });
 for (const [rel, body] of knowledge.pages) await out(rel, body);
+const knowledgePage = Object.fromEntries(knowledge.pages);
 // Alias pages: full names and community nicknames -> the ship's page (only if the alias is not a ship name itself)
 {
   const pageByName = Object.fromEntries(shipPages.filter((p) => !p.test).map((p) => [p.name, p]));
@@ -345,6 +358,7 @@ for (const [rel, body] of knowledge.pages) await out(rel, body);
       if (!key || !p || taken.has(key)) continue;
       taken.add(key);
       await out(`ship/${key}.md`, `> "${part}" is another name for ${name}. This is the same page as ${abs(`ship/${slug(name) || p.index.toLowerCase()}.md`)}.\n\n` + p.summaryMd);
+      await out(`ship/${key}/index.html`, redirectPage({ to: ORIGIN + shipHtml(p.index), title: name }));
     }
   }
 }
@@ -371,8 +385,9 @@ function entryMd(e) {
   (e.ships_removed.length ? `Removed ships: ${e.ships_removed.map((x) => x.name).join(", ")}\n\n` : "") +
   e.ships_changed.map((c) => `### ${c.name} (tier ${c.tier} ${c.nation} ${c.class})\n\n${c.changes.map((d) => `- ${d.metric}: ${d.before} -> ${d.after}`).join("\n")}`).join("\n\n");
 }
-await out("changes/index.md", md("What changed between game versions", `Detected by comparing each build of this site with the previous one. History started with game version ${history.started_with}. JSON: ${abs("changes/history.json")}`,
-  history.entries.length ? history.entries.map(entryMd).join("\n\n") : `No changes recorded yet: this site started recording with game version ${history.started_with}. The first change will appear here after the next patch. For earlier patches, see the official patch notes at https://worldofwarships.com/en/news/ (updates are listed as "Update X.Y").`));
+const changesMd = md("What changed between game versions", `Detected by comparing each build of this site with the previous one. History started with game version ${history.started_with}. JSON: ${abs("changes/history.json")}`,
+  history.entries.length ? history.entries.map(entryMd).join("\n\n") : `No changes recorded yet: this site started recording with game version ${history.started_with}. The first change will appear here after the next patch. For earlier patches, see the official patch notes at https://worldofwarships.com/en/news/ (updates are listed as "Update X.Y").`);
+await out("changes/index.md", changesMd);
 const llmsFull = `# All World of Warships ships with all their stats\n\nGame version ${ctx.gameVersion}. ${rows.length} ships. Top (fully researched) configuration, base values: ${COMMON_NOTE} Metric names are the same as in the rankings and ships.csv. Full details per ship: ${abs("api/ships/{index}.json")}\n\n` +
   rows.map((r) => `## ${r.name} | index ${r.index} | tier ${r.tier} | ${r.class} | ${r.nation} | ${r.category}\n\n${Object.entries(r.metrics).map(([k, v]) => `${k}: ${v}`).join("\n")}\n`).join("\n");
 const llmsFullBytes = Buffer.byteLength(llmsFull);
@@ -443,7 +458,7 @@ await out("rankings/index.md", md("All rankings", `${metricIndex.length} ranking
 
 // ---------- extra datasets ----------
 const nationName = (n) => nationId(n);
-await out("api/upgrades.json", {
+const upgradesDoc = {
   about: "Every upgrade (modernization) in the game, with its effects and which ships can mount it. Slot numbers start at 1.", game_version: ctx.gameVersion,
   upgrades: Object.values(ctx.modernizations).sort((a, b) => a.slot - b.slot || a.index.localeCompare(b.index)).map((m) => ({
     index: m.index, name: upgradeName(L, m), slot: m.slot + 1, type: slug(m.type), description: clean(L[`DESC_${m.name}`.toUpperCase()]),
@@ -451,7 +466,9 @@ await out("api/upgrades.json", {
     also_on_ships: (m.additionalShips ?? []).map((n) => shipName(rawName[n] ?? n)), not_on_ships: (m.blacklistedShips ?? []).map((n) => shipName(rawName[n] ?? n)),
     effects: describeEffects(L, m.modifiers ?? []),
   })),
-});
+};
+const upgradesData = upgradesDoc.upgrades;
+await out("api/upgrades.json", upgradesDoc);
 const captain = ctx.captains?.["Common.json"]?.Default;
 const skillsByClass = {};
 for (const c of Object.keys(CLASSES)) {
@@ -482,7 +499,7 @@ report.error_count = report.errors.length; report.warning_count = report.warning
 await out("api/validation.json", report);
 let verification = null;
 try { verification = JSON.parse(await readFile("verification/wiki-crosscheck.json", "utf8")); await out("api/verification.json", verification); } catch { /* optional */ }
-await out("api/status.json", {
+const statusDoc = {
   about: "Read this to decide how much to trust the data right now.",
   schema_version: SCHEMA_VERSION, game_version: ctx.gameVersion, server: SERVER, generated_at: meta.generated_at,
   data_source: "game files via WoWs ShipBuilder, every file checksum-verified",
@@ -491,7 +508,8 @@ await out("api/status.json", {
     match_rate_any_module_pct: verification.match_rate_pct, match_rate_top_configuration_pct: verification.strict?.match_rate_pct ?? null, report: abs("api/verification.json"),
     note: "Most remaining differences are outdated wiki pages; see the report's assessment." } : null,
   armor_source: "official wiki snapshot (not updated automatically)", community_page: "manually collected opinion, may be older than the current game version",
-});
+};
+await out("api/status.json", statusDoc);
 
 // ---------- schema, llms.txt, index ----------
 const UNIT_WORDS = { s: "seconds", km: "kilometres", m: "metres", mm: "millimetres", kg: "kilograms", knots: "knots", pct: "percent", pct_change: "percent change", deg: "degrees", deg_per_s: "degrees per second", m_per_s: "metres per second", m_s: "metres per second", hp: "hit points", hp_per_s: "hit points per second", t: "tonnes", per_s: "per second", per_min: "per minute" };
@@ -568,6 +586,7 @@ All pages in "Start here" are small enough to read whole. Files marked (large) a
 - [All stats of all ships, split by class and tier](${abs("all-stats/index.md")})
 - [Name lookup](${abs("api/name-lookup.json")}): name -> ship index, for the JSON files ${abs("api/ships/{index}.json")}
 - [Metric dictionary](${abs("metrics/index.md")}): every stat name with description, unit, better-direction, source and which classes have it, one small page per topic (all in one JSON: ${abs("api/metrics.json")}, large)
+- Human-readable encyclopedia (same data as HTML): homepage ${abs("")}, ship pages ${abs("ships/{name-index}/")} (map of every ship to its HTML, Markdown and JSON: ${abs("api/human-pages.json")}), rankings ${abs("rankings/{metric}/")}, comparison ${abs("compare.html")}. For reading data, the Markdown and JSON files are smaller.
 - [Status](${abs("api/status.json")}): game version, last update, validation and wiki cross-check results. Check this to judge freshness.
 - [Schema](${abs("api/schema.json")}): structure, units, how to combine upgrade effects, caveats
 
@@ -599,25 +618,56 @@ ${verification ? `- [Wiki cross-check](${abs("api/verification.json")}): values 
 }
 
 
-await out("index.html", `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>WoWs Data for AIs</title>
-<meta name="description" content="Complete World of Warships ship data for AI agents. Start at /llms.txt">
-<link rel="alternate" type="text/plain" href="${abs("llms.txt")}" title="llms.txt">
-<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@type": "Dataset", name: "World of Warships ship data for AI agents", description: `Every stat of ${rows.length} World of Warships ships (game version ${ctx.gameVersion}), upgrades, skills, signals and rankings.`, dateModified: meta.generated_at, version: ctx.gameVersion, isAccessibleForFree: true, distribution: [{ "@type": "DataDownload", encodingFormat: "text/csv", contentUrl: abs("ships.csv") }, { "@type": "DataDownload", encodingFormat: "application/jsonl", contentUrl: abs("ships.jsonl") }] })}</script>
-<style>body{font:15px/1.5 system-ui,sans-serif;margin:16px;max-width:760px;background:#fff;color:#111}@media(prefers-color-scheme:dark){body{background:#111;color:#ddd}a{color:#8ab4f8}}</style></head><body>
-<h1>World of Warships data for AI agents</h1>
-<p><strong>AI agents: read <a href="${abs("llms.txt")}">${abs("llms.txt")}</a> first.</strong> It explains every file and which one answers which question.</p>
-<p>${rows.length} ships, game version ${ctx.gameVersion}, updated ${meta.generated_at}. ${metricIndex.length} rankings.</p>
-<ul>
-<li>One ship: <a href="${abs("ship/yamato.md")}">${abs("ship/{name}.md")}</a> (example: Yamato)</li>
-<li><a href="${abs("ships.md")}">All ships</a></li>
-<li><a href="${abs("rankings/index.md")}">All rankings</a></li>
-<li><a href="${abs("all-stats/index.md")}">All stats of all ships</a></li>
-<li><a href="${abs("api/schema.json")}">Structure and units</a></li>
-</ul>
-<p>${meta.data_source}. ${meta.calculations} ${meta.license_note}</p></body></html>
-`);
+// ---------- human encyclopedia pages ----------
+{
+  await out("assets/site.css", CSS);
+  await out("assets/site.js", JS);
+  const date = meta.generated_at.slice(0, 10);
+  await out("index.html", renderHome({ layout, base: BASE_PATH, rows, gameVersion: ctx.gameVersion, updated: date, nations, counts: { rankings: metricIndex.length } }));
+  await out("ships/index.html", renderShipsIndex({ layout, base: BASE_PATH, rows, nations, shipUrl: shipHtml }));
+  await out("guide.html", redirectPage({ to: abs("ships/"), title: "Ships" }));
+  await out("compare.html", renderCompare({ layout, base: BASE_PATH }));
+  await out("about/index.html", renderAbout({ layout, base: BASE_PATH, status: JSON.parse(JSON.stringify(statusDoc)), meta }));
+  await out("legal/index.html", renderLegal({ layout }));
+  await out("guides/index.html", renderGuidesIndex({ layout, base: BASE_PATH, nations }));
+  // In human pages, link to human pages instead of the Markdown files meant for AI tools.
+  const toHumanLinks = (t) => [["glossary.md", "guides/glossary/"], ["mechanics.md", "guides/mechanics/"], ["community.md", "guides/community/"], ["changes/index.md", "guides/changes/"], ["tech-tree/index.md", "guides/tech-tree/"], ["rankings/index.md", "rankings/"], ["ships.md", "ships/"]]
+    .reduce((acc, [from, to]) => acc.replaceAll(abs(from), `${BASE_PATH}/${to}`), t)
+    .replace(new RegExp(`${abs("ship/").replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}([a-z0-9_]+)\\.md`, "g"), (m0, n) => `${BASE_PATH}/ship/${n}/`)
+    .replace(new RegExp(`${abs("rankings/").replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}groups/[a-z_]+\\.md`, "g"), `${BASE_PATH}/rankings/`);
+  const textPages = [
+    ["guides/mechanics/", "Game mechanics", "How damage, penetration, overmatch, detection and dispersion work in World of Warships.", knowledgePage["mechanics.md"]],
+    ["guides/glossary/", "Glossary", "World of Warships abbreviations, terms and ship nicknames.", knowledgePage["glossary.md"]],
+    ["guides/community/", "Community builds and opinions", "What current World of Warships guides and forums recommend, with sources.", knowledgePage["community.md"]],
+    ["guides/changes/", "Changes between game versions", "World of Warships ship stat changes recorded patch by patch.", changesMd],
+  ];
+  for (const [path, title, description, mdText] of textPages) if (mdText) await out(`${path}index.html`, renderTextPage({ layout, title, description, path, md: toHumanLinks(mdText), crumbs: [["Guides", "guides/"], [title, path]] }));
+  const ttNations = Object.keys(knowledgePage).filter((k) => /^tech-tree\/(?!index)/.test(k)).map((k) => k.slice(10, -3));
+  await out("guides/tech-tree/index.html", layout({ title: "Tech trees", description: "World of Warships research lines for every nation.", path: "guides/tech-tree/", crumbs: [["Guides", "guides/"], ["Tech trees", "guides/tech-tree/"]],
+    body: `<h1>Tech trees</h1><div class="cards">${ttNations.map((n) => `<a class="card" href="${abs(`guides/tech-tree/${n}/`)}"><h3>${esc(nationLabelOf(n))}</h3><p>Research lines</p></a>`).join("")}</div>` }));
+  for (const n of ttNations) {
+    const mdText = knowledgePage[`tech-tree/${n}.md`].replace(/^- ([a-z_]+): (.*)$/gm, (m0, cls, line) => `- **${cls.replace(/_/g, " ")}**: ${line.replace(/([^>;(]+?) \((\d+)\)/g, (m1, nm, t) => { const r = rows.find((x) => x.name === nm.trim() && x.nation === n) ?? rows.find((x) => x.name === nm.trim()); return r ? `[${nm.trim()}](${shipHtml(r.index)}) (${t})` : `${nm} (${t})`; })}`);
+    await out(`guides/tech-tree/${n}/index.html`, renderTextPage({ layout, title: `Tech tree: ${nationLabelOf(n)}`, description: `World of Warships ${nationLabelOf(n)} research lines.`, path: `guides/tech-tree/${n}/`, md: mdText, crumbs: [["Guides", "guides/"], ["Tech trees", "guides/tech-tree/"], [nationLabelOf(n), `guides/tech-tree/${n}/`]] }));
+  }
+  await out("guides/upgrades/index.html", renderUpgradesPage({ layout, base: BASE_PATH, upgrades: upgradesData, skillsByClass, flags: signalFlags(ctx).map((f) => ({ name: f.name, effects: describeEffects(L, f.mods) })) }));
+  // rankings
+  const docBy = Object.fromEntries(metricDocs.map((d) => [d.metric, d]));
+  const groupsHtml = [...new Set(metricIndex.map((r) => r.metric.split(".")[0]))].sort().map((g) => ({ group: g, items: metricIndex.filter((r) => r.metric.split(".")[0] === g) }));
+  await out("rankings/index.html", renderRankingsIndex({ layout, base: BASE_PATH, groups: groupsHtml, metricDocs }));
+  const upgradedSet = new Set(metricIndex.filter((r) => r.family !== "rankings").map((r) => r.metric));
+  for (const r of metricIndex.filter((x) => x.family === "rankings")) {
+    const doc = docBy[r.metric];
+    if (!doc) continue;
+    const ranked = rank(rows, r.metric, r.direction);
+    const upgraded = upgradedSet.has(r.metric) ? rank(upgradedRows, r.metric, r.direction) : null;
+    await out(`rankings/${r.metric}/index.html`, renderRankingPage({ layout, base: BASE_PATH, metric: r.metric, doc, ranked, upgraded, shipUrl: shipHtml, nations }));
+  }
+  // map of every ship to its human page and its structured data
+  await out("api/human-pages.json", { about: "Every ship's human-readable page and its structured data, generated from the same record.", game_version: ctx.gameVersion,
+    ships: shipPages.map((p) => ({ index: p.index, name: p.name, test_ship: p.test || undefined, html: `${SITE_URL}/ships/${slugByIndex[p.index]}/`, markdown: abs(`ships/${p.slug}.md`), json: abs(`api/ships/${p.index}.json`) })) });
+}
 await out("robots.txt", `# AI crawlers and agents are welcome.\nUser-agent: *\nAllow: /\n${SITE_URL ? `Sitemap: ${SITE_URL}/sitemap.xml\n` : ""}`);
-if (SITE_URL) await out("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${["", "llms.txt", "api/index.json", "api/schema.json", "api/rankings/index.json", ...rows.map((r) => `api/ships/${r.index}.json`), ...rows.map((r) => `ships/${r.slug}.md`), ...[...new Set(rows.map((r) => `ship/${slug(r.name) || r.index.toLowerCase()}.md`))], "ships.md", "rankings/index.md", "all-stats/index.md", "glossary.md", "mechanics.md", "community.md", "tech-tree/index.md", "changes/index.md", "api/metrics.json", "api/status.json"].map((u) => `<url><loc>${abs(u)}</loc></url>`).join("\n")}\n</urlset>\n`);
+if (SITE_URL) await out("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${["", "llms.txt", "api/index.json", "api/schema.json", "api/rankings/index.json", ...rows.map((r) => `api/ships/${r.index}.json`), ...rows.map((r) => `ships/${r.slug}.md`), ...[...new Set(rows.map((r) => `ship/${slug(r.name) || r.index.toLowerCase()}.md`))], "ships.md", "rankings/index.md", "all-stats/index.md", "glossary.md", "mechanics.md", "community.md", "tech-tree/index.md", "changes/index.md", "api/metrics.json", "api/status.json", "ships/", "rankings/", "compare.html", "guides/", "guides/mechanics/", "guides/glossary/", "guides/tech-tree/", "guides/upgrades/", "guides/community/", "guides/changes/", "about/", "legal/", ...rows.map((r) => `ships/${slugByIndex[r.index]}/`), ...metricIndex.filter((r) => r.family === "rankings").map((r) => `rankings/${r.metric}/`)].map((u) => `<url><loc>${abs(u)}</loc></url>`).join("\n")}\n</urlset>\n`);
 await out(".nojekyll", "");
 
 log(`built ${rows.length} ships (+${testShips.length} test), ${metricIndex.length} rankings, ${fileCount} files into ${OUT}`);
