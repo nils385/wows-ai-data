@@ -103,12 +103,22 @@ def candidates(flat, template, shell_type):
         return [v for k, v in flat.items() if rx.match(k)]
     return [flat[t]] if t in flat else []
 
+def pick_ship(cands):
+    """Unambiguous match only: one candidate, or exactly one tech-tree ship, else exactly one premium ship."""
+    if len(cands) == 1:
+        return cands[0]
+    for cat in ('tech_tree', 'premium'):
+        hit = [c for c in cands if c['category'] == cat]
+        if len(hit) == 1:
+            return hit[0]
+    return None
+
 by_name = defaultdict(list)
 for s in index:
     by_name[norm(s['name'])].append(s)
 pref = {'tech_tree': 0, 'premium': 1, 'special': 2}
 
-results, checked_ships, missing_pages = [], 0, []
+results, checked_ships, missing_pages, ambiguous = [], 0, [], []
 stats = Counter()
 strict = Counter()
 strict_other = Counter()
@@ -123,10 +133,13 @@ for fname in sorted(os.listdir(pages)):
     if not text:
         missing_pages.append(name)
         continue
-    ships = sorted(by_name.get(norm(name), []), key=lambda s: pref.get(s['category'], 9))
-    if not ships:
+    cands = by_name.get(norm(name), [])
+    if not cands:
         continue
-    ship = ships[0]
+    ship = pick_ship(cands)
+    if ship is None:
+        ambiguous.append({'wiki_page': name, 'ships': [c['index'] for c in cands]})
+        continue
     data = json.load(open(os.path.join(dist, 'api', 'ships', ship['index'] + '.json')))
     confs = json.load(open(os.path.join(dist, 'api', 'ships', ship['index'], 'configurations.json')))['configurations']
     flats = [flatten(c['stats']) for c in confs]
@@ -206,6 +219,7 @@ report = {
     'assessment': ASSESSMENT,
     'differences': mism, 'not_comparable': [r for r in results if r['status'] == 'no_value'][:300],
     'pages_without_stat_tables': missing_pages,
+    'ambiguous_pages_skipped': ambiguous,
 }
 json.dump(report, open(out_path, 'w'), indent=1, ensure_ascii=False)
 print(json.dumps({k: report[k] for k in ['ships_compared', 'values_compared', 'values_matching', 'values_different', 'values_not_comparable', 'match_rate_pct']}))

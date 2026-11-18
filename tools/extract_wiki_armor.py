@@ -11,6 +11,16 @@ pref = {'tech_tree': 0, 'premium': 1, 'special': 2}
 by_name = {}
 for s in index:
     by_name.setdefault(norm(s['name']), []).append(s)
+def pick_ship(cands):
+    """Unambiguous match only: one candidate, or exactly one tech-tree ship, else exactly one premium ship."""
+    if len(cands) == 1:
+        return cands[0]
+    for cat in ('tech_tree', 'premium'):
+        hit = [c for c in cands if c['category'] == cat]
+        if len(hit) == 1:
+            return hit[0]
+    return None
+
 FIELDS = {'Belt': 'belt_mm', 'Deck': 'deck_mm', 'Superstructure': 'superstructure_mm', 'Extremities': 'extremities_mm'}
 
 ships, skipped = {}, []
@@ -21,8 +31,9 @@ for fname in sorted(os.listdir(pages)):
     except Exception:
         continue
     i = text.find('ARMOR DETAIL')
-    cands = sorted(by_name.get(norm(name), []), key=lambda s: pref.get(s['category'], 9))
-    if i < 0 or not cands:
+    cands = by_name.get(norm(name), [])
+    ship = pick_ship(cands) if cands else None
+    if i < 0 or ship is None:
         skipped.append(name)
         continue
     block = re.sub(r'style="[^"]*"', '', text[i:text.find('|}', i)])
@@ -33,14 +44,16 @@ for fname in sorted(os.listdir(pages)):
             continue
         raw = m.group(2).strip()
         nums = [float(x) for x in re.findall(r'\d+(?:\.\d+)?', raw)]
-        if not nums:  # "—" means the wiki lists no value
-            armor[key] = None
+        if not nums:  # "—" means the wiki lists no value; never overwrite a real value with it
+            armor.setdefault(key, None)
             continue
+        if armor.get(key) is not None:
+            continue  # keep the first real value
         armor[key] = int(max(nums)) if max(nums).is_integer() else max(nums)
         if len(nums) > 1:
             armor[key.replace('_mm', '_min_mm')] = int(min(nums)) if min(nums).is_integer() else min(nums)
     if armor:
-        ships[cands[0]['index']] = {'wiki_page': f'https://wiki.worldofwarships.com/Ship:{urllib.parse.quote(name)}', **armor}
+        ships[ship['index']] = {'wiki_page': f'https://wiki.worldofwarships.com/Ship:{urllib.parse.quote(name)}', **armor}
 
 json.dump({
     'about': 'Armor thickness from the official World of Warships wiki ARMOR DETAIL tables (the game data used for the rest of this site has no armor values). Maximum value per area; *_min_mm is given where the wiki lists a range. The wiki is edited by hand, so values can lag behind game changes.',

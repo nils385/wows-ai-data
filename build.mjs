@@ -10,7 +10,7 @@
 import { mkdir, writeFile, rm, readFile, rename } from "node:fs/promises";
 import path from "node:path";
 import { loadGameData } from "./lib/data.mjs";
-import { allConfigurations, computeConfiguration, specialAbility, shellStats, weaponStats, cvPlane, describeModifier, slug, consumableSlots } from "./lib/ship.mjs";
+import { setConsumableTitles, allConfigurations, computeConfiguration, specialAbility, shellStats, weaponStats, cvPlane, describeModifier, slug, consumableSlots } from "./lib/ship.mjs";
 import { flatten, metricInfo } from "./lib/metrics.mjs";
 import { eligibleModernizations, skillsFor, signalFlags, changesWith, bestWithUpgrades, describeEffects, clean, upgradeName } from "./lib/analysis.mjs";
 import { toMarkdown } from "./lib/markdown.mjs";
@@ -30,6 +30,7 @@ const log = (...a) => console.log(`[${((Date.now() - t0) / 1000).toFixed(0)}s]`,
 const ctx = await loadGameData({ server: SERVER, dataDir: argVal("--data-dir") });
 log("data loaded, game version", ctx.gameVersion);
 const L = ctx.L;
+setConsumableTitles(ctx.consumableTitles);
 
 // ---------- names and ids ----------
 const NATIONS = { Usa: ["usa", "U.S.A."], Japan: ["japan", "Japan"], Germany: ["germany", "Germany"], UnitedKingdom: ["united_kingdom", "U.K."], Russia: ["ussr", "U.S.S.R."], France: ["france", "France"], Italy: ["italy", "Italy"], PanAsia: ["pan_asia", "Pan-Asia"], Europe: ["europe", "Europe"], PanAmerica: ["pan_america", "Pan-America"], Netherlands: ["netherlands", "The Netherlands"], Commonwealth: ["commonwealth", "Commonwealth"], Spain: ["spain", "Spain"] };
@@ -86,11 +87,15 @@ function changesSincePrevious(index, flat) {
   if (!versionChanged || !p) return [];
   return Object.keys(flat).filter((k) => k in p && typeof p[k] === "number" && Math.abs(p[k] - flat[k]) > 1e-9).map((k) => ({ metric: k, before: p[k], after: flat[k] }));
 }
+const historyByShip = {};
+for (const e of oldEntries) for (const c of e.ships_changed ?? []) (historyByShip[c.index] ??= []).push({ game_version: e.game_version, previous_game_version: e.previous_game_version, changes: c.changes });
 function shipHistory(index, current) {
   const list = current.length ? [{ game_version: ctx.gameVersion, previous_game_version: prevVersion, changes: current }] : [];
-  for (const e of oldEntries) { const c = e.ships_changed?.find((x) => x.index === index); if (c) list.push({ game_version: e.game_version, previous_game_version: e.previous_game_version, changes: c.changes }); }
+  for (const h of historyByShip[index] ?? []) list.push(h);
   return list;
 }
+const configIssues = [], configWarnings = [];
+let configsChecked = 0;
 const rows = [];            // one per released ship, used for lists, CSV and rankings
 const upgradedRows = [];    // best values reachable with upgrades
 const testShips = [];
@@ -149,7 +154,11 @@ for (const s of ships) {
   const ifhe = allSkills.find((k) => k.name === "Inertia Fuse for HE Shells");
   if (ifhe && topFlat["main_battery.shells.he.penetration_mm"] !== undefined) {
     const c = changesWith(ctx, s, top.cfg, topFlat, ifhe.mods).find((x) => x.metric === "main_battery.shells.he.penetration_mm");
-    if (c) { derived["main_battery.shells.he.penetration_with_ifhe_mm"] = c.after; derivedNotes.ifhe = "with the captain skill Inertia Fuse for HE Shells"; }
+    if (c) {
+      derived["main_battery.shells.he.penetration_with_ifhe_mm"] = c.after; derivedNotes.ifhe = "with the captain skill Inertia Fuse for HE Shells";
+      const fc = changesWith(ctx, s, top.cfg, topFlat, ifhe.mods).find((x) => x.metric === "main_battery.shells.he.fire_chance_pct");
+      if (fc) derived["main_battery.shells.he.fire_chance_with_ifhe_pct"] = fc.after;
+    }
   }
   const ce = allSkills.find((k) => k.name === "Concealment Expert");
   const csm = slots.flatMap((sl) => sl.options).find((o) => upgradeName(L, o) === "Concealment System Modification 1");
@@ -188,9 +197,20 @@ for (const s of ships) {
     derived_metric_notes: Object.keys(derivedNotes).length ? derivedNotes : undefined,
   };
   await out(`api/ships/${s.index}.json`, record);
+  const allConfigs = configs.map((c) => ({ id: c.id, is_stock: c.stock, is_top: c.top, module_ids: Object.fromEntries(Object.entries(c.cfg).sort(([a], [b]) => a.localeCompare(b)).map(([t, u]) => [slug(t), u.name])), stats: computeConfiguration(ctx, s, c.cfg, [], { tables: false, accel: true }) }));
+  // checks on every module combination, not only the top one
+  if (new Set(allConfigs.map((c) => c.id)).size !== allConfigs.length) configIssues.push(`${s.index}: duplicate configuration ids`);
+  if (allConfigs.filter((c) => c.is_stock).length !== 1 || allConfigs.filter((c) => c.is_top).length !== 1) configIssues.push(`${s.index}: expected exactly one stock and one top configuration`);
+  for (const c of allConfigs) {
+    const f = flatten(c.stats);
+    const bad = Object.entries(f).filter(([, v]) => !Number.isFinite(v)).map(([k]) => k);
+    if (bad.length) configIssues.push(`${s.index} ${c.id}: non-finite ${bad.slice(0, 3).join(", ")}`);
+    if (!(f["survivability.hit_points"] > 0)) configIssues.push(`${s.index} ${c.id}: hit points missing`);
+    if (JSON.stringify(c.stats).includes('"missing_data":true')) configWarnings.push(`${s.index} ${c.id}: a referenced projectile, aircraft or consumable is missing in the game data`);
+  }
+  configsChecked += allConfigs.length;
   await out(`api/ships/${s.index}/configurations.json`, {
-    about: `Every module combination for ${name} with full stats. ${COMMON_NOTE}`, game_version: ctx.gameVersion, index: s.index, name,
-    configurations: configs.map((c) => ({ id: c.id, is_stock: c.stock, is_top: c.top, module_ids: Object.fromEntries(Object.entries(c.cfg).sort(([a], [b]) => a.localeCompare(b)).map(([t, u]) => [slug(t), u.name])), stats: computeConfiguration(ctx, s, c.cfg, [], { tables: false, accel: true }) })),
+    about: `Every module combination for ${name} with full stats. ${COMMON_NOTE}`, game_version: ctx.gameVersion, index: s.index, name, configurations: allConfigs,
   });
   // Small pages so AI fetch tools (which often cut pages at ~50-100 KB) can read them whole.
   const title = `${name} (tier ${base.tier_roman} ${base.nation} ${base.class}, ${base.category})`;
@@ -214,8 +234,11 @@ for (const s of ships) {
     `detectability: ${topFlat["concealment.detectability_by_ships_km"]} km by ships, ${topFlat["concealment.detectability_by_planes_km"]} km by planes` +
     (derivedNotes.min_detectability ? `; best ${topFlat["concealment.min_detectability_by_ships_km"]} km / ${topFlat["concealment.min_detectability_by_planes_km"]} km ${derivedNotes.min_detectability}` : "") + "\n" +
     (topFlat["main_battery.reload_s"] !== undefined ? `main battery: ${topFlat["main_battery.range_km"]} km range, ${topFlat["main_battery.reload_s"]} s reload, ${top.stats.main_battery.layout} ${top.stats.main_battery.caliber_mm} mm\n` : "") +
-    (topFlat["main_battery.shells.he.penetration_mm"] !== undefined ? `HE penetration: ${topFlat["main_battery.shells.he.penetration_mm"]} mm${topFlat["main_battery.shells.he.penetration_with_ifhe_mm"] !== undefined ? ` (${topFlat["main_battery.shells.he.penetration_with_ifhe_mm"]} mm with Inertia Fuse for HE Shells)` : ""}\n` : "") +
+    (topFlat["main_battery.shells.he.penetration_mm"] !== undefined ? `HE penetration: ${topFlat["main_battery.shells.he.penetration_mm"]} mm${topFlat["main_battery.shells.he.penetration_with_ifhe_mm"] !== undefined ? ` (${topFlat["main_battery.shells.he.penetration_with_ifhe_mm"]} mm with Inertia Fuse for HE Shells, which also lowers HE fire chance from ${topFlat["main_battery.shells.he.fire_chance_pct"]}% to ${topFlat["main_battery.shells.he.fire_chance_with_ifhe_pct"] ?? "?"}%)` : ""}\n` : "") +
     (topFlat["main_battery.shells.ap.penetration_at_10km_mm"] !== undefined ? `AP penetration: ${[5, 10, 15, 20].filter((k) => topFlat[`main_battery.shells.ap.penetration_at_${k}km_mm`] !== undefined).map((k) => `${topFlat[`main_battery.shells.ap.penetration_at_${k}km_mm`]} mm at ${k} km`).join(", ")}\n` : "") +
+    (top.stats.torpedoes ? `torpedoes: ${top.stats.torpedoes.layout} tubes, ${top.stats.torpedoes.reload_s} s reload; ${Object.values(top.stats.torpedoes.torpedoes).map((t) => `${t.name}: ${t.damage} damage, ${t.range_km} km, ${t.speed_knots} kn, seen at ${t.detectability_km} km`).join(" | ")}\n` : "") +
+    (top.stats.aircraft ? `aircraft: ${Object.values(top.stats.aircraft).map((p) => `${p.name} (${p.type.replace(/_/g, " ")}, ${p.planes_in_squadron} per squadron, ${p.plane_hp} HP each)`).join("; ")}\n` : "") +
+    (top.stats.sonar ? `sonar: ${top.stats.sonar.range_km} km range, ${top.stats.sonar.reload_s} s reload\n` : "") +
     (armor ? `armor (official wiki): belt ${armor.belt_mm ?? "n/a"} mm, deck ${armor.deck_mm ?? "n/a"} mm, extremities ${armor.extremities_mm ?? "n/a"} mm, superstructure ${armor.superstructure_mm ?? "n/a"} mm\n` : "armor: not available\n") +
     `price: ${record.price_credits ? record.price_credits + " credits" : record.price_doubloons ? record.price_doubloons + " doubloons" : "n/a"}\n` +
     `researched from: ${record.previous_ship?.name ?? "n/a"}\nleads to: ${record.next_ships.map((n) => n.name).join(", ") || "n/a"}\n` +
@@ -433,6 +456,10 @@ log("datasets done");
 
 // ---------- validation ----------
 const report = validate({ rows, testShips, ctx, metricIndex });
+report.checks.push({ name: "every module combination: unique ids, one stock and one top, finite numbers, hit points", level: "error", checked: configsChecked, failures: configIssues.length, examples: configIssues.slice(0, 20) });
+report.checks.push({ name: "every module combination: all referenced projectiles, aircraft and consumables exist", level: "warning", checked: configsChecked, failures: configWarnings.length, examples: configWarnings.slice(0, 20) });
+report.errors.push(...configIssues); report.warnings.push(...configWarnings);
+report.error_count = report.errors.length; report.warning_count = report.warnings.length; report.passed = report.errors.length === 0;
 await out("api/validation.json", report);
 let verification = null;
 try { verification = JSON.parse(await readFile("verification/wiki-crosscheck.json", "utf8")); await out("api/verification.json", verification); } catch { /* optional */ }
@@ -457,6 +484,9 @@ function describeMetric(m) {
   if (m.startsWith("consumables.")) text += ". Only ships that carry this consumable have a value.";
   if (m.endsWith("min_detectability_by_ships_km") || m.endsWith("min_detectability_by_planes_km")) text += ". With Concealment Expert and Concealment System Modification 1 where the ship can use them; no camouflage.";
   if (m.endsWith("penetration_with_ifhe_mm")) text += ". With the captain skill Inertia Fuse for HE Shells.";
+  if (/penetration_at_\d+km_mm$/.test(m)) text += ". Raw penetration against a plate hit straight on; at long range the steeper fall angle makes vertical belts effectively thicker.";
+  if (m.endsWith("reaction_time_s")) text += ". Seconds between the torpedo being seen and reaching the ship (detectability / speed); for homing torpedoes, before homing starts.";
+  if (m.endsWith("fire_chance_with_ifhe_pct")) text += ". HE fire chance after Inertia Fuse for HE Shells, which lowers it.";
   return text;
 }
 const metricKind = (m) => /damage_per_minute|potential_fires|salvo_damage/.test(m) ? "theoretical (every shell hits)" : /min_detectability|with_ifhe/.test(m) ? "with skills/upgrades as stated" : "base value";
@@ -507,7 +537,7 @@ All pages in "Start here" are small enough to read whole. Files marked (large) a
 
 ## Start here
 
-- One ship: ${abs("ship/{name}.md")}, name in lowercase with spaces and symbols as "_" (e.g. ${abs("ship/yamato.md")}, ${abs("ship/des_moines.md")}). Shows all stats plus links to upgrades, captain skills, signal flags and full details (shells with penetration per km). If several ships share the name, the page lists them.
+- One ship: ${abs("ship/{name}.md")}: name in lowercase, accents removed (ü -> u, å -> a, é -> e), every space or symbol replaced by "_" (e.g. ${abs("ship/yamato.md")}, ${abs("ship/des_moines.md")}, ${abs("ship/g_kurfurst.md")}). Shows all stats plus links to upgrades, captain skills, signal flags and full details (shells with penetration per km). If several ships share the name, the page lists them.
 - [All ships by class](${abs("ships.md")}): names, tiers, nations and page links
 - [All rankings by topic](${abs("rankings/index.md")}): ${metricIndex.length} rankings, every metric with unit and better-direction
 - [All stats of all ships, split by class and tier](${abs("all-stats/index.md")})
@@ -534,7 +564,7 @@ ${guide}
 - [Upgrades](${abs("api/upgrades.json")}) (about 110 KB), [Captain skills](${abs("api/captain-skills.json")}), [Signal flags](${abs("api/signal-flags.json")}), [Consumables](${abs("api/consumables.json")}) (large)
 - [Shells, torpedoes, bombs, rockets, depth charges](${abs("api/projectiles.json")}) (large), [Aircraft](${abs("api/aircraft.json")}) (large)
 - JSON lists with all metrics: ${abs("api/by-tier/{1-11}.json")}, ${abs("api/by-nation/{nation}.json")} (${nations.join(", ")}), ${abs("api/by-class/{class}.json")} (${classes.join(", ")}) (large)
-- Bulk (large): [ships.csv](${abs("ships.csv")}) (one row per ship, ${allMetrics.length} metric columns), [ships.jsonl](${abs("ships.jsonl")}), [llms-full.txt](${abs("llms-full.txt")}) (every ship and stat in one file, about 7 MB), [ship index JSON](${abs("api/index.json")})
+- Bulk (large): [ships.jsonl](${abs("ships.jsonl")}) (one ship per line, only the metrics it has: best for code), [ships.csv](${abs("ships.csv")}) (one row per ship, ${allMetrics.length} metric columns, mostly empty per row: for spreadsheets), [llms-full.txt](${abs("llms-full.txt")}) (every ship and stat in one file, about 7 MB), [ship index JSON](${abs("api/index.json")})
 
 ## Trust
 
@@ -562,7 +592,7 @@ await out("index.html", `<!doctype html><html lang="en"><head><meta charset="utf
 <p>${meta.data_source}. ${meta.calculations} ${meta.license_note}</p></body></html>
 `);
 await out("robots.txt", `# AI crawlers and agents are welcome.\nUser-agent: *\nAllow: /\n${SITE_URL ? `Sitemap: ${SITE_URL}/sitemap.xml\n` : ""}`);
-if (SITE_URL) await out("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${["", "llms.txt", "api/index.json", "api/schema.json", "api/rankings/index.json", ...rows.map((r) => `api/ships/${r.index}.json`), ...rows.map((r) => `ships/${r.slug}.md`), ...[...new Set(rows.map((r) => `ship/${slug(r.name) || r.index.toLowerCase()}.md`))], "ships.md", "rankings/index.md", "all-stats/index.md"].map((u) => `<url><loc>${abs(u)}</loc></url>`).join("\n")}\n</urlset>\n`);
+if (SITE_URL) await out("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${["", "llms.txt", "api/index.json", "api/schema.json", "api/rankings/index.json", ...rows.map((r) => `api/ships/${r.index}.json`), ...rows.map((r) => `ships/${r.slug}.md`), ...[...new Set(rows.map((r) => `ship/${slug(r.name) || r.index.toLowerCase()}.md`))], "ships.md", "rankings/index.md", "all-stats/index.md", "glossary.md", "mechanics.md", "community.md", "tech-tree/index.md", "changes/index.md", "api/metrics.json", "api/status.json"].map((u) => `<url><loc>${abs(u)}</loc></url>`).join("\n")}\n</urlset>\n`);
 await out(".nojekyll", "");
 
 log(`built ${rows.length} ships (+${testShips.length} test), ${metricIndex.length} rankings, ${fileCount} files into ${OUT}`);
@@ -571,7 +601,13 @@ for (const must of ["llms.txt", "index.html", "api/index.json", "api/schema.json
   try { await readFile(path.join(OUT, must)); } catch { console.error(`BUILD INCOMPLETE: ${must} missing. Previous output left untouched.`); process.exit(1); }
 }
 await rm(`${FINAL_OUT}.old`, { recursive: true, force: true });
-await rename(FINAL_OUT, `${FINAL_OUT}.old`).catch(() => {});
-await rename(OUT, FINAL_OUT);
+const hadPrevious = await rename(FINAL_OUT, `${FINAL_OUT}.old`).then(() => true, () => false);
+try {
+  await rename(OUT, FINAL_OUT);
+} catch (e) {
+  if (hadPrevious) await rename(`${FINAL_OUT}.old`, FINAL_OUT).catch(() => {}); // put the previous output back
+  console.error(`PUBLISH FAILED: ${e.message}. Previous output restored.`);
+  process.exit(1);
+}
 await rm(`${FINAL_OUT}.old`, { recursive: true, force: true });
 log(`published to ${FINAL_OUT}`);
