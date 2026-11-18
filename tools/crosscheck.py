@@ -106,11 +106,11 @@ def candidates(flat, template, shell_type):
 def pick_ship(cands):
     """Unambiguous match only: one candidate, or exactly one tech-tree ship, else exactly one premium ship."""
     if len(cands) == 1:
-        return cands[0]
+        return dict(cands[0], match_reason='only ship with this name')
     for cat in ('tech_tree', 'premium'):
         hit = [c for c in cands if c['category'] == cat]
         if len(hit) == 1:
-            return hit[0]
+            return dict(hit[0], match_reason=f'{len(cands)} ships share this name; picked the only {cat} one: ' + ', '.join(c['index'] for c in cands))
     return None
 
 by_name = defaultdict(list)

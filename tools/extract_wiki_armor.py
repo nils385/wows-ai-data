@@ -14,11 +14,11 @@ for s in index:
 def pick_ship(cands):
     """Unambiguous match only: one candidate, or exactly one tech-tree ship, else exactly one premium ship."""
     if len(cands) == 1:
-        return cands[0]
+        return dict(cands[0], match_reason='only ship with this name')
     for cat in ('tech_tree', 'premium'):
         hit = [c for c in cands if c['category'] == cat]
         if len(hit) == 1:
-            return hit[0]
+            return dict(hit[0], match_reason=f'{len(cands)} ships share this name; picked the only {cat} one: ' + ', '.join(c['index'] for c in cands))
     return None
 
 FIELDS = {'Belt': 'belt_mm', 'Deck': 'deck_mm', 'Superstructure': 'superstructure_mm', 'Extremities': 'extremities_mm'}
@@ -53,7 +53,7 @@ for fname in sorted(os.listdir(pages)):
         if len(nums) > 1:
             armor[key.replace('_mm', '_min_mm')] = int(min(nums)) if min(nums).is_integer() else min(nums)
     if armor:
-        ships[ship['index']] = {'wiki_page': f'https://wiki.worldofwarships.com/Ship:{urllib.parse.quote(name)}', **armor}
+        ships[ship['index']] = {'wiki_page': f'https://wiki.worldofwarships.com/Ship:{urllib.parse.quote(name)}', **({'match_note': ship['match_reason']} if ship['match_reason'] != 'only ship with this name' else {}), **armor}
 
 json.dump({
     'about': 'Armor thickness from the official World of Warships wiki ARMOR DETAIL tables (the game data used for the rest of this site has no armor values). Maximum value per area; *_min_mm is given where the wiki lists a range. The wiki is edited by hand, so values can lag behind game changes.',
