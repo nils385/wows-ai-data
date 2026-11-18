@@ -31,6 +31,12 @@ for (const [idx, metric, expected] of KNOWN) {
 // Upgrade effect known from the game: Gun Fire Control System Modification 2 = +16% range on Yamato
 const gfcs = cache.PJSB018?.upgrades?.slots.flatMap((s) => s.options).find((o) => o.name === "Gun Fire Control System Modification 2");
 ok(gfcs?.stat_changes?.some((c) => c.metric === "main_battery.range_km" && c.after === 30.89), "Yamato GFCS2 range 26.63 -> 30.89");
+// Burst fire mode applies its own modifiers (review finding): J. Humphreys burst AP damage x1.5
+const humphreys = await json("api/ships/PASD111.json").catch(() => null);
+ok(humphreys?.configurations?.top?.main_battery?.burst_fire_mode?.shells?.ap?.damage === 3150, "PASD111 burst AP damage 3150");
+// Manual Secondary Battery Aiming shows its secondary reload effect on battleships (review finding)
+const msba = cache.PJSB018?.captain_skills?.skills?.find((k) => k.name === "Manual Secondary Battery Aiming");
+ok(msba?.stat_changes?.some((c) => c.metric === "secondaries.range_km" || c.metric.startsWith("secondaries.")), "Manual Secondary Battery Aiming changes secondary stats");
 // No fake "-> null" stat changes
 ok(!JSON.stringify(cache.PJSB018?.captain_skills ?? {}).includes('"after":null'), "no '-> null' changes in captain skills");
 

@@ -15,7 +15,7 @@ import { flatten, metricInfo } from "./lib/metrics.mjs";
 import { eligibleModernizations, skillsFor, signalFlags, changesWith, bestWithUpgrades, describeEffects, clean, upgradeName } from "./lib/analysis.mjs";
 import { toMarkdown } from "./lib/markdown.mjs";
 import { makeLayout, renderShipPage, CSS, JS, esc, nationLabel as nationLabelOf } from "./lib/site.mjs";
-import { renderHome, renderShipsIndex, renderRankingsIndex, renderRankingPage, renderTextPage, renderGuidesIndex, renderUpgradesPage, renderCompare, renderAbout, renderLegal, redirectPage } from "./lib/pages.mjs";
+import { renderNotFound, renderHome, renderShipsIndex, renderRankingsIndex, renderRankingPage, renderTextPage, renderGuidesIndex, renderUpgradesPage, renderCompare, renderAbout, renderLegal, redirectPage } from "./lib/pages.mjs";
 import { validate } from "./lib/validate.mjs";
 import { buildKnowledge } from "./lib/knowledge.mjs";
 
@@ -255,7 +255,8 @@ for (const s of ships) {
     (record.special_ability ? `special ability: ${record.special_ability.name}\n` : "") +
     `\n## More\n\n${links}\n\n## Changes between game versions\n\n${histMd}\n\n## All stats (metric: value)\n\nSorted alphabetically; metric names are the same on every ship page, in rankings and in ships.csv, so two ships can be compared line by line. Units are in the names.\n\n${Object.entries(topFlat).map(([k, v]) => `${k}: ${v}`).join("\n")}`);
   await out(`${sp}.md`, summaryMd);
-  await out(`${sp}/index.html`, renderShipPage({ layout, base: BASE_PATH, rec: { ...record, generated_at: meta.generated_at }, shipUrl: `${sp}/`, mdUrl: abs(`${sp}.md`), jsonUrl: abs(`api/ships/${s.index}.json`), configsUrl: abs(`api/ships/${s.index}/configurations.json`), related: shipHtml }));
+  const similar = Object.values(ctx.ships).filter((x) => x.index !== s.index && x.tier === s.tier && x.shipClass === s.shipClass && x.shipCategory !== "TestShip").map((x) => ({ index: x.index, name: shipName(x.index), nation: nationId(x.shipNation), cat: x.shipCategory })).sort((a, b) => (a.nation !== nationId(s.shipNation)) - (b.nation !== nationId(s.shipNation)) || (a.cat !== "TechTree") - (b.cat !== "TechTree") || a.name.localeCompare(b.name));
+  await out(`${sp}/index.html`, renderShipPage({ layout, base: BASE_PATH, similar, rec: { ...record, generated_at: meta.generated_at }, shipUrl: `${sp}/`, mdUrl: abs(`${sp}.md`), jsonUrl: abs(`api/ships/${s.index}.json`), configsUrl: abs(`api/ships/${s.index}/configurations.json`), related: shipHtml }));
   await out(`${sp}/details.md`, md(`${title}: full details`, `${COMMON_NOTE} Summary: ${abs(`${sp}.md`)}`, toMarkdown({ description: record.description, special_ability: record.special_ability, configurations: record.configurations })));
   const changeLine = (c) => `${c.metric}: ${c.before} -> ${c.after}${c.change_pct !== null ? ` (${c.change_pct > 0 ? "+" : ""}${c.change_pct}%)` : ""}${c.better === true ? " better" : c.better === false ? " worse" : ""}`;
   const optMd = (o) => `### ${o.name}\n\n${o.description ? o.description + "\n\n" : ""}effects: ${(o.effects ?? []).map((e) => `${e.display} ${e.label}`).join("; ") || "none listed"}\n\n${o.stat_changes?.length ? "stat changes on this ship:\n" + o.stat_changes.map((c) => "- " + changeLine(c)).join("\n") : o.note ?? "no stat this site calculates changes (the effect is listed above)"}\n${o.conditional_effects ? "\nconditional effects:\n" + o.conditional_effects.map((g) => `- when ${g.trigger}: ${g.effects.map((e) => `${e.display} ${e.label}`).join("; ")}`).join("\n") + "\n" : ""}`;
@@ -562,6 +563,7 @@ await out("api/schema.json", {
     "concealment: detectability_by_ships_after_firing_main_battery_km = main battery range (firing outside smoke raises sea detectability to the guns' max range for 20 s, per the official wiki); detectability_when_firing_from_smoke_km comes from the game files; *_while_burning_km = +2 km by sea / +3 km by air while on fire.",
     "Secondary battery range: for some ships (mostly aircraft carriers and a few secondary-focused battleships) the official wiki lists a longer secondary range than the game files used here. This is unresolved; see api/verification.json.",
     "Penetration of HE/SAP shells is the exact game value (for example 54.9 mm); the game client may round it.",
+    "Anti-air and the large-caliber concealment rule use the main battery module that the hull can actually mount. ShipBuilder picks the first listed module there, so about 10 ships' AA values differ from ShipBuilder (this site is the consistent one).",
     "No player statistics (win rate, average damage).",
     "Test ships are excluded from lists and rankings: api/test-ships.json.",
   ],
@@ -625,6 +627,8 @@ ${verification ? `- [Wiki cross-check](${abs("api/verification.json")}): values 
   const date = meta.generated_at.slice(0, 10);
   await out("index.html", renderHome({ layout, base: BASE_PATH, rows, gameVersion: ctx.gameVersion, updated: date, nations, counts: { rankings: metricIndex.length } }));
   await out("ships/index.html", renderShipsIndex({ layout, base: BASE_PATH, rows, nations, shipUrl: shipHtml }));
+  for (const c of classes) await out(`ships/class/${c}/index.html`, renderShipsIndex({ layout, base: BASE_PATH, rows, nations, shipUrl: shipHtml, onlyClass: c }));
+  await out("404.html", renderNotFound({ layout, base: BASE_PATH }));
   await out("guide.html", redirectPage({ to: abs("ships/"), title: "Ships" }));
   await out("compare.html", renderCompare({ layout, base: BASE_PATH }));
   await out("about/index.html", renderAbout({ layout, base: BASE_PATH, status: JSON.parse(JSON.stringify(statusDoc)), meta }));
