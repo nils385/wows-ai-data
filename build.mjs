@@ -15,6 +15,7 @@ import { flatten, metricInfo } from "./lib/metrics.mjs";
 import { eligibleModernizations, skillsFor, signalFlags, changesWith, bestWithUpgrades, describeEffects, clean, upgradeName } from "./lib/analysis.mjs";
 import { toMarkdown } from "./lib/markdown.mjs";
 import { validate } from "./lib/validate.mjs";
+import { buildKnowledge, buildChanges } from "./lib/knowledge.mjs";
 
 const args = process.argv.slice(2);
 const argVal = (n) => (args.includes(n) ? args[args.indexOf(n) + 1] : null);
@@ -51,6 +52,11 @@ async function out(rel, data) {
 }
 const md = (title, intro, body) => `# ${title}\n\n${intro ? intro + "\n\n" : ""}${body}\n`;
 
+// Previous build from the live site, to record what changed (optional; ignored if unreachable).
+async function fetchPrev(rel, parse) { if (!SITE_URL) return null; try { const r = await fetch(abs(rel)); if (!r.ok) return null; return parse(await r.text()); } catch { return null; } }
+const previousRows = await fetchPrev("ships.jsonl", (t) => t.trim().split("\n").map((l) => JSON.parse(l)));
+const previousHistory = await fetchPrev("changes/history.json", JSON.parse);
+log(previousRows ? `previous build found: ${previousRows.length} ships` : "no previous build reachable");
 await rm(OUT, { recursive: true, force: true });
 await mkdir(OUT, { recursive: true });
 const meta = {
@@ -61,9 +67,31 @@ const meta = {
 };
 
 // ---------- ships ----------
+// Armor from the official wiki (snapshot committed in verification/, refreshed with tools/extract_wiki_armor.py)
+const wikiArmorFile = JSON.parse(await readFile(new URL("./verification/wiki-armor.json", import.meta.url), "utf8").catch(() => "{}"));
+const wikiArmor = Object.fromEntries(Object.entries(wikiArmorFile.ships ?? {}).map(([i, a]) => { const { wiki_page, ...rest } = a; return [i, { ...rest, source: wiki_page }]; }));
+// Change tracking: only when the game data version differs from the previous build, and only for metrics present in both
+// (so renamed or new fields on this site are never reported as game changes).
+const prevBy = Object.fromEntries((previousRows ?? []).map((r) => [r.index, r]));
+const prevVersion = previousRows?.[0]?.game_version ?? null;
+const versionChanged = !!prevVersion && prevVersion !== ctx.gameVersion;
+const oldEntries = Array.isArray(previousHistory?.entries) ? previousHistory.entries : [];
+const historyStart = previousHistory?.started_with ?? prevVersion ?? ctx.gameVersion;
+const changedShips = [];
+function changesSincePrevious(index, flat) {
+  const p = prevBy[index]?.metrics;
+  if (!versionChanged || !p) return [];
+  return Object.keys(flat).filter((k) => k in p && typeof p[k] === "number" && Math.abs(p[k] - flat[k]) > 1e-9).map((k) => ({ metric: k, before: p[k], after: flat[k] }));
+}
+function shipHistory(index, current) {
+  const list = current.length ? [{ game_version: ctx.gameVersion, previous_game_version: prevVersion, changes: current }] : [];
+  for (const e of oldEntries) { const c = e.ships_changed?.find((x) => x.index === index); if (c) list.push({ game_version: e.game_version, previous_game_version: e.previous_game_version, changes: c.changes }); }
+  return list;
+}
 const rows = [];            // one per released ship, used for lists, CSV and rankings
 const upgradedRows = [];    // best values reachable with upgrades
 const testShips = [];
+const shipPages = [];       // for name-based pages
 const ships = Object.values(ctx.ships).sort((a, b) => a.index.localeCompare(b.index));
 let done = 0;
 for (const s of ships) {
@@ -78,7 +106,13 @@ for (const s of ships) {
   const configs = allConfigurations(s).map((c) => ({ ...c, stats: computeConfiguration(ctx, s, c.cfg, [], { tables: c.top || c.stock }) }));
   const top = configs.find((c) => c.top) ?? configs[configs.length - 1];
   const stock = configs.find((c) => c.stock) ?? configs[0];
-  const topFlat = flatten(top.stats);
+  const topFlatRaw = flatten(top.stats);
+  const armor = wikiArmor[s.index] ?? null;
+  if (armor) for (const [k, v] of Object.entries(armor)) if (typeof v === "number") topFlatRaw[`armor.${k}`] = v;
+  // alphabetical, so two ships' stat lists line up line by line
+  const topFlat = Object.fromEntries(Object.entries(topFlatRaw).sort(([a], [b]) => a.localeCompare(b)));
+  const shipChanges = changesSincePrevious(s.index, topFlat);
+  if (shipChanges.length && s.shipCategory !== "TestShip") changedShips.push({ index: s.index, name: shipName(s.index), tier: s.tier, class: classId(s.shipClass), nation: nationId(s.shipNation), changes: shipChanges });
 
   // upgrades
   const slots = eligibleModernizations(ctx, s);
@@ -110,6 +144,8 @@ for (const s of ships) {
     previous_ship: sum.prevShipIndex ? { index: sum.prevShipIndex, name: shipName(sum.prevShipIndex) } : null,
     next_ships: (sum.nextShipIndexes ?? []).map((i) => ({ index: i, name: shipName(i) })),
     special_ability: specialAbility(ctx, s),
+    armor: armor ? { about: "Armor thickness from the official wiki (the game data used elsewhere has no armor values). Maximum per area; *_min_mm where the wiki gives a range.", ...armor } : null,
+    stat_changes_history: { about: `Stat changes of this ship between game versions, detected by this site (history started with ${historyStart}). Newest first.`, entries: shipHistory(s.index, shipChanges) },
     configurations: { top: top.stats, stock: stock.stats },
     module_combinations: { count: configs.length, url: abs(`api/ships/${s.index}/configurations.json`), note: "Every combination of researchable modules, with full stats." },
     upgrades: {
@@ -126,7 +162,43 @@ for (const s of ships) {
     about: `Every module combination for ${name} with full stats. ${COMMON_NOTE}`, game_version: ctx.gameVersion, index: s.index, name,
     configurations: configs.map((c) => ({ id: c.id, is_stock: c.stock, is_top: c.top, stats: computeConfiguration(ctx, s, c.cfg, [], { tables: false, accel: true }) })),
   });
-  await out(`ships/${base.slug}.md`, md(`${name} (tier ${base.tier_roman} ${base.nation} ${base.class}, ${base.category})`, `${COMMON_NOTE} JSON: ${abs(`api/ships/${s.index}.json`)}`, toMarkdown(record)));
+  // Small pages so AI fetch tools (which often cut pages at ~50-100 KB) can read them whole.
+  const title = `${name} (tier ${base.tier_roman} ${base.nation} ${base.class}, ${base.category})`;
+  const sp = `ships/${base.slug}`;
+  const links = [
+    `- All stats of the top configuration (this page, below)`,
+    `- [Full details: top and stock configurations, every shell with penetration per km](${abs(`${sp}/details.md`)})`,
+    `- [Upgrades: every option per slot with exact stat changes, best reachable values](${abs(`${sp}/upgrades.md`)})`,
+    `- [Captain skills with exact stat changes](${abs(`${sp}/captain-skills.md`)})`,
+    `- [Signal flags with exact stat changes](${abs(`${sp}/signal-flags.md`)})`,
+    `- [Every module combination](${abs(`api/ships/${s.index}/configurations.json`)}) (${configs.length})`,
+    `- [Everything as one JSON file](${abs(`api/ships/${s.index}.json`)}) (large)`,
+  ].join("\n");
+  const hist = record.stat_changes_history.entries;
+  const histMd = hist.length
+    ? hist.slice(0, 5).map((e) => `### ${e.previous_game_version} -> ${e.game_version}\n\n${e.changes.map((d) => `- ${d.metric}: ${d.before} -> ${d.after}`).join("\n")}`).join("\n\n")
+    : `No stat changes recorded for this ship since history started (game version ${historyStart}).`;
+  const summaryMd = md(title, `${COMMON_NOTE} Values are the top (fully researched) configuration.`,
+    `game version: ${ctx.gameVersion} (data updated ${meta.generated_at.slice(0, 10)})\n` +
+    `index: ${s.index}\nname: ${name}\nfull name: ${record.full_name}\ntier: ${base.tier}\nclass: ${base.class}\nnation: ${base.nation}\ncategory: ${base.category}\n` +
+    (armor ? `armor (official wiki): belt ${armor.belt_mm ?? "n/a"} mm, deck ${armor.deck_mm ?? "n/a"} mm, extremities ${armor.extremities_mm ?? "n/a"} mm, superstructure ${armor.superstructure_mm ?? "n/a"} mm\n` : "armor: not available\n") +
+    `price: ${record.price_credits ? record.price_credits + " credits" : record.price_doubloons ? record.price_doubloons + " doubloons" : "n/a"}\n` +
+    `researched from: ${record.previous_ship?.name ?? "n/a"}\nleads to: ${record.next_ships.map((n) => n.name).join(", ") || "n/a"}\n` +
+    `modules (top): ${Object.entries(top.stats.modules).map(([k, v]) => `${k}=${v}`).join("; ")}\n` +
+    `consumables: ${top.stats.consumables.map((sl) => `slot ${sl.slot}: ${sl.options.map((o) => `${o.name} (${o.charges} charges, ${o.reload_s} s reload${o.duration_s ? `, ${o.duration_s} s` : ""})`).join(" or ")}`).join("; ")}\n` +
+    (record.special_ability ? `special ability: ${record.special_ability.name}\n` : "") +
+    `\n## More\n\n${links}\n\n## Changes between game versions\n\n${histMd}\n\n## All stats (metric: value)\n\nSorted alphabetically; metric names are the same on every ship page, in rankings and in ships.csv, so two ships can be compared line by line. Units are in the names.\n\n${Object.entries(topFlat).map(([k, v]) => `${k}: ${v}`).join("\n")}`);
+  await out(`${sp}.md`, summaryMd);
+  await out(`${sp}/details.md`, md(`${title}: full details`, `${COMMON_NOTE} Summary: ${abs(`${sp}.md`)}`, toMarkdown({ description: record.description, special_ability: record.special_ability, configurations: record.configurations })));
+  const changeLine = (c) => `${c.metric}: ${c.before} -> ${c.after}${c.change_pct !== null ? ` (${c.change_pct > 0 ? "+" : ""}${c.change_pct}%)` : ""}${c.better === true ? " better" : c.better === false ? " worse" : ""}`;
+  const optMd = (o) => `### ${o.name}\n\n${o.description ? o.description + "\n\n" : ""}effects: ${(o.effects ?? []).map((e) => `${e.display} ${e.label}`).join("; ") || "none listed"}\n\n${o.stat_changes?.length ? "stat changes on this ship:\n" + o.stat_changes.map((c) => "- " + changeLine(c)).join("\n") : o.note ?? "no stat this site calculates changes (the effect is listed above)"}\n${o.conditional_effects ? "\nconditional effects:\n" + o.conditional_effects.map((g) => `- when ${g.trigger}: ${g.effects.map((e) => `${e.display} ${e.label}`).join("; ")}`).join("\n") + "\n" : ""}`;
+  await out(`${sp}/upgrades.md`, md(`${title}: upgrades`, `One upgrade per slot. Stat changes are for that upgrade alone on the top configuration. Combine multiplier effects by multiplying. Summary: ${abs(`${sp}.md`)}`,
+    upgradeSlots.map((sl) => `## Slot ${sl.slot}\n\n${sl.options.map(optMd).join("\n")}`).join("\n") +
+    `\n## Best reachable value per stat (one upgrade per slot)\n\n${Object.entries(best).map(([k, b]) => `- ${k}: ${b.base} -> ${b.best} with ${b.upgrades.map((u) => `${u.name} (slot ${u.slot + 1})`).join(" + ")}`).join("\n")}`));
+  await out(`${sp}/captain-skills.md`, md(`${title}: captain skills`, `Each skill alone on the top configuration. A captain has 21 points. Summary: ${abs(`${sp}.md`)}`,
+    skills.map((k) => optMd({ ...k, name: `${k.name} (cost ${k.point_cost}, row ${k.row}, column ${k.column})` })).join("\n")));
+  await out(`${sp}/signal-flags.md`, md(`${title}: signal flags`, `Each flag alone on the top configuration. Summary: ${abs(`${sp}.md`)}`, flags.map(optMd).join("\n")));
+  shipPages.push({ name, slug: base.slug, index: s.index, tier: base.tier, class: base.class, nation: base.nation, category: base.category, test: s.shipCategory === "TestShip", summaryMd });
 
   const row = { ...base, url: abs(`api/ships/${s.index}.json`), metrics: topFlat };
   if (s.shipCategory === "TestShip") testShips.push(row); else {
@@ -155,6 +227,32 @@ const addName = (k, i) => { const key = k.toLowerCase().normalize("NFKD").replac
 for (const r of rows) addName(r.name, r.index);
 for (const s of Object.values(ctx.ships)) if (s.shipCategory !== "TestShip") addName(clean(L[`${s.index}_FULL`]) ?? shipName(s.index), s.index);
 await out("api/name-lookup.json", { about: "Lowercase ship name (accents removed) -> ship indexes. Several ships can share a name (event or alternate versions): check tier and category in api/index.json.", names });
+// Name-based pages: /ship/{name}.md. Several ships with one name -> a short page listing them.
+const byName = {};
+for (const p of shipPages.filter((p) => !p.test)) (byName[slug(p.name) || p.index.toLowerCase()] ??= []).push(p);
+for (const [n, list] of Object.entries(byName)) {
+  if (list.length === 1) await out(`ship/${n}.md`, list[0].summaryMd);
+  else await out(`ship/${n}.md`, md(`Several ships are called "${list[0].name}"`, "Pick one:", list.map((p) => `- [${p.name}, tier ${p.tier} ${p.nation} ${p.class}, ${p.category}](${abs(`ships/${p.slug}.md`)})`).join("\n")));
+}
+const shipLine = (r) => `| ${r.name} | ${r.tier} | ${r.class} | ${r.nation} | ${r.category} | ${abs(`ship/${slug(r.name) || r.index.toLowerCase()}.md`)} |`;
+const shipTable = (list) => `| name | tier | class | nation | category | page |\n|---|---|---|---|---|---|\n${list.map(shipLine).join("\n")}`;
+await out("ships.md", md("All ships", `${rows.length} released ships. Page per ship: ${abs("ship/{name}.md")} (lowercase, spaces and symbols become _). Split lists: ${abs("ships/class/{class}.md")}.`,
+  classes.map((c) => `- [${c}](${abs(`ships/class/${c}.md`)}): ${rows.filter((r) => r.class === c).length} ships`).join("\n")));
+for (const c of classes) await out(`ships/class/${c}.md`, md(`All ${c} ships`, "Sorted by tier, then nation.", shipTable(rows.filter((r) => r.class === c).sort((a, b) => a.tier - b.tier || a.nation.localeCompare(b.nation) || a.name.localeCompare(b.name)))));
+// All stats split by class and tier, so each file is small enough to read whole.
+const statsBlock = (r) => `## ${r.name} | index ${r.index} | tier ${r.tier} | ${r.class} | ${r.nation} | ${r.category}\n\n${Object.entries(r.metrics).map(([k, v]) => `${k}: ${v}`).join("\n")}\n`;
+const statFiles = [];
+for (const c of classes) for (const t of tiers) {
+  for (const n of nations) {
+    const list = rows.filter((r) => r.class === c && r.tier === t && r.nation === n);
+    if (!list.length) continue;
+    await out(`all-stats/${c}/tier-${t}/${n}.txt`, `# All stats: tier ${t} ${n} ${c}s (${list.length} ships)\n\nTop configuration, base values. ${COMMON_NOTE}\n\n${list.map(statsBlock).join("\n")}`);
+    statFiles.push({ c, t, n, count: list.length });
+  }
+}
+await out("all-stats/index.md", md("All stats of all ships, split by class, tier and nation", `Each file lists every ship of one class, tier and nation with every stat as "metric: value" (small enough to read whole). URL pattern: ${abs("all-stats/{class}/tier-{n}/{nation}.txt")}. Everything in one file (very large, about 7 MB): ${abs("llms-full.txt")}`,
+  classes.map((c) => `## ${c}\n\n${tiers.filter((t) => statFiles.some((f) => f.c === c && f.t === t)).map((t) => `- tier ${t}: ${statFiles.filter((f) => f.c === c && f.t === t).map((f) => `[${f.n}](${abs(`all-stats/${c}/tier-${t}/${f.n}.txt`)}) (${f.count})`).join(", ")}`).join("\n")}`).join("\n\n")));
+
 for (const [kind, key, values] of [["by-nation", "nation", nations], ["by-class", "class", classes], ["by-tier", "tier", tiers]]) {
   for (const v of values) {
     const list = rows.filter((r) => r[key] === v);
@@ -169,7 +267,37 @@ const allMetrics = [...new Set(rows.flatMap((r) => Object.keys(r.metrics)))].sor
 const csvCell = (v) => (v === null || v === undefined ? "" : /[",\n]/.test(String(v)) ? `"${String(v).replace(/"/g, '""')}"` : String(v));
 const infoCols = ["index", "name", "tier", "class", "nation", "category"];
 await out("ships.csv", [[...infoCols, ...allMetrics].join(","), ...rows.map((r) => [...infoCols.map((c) => csvCell(r[c])), ...allMetrics.map((m) => csvCell(r.metrics[m]))].join(","))].join("\n") + "\n");
-await out("ships.jsonl", rows.map((r) => JSON.stringify({ ...listEntry(r), metrics: r.metrics })).join("\n") + "\n");
+await out("ships.jsonl", rows.map((r) => JSON.stringify({ ...listEntry(r), game_version: ctx.gameVersion, metrics: r.metrics })).join("\n") + "\n");
+// ---------- knowledge pages and change history ----------
+const wikiTerms = JSON.parse(await readFile(new URL("./verification/wiki-terminology.json", import.meta.url), "utf8").catch(() => "{}")).terms ?? [];
+const communityMd = (await readFile(new URL("./lib/community.md", import.meta.url), "utf8").catch(() => "")).replaceAll("{BASE}", SITE_URL).replaceAll("{VERSION}", ctx.gameVersion);
+const knowledge = buildKnowledge({ ctx, rows, abs, md, slug, terms: wikiTerms, community: communityMd });
+for (const [rel, body] of knowledge.pages) await out(rel, body);
+if (knowledge.dropped.length) log("glossary entries dropped (not found in game data):", knowledge.dropped.join(", "));
+let entry = null;
+if (versionChanged) {
+  const curIdx = new Set(rows.map((r) => r.index));
+  entry = {
+    game_version: ctx.gameVersion, previous_game_version: prevVersion, detected_at: meta.generated_at,
+    ships_added: rows.filter((r) => !prevBy[r.index]).map((r) => ({ index: r.index, name: r.name, tier: r.tier, class: r.class, nation: r.nation })),
+    ships_removed: (previousRows ?? []).filter((r) => !curIdx.has(r.index)).map((r) => ({ index: r.index, name: r.name })),
+    ships_changed: changedShips,
+  };
+  if (!entry.ships_added.length && !entry.ships_removed.length && !entry.ships_changed.length) entry = null;
+}
+const history = { started_with: historyStart, entries: entry ? [entry, ...oldEntries].slice(0, 60) : oldEntries };
+for (const e of history.entries) {
+  await out(`changes/${e.game_version}.md`, md(`Changes in game version ${e.game_version}`, `Compared with ${e.previous_game_version}. Base stats, top configuration.`, entryMd(e)));
+}
+await out("changes/history.json", { about: "Stat changes detected between builds of this site (each build uses the newest game data). Newest first.", ...history });
+const entryMd = (e) => `## ${e.previous_game_version ?? "?"} -> ${e.game_version} (detected ${e.detected_at.slice(0, 10)})\n\n` +
+  (e.ships_added.length ? `New ships: ${e.ships_added.map((x) => `${x.name} (tier ${x.tier} ${x.nation} ${x.class})`).join(", ")}\n\n` : "") +
+  (e.ships_removed.length ? `Removed ships: ${e.ships_removed.map((x) => x.name).join(", ")}\n\n` : "") +
+  e.ships_changed.map((c) => `### ${c.name} (tier ${c.tier} ${c.nation} ${c.class})\n\n${c.changes.map((d) => `- ${d.metric}: ${d.before} -> ${d.after}`).join("\n")}`).join("\n\n");
+await out("changes/index.md", md("What changed between game versions", `Detected by comparing each build of this site with the previous one. History started with game version ${history.started_with}. JSON: ${abs("changes/history.json")}`,
+  history.entries.length ? history.entries.map(entryMd).join("\n\n") : `No changes recorded yet. The first change will appear here after the next patch.`));
+await out("llms-full.txt", `# All World of Warships ships with all their stats\n\nGame version ${ctx.gameVersion}. ${rows.length} ships. Top (fully researched) configuration, base values: ${COMMON_NOTE} Metric names are the same as in the rankings and ships.csv. Full details per ship: ${abs("api/ships/{index}.json")}\n\n` +
+  rows.map((r) => `## ${r.name} | index ${r.index} | tier ${r.tier} | ${r.class} | ${r.nation} | ${r.category}\n\n${Object.entries(r.metrics).map(([k, v]) => `${k}: ${v}`).join("\n")}\n`).join("\n"));
 log("lists and bulk done");
 
 // ---------- rankings ----------
@@ -212,10 +340,25 @@ for (const [family, list, label] of [["rankings", rows, "base stats, top configu
   }
   log(`${family} done`);
 }
+// Rankings index split by topic, so every page is small. Filtered versions follow one URL pattern.
+const FILTER_HELP = `Filtered versions: replace ".json" with "/class/{class}.json", "/class/{class}/tier-{n}.json", "/tier/{n}.json" or "/nation/{nation}.json" (only lists with 2+ ships exist). For several nations at once, fetch the full list and keep those nations; the order stays correct. Markdown version of each full list: ${abs("rankings/{metric}.md")} (with upgrades: ${abs("rankings-with-upgrades/{metric}.md")}).`;
+const groupOf = (m) => m.split(".")[0];
+const groups = [...new Set(metricIndex.map((r) => groupOf(r.metric)))].sort();
+const groupSummary = [];
+for (const g of groups) {
+  const items = metricIndex.filter((r) => groupOf(r.metric) === g);
+  const compact = items.map((r) => ({ family: r.family, metric: r.metric, unit: r.unit, direction: r.direction, ships: r.ships, url: r.url }));
+  await out(`api/rankings/groups/${g}.json`, { about: `Rankings for "${g}" stats. ${FILTER_HELP}`, game_version: ctx.gameVersion, rankings: compact });
+  const line = (r) => `- ${r.metric} (${r.unit ?? "no unit"}, ${r.direction.replace(/_/g, " ")}, ${r.ships} ships): ${r.markdown}`;
+  await out(`rankings/groups/${g}.md`, md(`Rankings: ${g}`, FILTER_HELP,
+    `## Base stats\n\n${items.filter((r) => r.family === "rankings").map(line).join("\n") || "none"}\n\n## Best value reachable with upgrades\n\n${items.filter((r) => r.family !== "rankings").map(line).join("\n") || "none"}`));
+  groupSummary.push({ group: g, rankings: items.length, markdown: abs(`rankings/groups/${g}.md`), json: abs(`api/rankings/groups/${g}.json`) });
+}
 await out("api/rankings/index.json", {
-  about: "Every ranking on this site. Every numeric stat of every ship is ranked (nothing hand-picked). 'rankings' = base stats; 'rankings-with-upgrades' = best value reachable with upgrades. Filtered lists: {url without .json}/class/{class}.json, /class/{class}/tier-{n}.json, /tier/{n}.json, /nation/{nation}.json. For several nations at once, filter the full list.",
-  game_version: ctx.gameVersion, count: metricIndex.length, rankings: metricIndex,
+  about: `Every numeric stat of every ship is ranked (nothing hand-picked), grouped by topic. 'rankings' = base stats, 'rankings-with-upgrades' = best value reachable with upgrades. Open a group to see its rankings. ${FILTER_HELP}`,
+  game_version: ctx.gameVersion, total_rankings: metricIndex.length, url_pattern: abs("api/rankings/{metric}.json"), groups: groupSummary,
 });
+await out("rankings/index.md", md("All rankings", `${metricIndex.length} rankings, grouped by topic. ${FILTER_HELP}`, groupSummary.map((g) => `- [${g.group}](${g.markdown}): ${g.rankings} rankings`).join("\n")));
 
 // ---------- extra datasets ----------
 const nationName = (n) => nationId(n);
@@ -281,7 +424,7 @@ await out("api/schema.json", {
     "No player statistics (win rate, average damage).",
     "Test ships are excluded from lists and rankings: api/test-ships.json.",
   ],
-  metrics: metricDocs,
+  metrics: `Every metric with its unit and direction is listed per topic in ${abs("rankings/index.md")} (${metricDocs.length} base metrics).`,
 });
 
 await out("llms.txt", await llmsTxt());
@@ -291,20 +434,36 @@ async function llmsTxt() {
 
 > Complete World of Warships ship data: ${rows.length} ships, game version ${ctx.gameVersion}, generated ${meta.generated_at}. Every stat of every ship (all module combinations), what every upgrade, captain skill and signal flag changes, and ${metricIndex.length} rankings of every numeric stat with filters by class, tier and nation. Static JSON, CSV and Markdown. No auth, no JavaScript. Source: game files via WoWs ShipBuilder; calculations ported from ShipBuilder.
 
+All pages in "Start here" are small enough to read whole. Files marked (large) are for download and code, not for reading in one fetch.
+
 ## Start here
 
-- [Ship index](${abs("api/index.json")}): every ship with index, name, tier, class, nation, category
-- [Name lookup](${abs("api/name-lookup.json")}): ship name -> index. Then fetch ${abs("api/ships/{index}.json")} (or ${abs("ships/{name-index}.md")})
-- [Rankings index](${abs("api/rankings/index.json")}): every ranking and its filtered versions
-- [Schema](${abs("api/schema.json")}): structure, units, how to combine upgrade effects, every metric with its unit and better-direction
+- One ship: ${abs("ship/{name}.md")}, name in lowercase with spaces and symbols as "_" (e.g. ${abs("ship/yamato.md")}, ${abs("ship/des_moines.md")}). Shows all stats plus links to upgrades, captain skills, signal flags and full details (shells with penetration per km). If several ships share the name, the page lists them.
+- [All ships by class](${abs("ships.md")}): names, tiers, nations and page links
+- [All rankings by topic](${abs("rankings/index.md")}): ${metricIndex.length} rankings, every metric with unit and better-direction
+- [All stats of all ships, split by class and tier](${abs("all-stats/index.md")})
+- [Name lookup](${abs("api/name-lookup.json")}): name -> ship index, for the JSON files ${abs("api/ships/{index}.json")}
+- [Schema](${abs("api/schema.json")}): structure, units, how to combine upgrade effects, caveats
+
+- [Glossary](${abs("glossary.md")}): player abbreviations (CE, IFHE, DCP, GFCS...) and nicknames (Shima, DM...) mapped to exact game names
+- [Game mechanics](${abs("mechanics.md")}): the rules and formulas behind the numbers (DPM, overmatch, detection, dispersion, stacking)
+- [Tech trees](${abs("tech-tree/index.md")}): research lines per nation
+- [Community opinion: builds and meta](${abs("community.md")}): what current guides and player forums recommend, with sources (opinion, kept separate from game data)
+- [What changed between game versions](${abs("changes/index.md")}): stat changes per ship, recorded on every update
 
 ${guide}
+## Not on this site
+
+- Player statistics (win rates, average damage, popularity) need Wargaming's player API; community sites such as wows-numbers.com publish them. Do not estimate them from this data.
+- Armor thickness per plate and module HP are not in the game files used here.
+- Opinions on which ship or build is "best": this site gives facts only.
+
 ## Data sets
 
-- [Upgrades](${abs("api/upgrades.json")}), [Captain skills](${abs("api/captain-skills.json")}), [Signal flags](${abs("api/signal-flags.json")}), [Consumables](${abs("api/consumables.json")})
-- [Shells, torpedoes, bombs, rockets, depth charges](${abs("api/projectiles.json")}), [Aircraft](${abs("api/aircraft.json")})
-- Lists: ${abs("api/by-tier/{1-11}.json")}, ${abs("api/by-nation/{nation}.json")} (${nations.join(", ")}), ${abs("api/by-class/{class}.json")} (${classes.join(", ")})
-- Bulk: [ships.csv](${abs("ships.csv")}) (one row per ship, ${allMetrics.length} metric columns), [ships.jsonl](${abs("ships.jsonl")})
+- [Upgrades](${abs("api/upgrades.json")}) (about 110 KB), [Captain skills](${abs("api/captain-skills.json")}), [Signal flags](${abs("api/signal-flags.json")}), [Consumables](${abs("api/consumables.json")}) (large)
+- [Shells, torpedoes, bombs, rockets, depth charges](${abs("api/projectiles.json")}) (large), [Aircraft](${abs("api/aircraft.json")}) (large)
+- JSON lists with all metrics: ${abs("api/by-tier/{1-11}.json")}, ${abs("api/by-nation/{nation}.json")} (${nations.join(", ")}), ${abs("api/by-class/{class}.json")} (${classes.join(", ")}) (large)
+- Bulk (large): [ships.csv](${abs("ships.csv")}) (one row per ship, ${allMetrics.length} metric columns), [ships.jsonl](${abs("ships.jsonl")}), [llms-full.txt](${abs("llms-full.txt")}) (every ship and stat in one file, about 7 MB), [ship index JSON](${abs("api/index.json")})
 
 ## Trust
 
@@ -313,21 +472,26 @@ ${verification ? `- [Wiki cross-check](${abs("api/verification.json")}): values 
 `;
 }
 
-const tcols = ["survivability.hit_points", "maneuverability.max_speed_knots", "concealment.detectability_by_ships_km", "main_battery.range_km", "main_battery.reload_s"];
+
 await out("index.html", `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>WoWs Data for AIs</title>
 <meta name="description" content="Complete World of Warships ship data for AI agents. Start at /llms.txt">
 <link rel="alternate" type="text/plain" href="${abs("llms.txt")}" title="llms.txt">
 <script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@type": "Dataset", name: "World of Warships ship data for AI agents", description: `Every stat of ${rows.length} World of Warships ships (game version ${ctx.gameVersion}), upgrades, skills, signals and rankings.`, dateModified: meta.generated_at, version: ctx.gameVersion, isAccessibleForFree: true, distribution: [{ "@type": "DataDownload", encodingFormat: "text/csv", contentUrl: abs("ships.csv") }, { "@type": "DataDownload", encodingFormat: "application/jsonl", contentUrl: abs("ships.jsonl") }] })}</script>
-<style>body{font:13px/1.4 ui-monospace,monospace;margin:16px;background:#fff;color:#111}table{border-collapse:collapse}td,th{border:1px solid #ccc;padding:2px 6px;text-align:left;white-space:nowrap}.w{overflow-x:auto}@media(prefers-color-scheme:dark){body{background:#111;color:#ddd}td,th{border-color:#444}a{color:#8ab4f8}}</style></head><body>
+<style>body{font:15px/1.5 system-ui,sans-serif;margin:16px;max-width:760px;background:#fff;color:#111}@media(prefers-color-scheme:dark){body{background:#111;color:#ddd}a{color:#8ab4f8}}</style></head><body>
 <h1>World of Warships data for AI agents</h1>
-<p>This site is for AI agents. Read <a href="${abs("llms.txt")}">/llms.txt</a>. Structure and units: <a href="${abs("api/schema.json")}">/api/schema.json</a>. Rankings: <a href="${abs("api/rankings/index.json")}">/api/rankings/index.json</a>.</p>
-<p>ships=${rows.length}; game_version=${ctx.gameVersion}; generated_at=${meta.generated_at}; rankings=${metricIndex.length}</p>
-<div class="w"><table><thead><tr><th>index</th><th>name</th><th>tier</th><th>class</th><th>nation</th><th>category</th>${tcols.map((c) => `<th>${c}</th>`).join("")}<th>json</th><th>md</th></tr></thead><tbody>
-${rows.map((r) => `<tr><td>${r.index}</td><td>${r.name.replace(/</g, "&lt;")}</td><td>${r.tier}</td><td>${r.class}</td><td>${r.nation}</td><td>${r.category}</td>${tcols.map((c) => `<td>${r.metrics[c] ?? ""}</td>`).join("")}<td><a href="${r.url}">json</a></td><td><a href="${abs(`ships/${r.slug}.md`)}">md</a></td></tr>`).join("\n")}
-</tbody></table></div><p>${meta.data_source}. ${meta.calculations} ${meta.license_note}</p></body></html>
+<p><strong>AI agents: read <a href="${abs("llms.txt")}">${abs("llms.txt")}</a> first.</strong> It explains every file and which one answers which question.</p>
+<p>${rows.length} ships, game version ${ctx.gameVersion}, updated ${meta.generated_at}. ${metricIndex.length} rankings.</p>
+<ul>
+<li>One ship: <a href="${abs("ship/yamato.md")}">${abs("ship/{name}.md")}</a> (example: Yamato)</li>
+<li><a href="${abs("ships.md")}">All ships</a></li>
+<li><a href="${abs("rankings/index.md")}">All rankings</a></li>
+<li><a href="${abs("all-stats/index.md")}">All stats of all ships</a></li>
+<li><a href="${abs("api/schema.json")}">Structure and units</a></li>
+</ul>
+<p>${meta.data_source}. ${meta.calculations} ${meta.license_note}</p></body></html>
 `);
 await out("robots.txt", `# AI crawlers and agents are welcome.\nUser-agent: *\nAllow: /\n${SITE_URL ? `Sitemap: ${SITE_URL}/sitemap.xml\n` : ""}`);
-if (SITE_URL) await out("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${["", "llms.txt", "api/index.json", "api/schema.json", "api/rankings/index.json", ...rows.map((r) => `api/ships/${r.index}.json`), ...rows.map((r) => `ships/${r.slug}.md`)].map((u) => `<url><loc>${abs(u)}</loc></url>`).join("\n")}\n</urlset>\n`);
+if (SITE_URL) await out("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${["", "llms.txt", "api/index.json", "api/schema.json", "api/rankings/index.json", ...rows.map((r) => `api/ships/${r.index}.json`), ...rows.map((r) => `ships/${r.slug}.md`), "ships.md", "rankings/index.md", "all-stats/index.md"].map((u) => `<url><loc>${abs(u)}</loc></url>`).join("\n")}\n</urlset>\n`);
 await out(".nojekyll", "");
 
 log(`built ${rows.length} ships (+${testShips.length} test), ${metricIndex.length} rankings, ${fileCount} files into ${OUT}`);

@@ -1,0 +1,1075 @@
+{
+ "about": "Community terminology from the official World of Warships wiki page Ship:Terminology (short definitions). Attribution: wiki.worldofwarships.com.",
+ "source": "https://wiki.worldofwarships.com/Ship:Terminology",
+ "retrieved": "2026-11-18",
+ "terms": [
+  {
+   "term": "AA",
+   "definition": "adj. \"Anti-Aircraft\" - usually refers to the anti-aircraft function of those guns capable of firing at aircraft."
+  },
+  {
+   "term": "AA Sector",
+   "definition": "Refers to a side of the ship (port or starboard) where AA gunfire can be reinforced using the Sector Reinforcement mechanism."
+  },
+  {
+   "term": "AAA",
+   "definition": "n. \"Anti-Aircraft Artillery\" or \"Anti-Aircraft Armament\" or \"Triple-A\"."
+  },
+  {
+   "term": "Action time",
+   "definition": "The length of the period over which a time-limited feature, such as a consumable or sector reinforcement, is active. Typically these periods are separated by reload or cooldown periods."
+  },
+  {
+   "term": "AFK",
+   "definition": "\"Away from Keyboard\". Considered unsportsmanlike conduct."
+  },
+  {
+   "term": "AFT",
+   "definition": "obs. The old commander skill Advanced Firing Training."
+  },
+  {
+   "term": "Aft",
+   "definition": "The stern, or toward the stern of the ship."
+  },
+  {
+   "term": "Alpha",
+   "definition": "1) From 'alpha strike' - The amount of instant damage a ship or weapon can do in a single strike (not including fires or floods)."
+  },
+  {
+   "term": "Amidships",
+   "definition": "The middle of the ship, roughly half way between the bow and the stern."
+  },
+  {
+   "term": "Anchor",
+   "definition": "1) The big pointy thing on a chain that is used to keep a ship from moving. 2) In battle, a position - typically on or near a flank and usually next to an island - that forces the enemy to deal with the anchor ship in order to win the flank."
+  },
+  {
+   "term": "Angle",
+   "definition": "v. -ed -ing To orient a ship at an angle to the enemy such that the profile is narrow and the side armor presents a sharp angle that will bounce most shells."
+  },
+  {
+   "term": "AP",
+   "definition": "Armor-Piercing shells. Ammo article."
+  },
+  {
+   "term": "AR",
+   "definition": "Commander skill Adrenaline Rush."
+  },
+  {
+   "term": "Area Denial",
+   "definition": "A spread of torpedoes that is used to deter or prevent an enemy or group from entering a desired location, or a consumable (esp. radar) use that prevents a ship from occupying or pressures a ship out of a location."
+  },
+  {
+   "term": "ASW",
+   "definition": "Anti-Submarine Warfare refers to the acts of tracking, locating and destroying submarines."
+  },
+  {
+   "term": "Banzai",
+   "definition": "Declaration of a hopeless attack (Ramming, YOLO rush). From the Japanese war cry \"Tenno Heika Banzai!\" (Long live the Emperor!)."
+  },
+  {
+   "term": "Battery",
+   "definition": "A group or organizational unit of guns, usually by caliber and purpose. A battery is usually controlled by a common director."
+  },
+  {
+   "term": "Battle Performance Bonus",
+   "definition": "Rewards that are triggered by battle results in addition to Experience and Credits. Two examples are Snowflake-type event rewards and Research Points."
+  },
+  {
+   "term": "Battle-Line",
+   "definition": "A continuous area of influence that extends between ships in a given sector. Advancing the line applies pressure to the enemy while pulling the line alleviates pressure."
+  },
+  {
+   "term": "BB",
+   "definition": "Battleship."
+  },
+  {
+   "term": "Beam",
+   "definition": "The breadth of a ship's hull at its widest point."
+  },
+  {
+   "term": "BFT",
+   "definition": "obs. The old commander skill Basic Firing Training."
+  },
+  {
+   "term": "Big Mamie",
+   "definition": "The nickname of the Tier VIII premium battleship Massachusetts."
+  },
+  {
+   "term": "Big Wiscy",
+   "definition": "The nickname of the Tier X premium battleship Wisconsin."
+  },
+  {
+   "term": "Blap",
+   "definition": "To do a large chunk of damage to an enemy ship."
+  },
+  {
+   "term": "Blindfire",
+   "definition": "Salvos fired against a target that cannot be seen from the firing ship. Often done as counter-fire against a ship obscured by smoke or concealed behind an island."
+  },
+  {
+   "term": "Booster",
+   "definition": "An expendable economic bonus to rewards earned in battle."
+  },
+  {
+   "term": "Bot",
+   "definition": "1) A game-directed combatant. In a PVE mode, one side in battle is composed of bots.2) An illegal autonomous 'player' ship."
+  },
+  {
+   "term": "Bote",
+   "definition": "A fond but joking reference to a ship. (A ship is not a \"boat\", thus the misspelling.)"
+  },
+  {
+   "term": "Bounce",
+   "definition": "n. A shell hit that ricochets off the target due to the impact angle. v. To ricochet."
+  },
+  {
+   "term": "Bow",
+   "definition": "Front of the ship where the porpoises hang out when underway."
+  },
+  {
+   "term": "Bow-in / Bow-onBow tanking",
+   "definition": "Facing the bow of the ship directly at the enemy. The orientation restricts the number of guns that can bear, but reduces the ship's target size and forms sharp angles that tend to deflect incoming projectiles."
+  },
+  {
+   "term": "Bracket",
+   "definition": "When a well-aimed salvo misses to both sides of the ship due to dispersion."
+  },
+  {
+   "term": "Brawl",
+   "definition": "1) A close-quarters engagement between ships. Some ships are better than others in this capacity.2) A battle mode at a variety of tiers pitting small player teams against one another."
+  },
+  {
+   "term": "BRB",
+   "definition": "\"I'll Be Right Back\""
+  },
+  {
+   "term": "Brisk",
+   "definition": "abbrev. BR or BK n. A battleship commander skill (2 points). \"Increases your ship's speed +10% while she remains undetected.\""
+  },
+  {
+   "term": "Broadside",
+   "definition": "n. 1) The long (\"broad\") side of a ship. Turning the ship's broadside to an enemy allows the greatest number of main battery guns to target the enemy, but presents a large, flat-faced target in return. The opposite of angled. Shells arriving perpendicular to a broadside are much more likely to penetrate than shells arriving at a sharp angle. 2) A salvo of all main guns that can bear on a target."
+  },
+  {
+   "term": "Buff",
+   "definition": "To increase the effectiveness of a ship or mechanism."
+  },
+  {
+   "term": "BZ",
+   "definition": "\"Bravo Zulu\" or \"Well done\"."
+  },
+  {
+   "term": "CA",
+   "definition": "Heavy cruiser. (The 'A' comes from 'Armored', but the post-WWI CA is distinguished by the larger caliber of its guns.) Generally assigned an anti-cruiser role."
+  },
+  {
+   "term": "Camp",
+   "definition": "-er -ing To sit in one spot for the majority of the game. Usually pejorative."
+  },
+  {
+   "term": "Cap, Capping",
+   "definition": "from 'capture' - n. 1) An objective area, usually a circle. 2) The capture of an objective area. v. To attempt to control or capture an objective area or enemy base by occupying it."
+  },
+  {
+   "term": "Carry",
+   "definition": "To perform far better than the rest of the team in an effort to secure a victory."
+  },
+  {
+   "term": "Carwash",
+   "definition": "The soaking of an enemy ship with seawater splashes from shells that fail to hit. See 'bracket'."
+  },
+  {
+   "term": "CB",
+   "definition": "Abbreviation for the mode Clan Battles."
+  },
+  {
+   "term": "CBT",
+   "definition": "-er 1) Closed Beta Test - an early period in World of Warships development following Alpha test. The test period was by invitation only. 2) Clan Battle Test - a volunteer group charged with evaluating ships in the Clan Battles mode."
+  },
+  {
+   "term": "CC",
+   "definition": "Community Contributor."
+  },
+  {
+   "term": "CE",
+   "definition": "The commander skill Concealment Expert."
+  },
+  {
+   "term": "Chunk",
+   "definition": "A noticeable amount of damage, but not crippling."
+  },
+  {
+   "term": "Cit / Citted",
+   "definition": "Citadel hit."
+  },
+  {
+   "term": "Citadel",
+   "definition": "n. The vital areas of a ship containing machinery, magazines, etc. v. To penetrate the citadel and explode within, causing great damage."
+  },
+  {
+   "term": "CL",
+   "definition": "Light Cruiser. A cruiser with smaller-caliber guns. Generally assigned an anti-destroyer or anti-air role."
+  },
+  {
+   "term": "Clam digging",
+   "definition": "Running aground. Close inspection of an uncharted island. \"Pulling a Notser\"."
+  },
+  {
+   "term": "Clubson",
+   "definition": "Nickname for Tier IV USN destroyer Clemson, for its use in seal-clubbing expeditions."
+  },
+  {
+   "term": "Cockpit",
+   "definition": "The place at the front of the plane where the crew and the stewardae have their parties. Oh wait. That's World of Warplanes. NVM."
+  },
+  {
+   "term": "Cockbote",
+   "definition": "Nickname for Tier X USN cruiser Worcester (rhymes with 'rooster', aka a cock)."
+  },
+  {
+   "term": "Consumables",
+   "definition": "1) Items that are expended in battle, notably boosters, signal flags, and single-use camouflage.2) A class of equipment that provides new or enhanced capabilities to a ship and is consumed in battle."
+  },
+  {
+   "term": "Cooldown",
+   "definition": "or 'cooldown time', sometimes 'reload time'. After the use of an equipment Consumable, the length of time until it can be used again (assuming it has more charges available)."
+  },
+  {
+   "term": "Crossfire",
+   "definition": "Intersecting lanes of gunfire that make it impossible for the enemy ship to effectively angle."
+  },
+  {
+   "term": "CTD",
+   "definition": "\"Crash To Desktop\". Usually accompanied by expletives."
+  },
+  {
+   "term": "CV",
+   "definition": "Aircraft Carrier."
+  },
+  {
+   "term": "CXP",
+   "definition": "Commander experience."
+  },
+  {
+   "term": "DAAF",
+   "definition": "The consumable."
+  },
+  {
+   "term": "Daily shipments",
+   "definition": "Small gifts for logging in each day - usually available with the advent of a new event."
+  },
+  {
+   "term": "Damage Farming",
+   "definition": "Doing damage to enemy ships as the primary objective, possibly at the expense of team objectives such as winning the battle."
+  },
+  {
+   "term": "Damage Saturation",
+   "definition": "When a part of a ship has sustained damage equal to its health pool."
+  },
+  {
+   "term": "DB",
+   "definition": "Dive Bomber."
+  },
+  {
+   "term": "DCP / Damacon",
+   "definition": "The consumable or its use."
+  },
+  {
+   "term": "DD",
+   "definition": "Destroyer."
+  },
+  {
+   "term": "DE",
+   "definition": "The commander skill Demolition Expert. For a while renamed Pyrotechnician. Now DE again. Except for Carriers. sigh..."
+  },
+  {
+   "term": "Dead Eye",
+   "definition": "obs. A short-lived commander skill buffing battleship dispersion at longer ranges, thus encouraging back-line camping and sniping."
+  },
+  {
+   "term": "Death ball",
+   "definition": "A tight huddle of ships intended to protect against air attack by overlapping AA auras. Mutual defense is good, but a death ball is not recommended due to the amount of map control surrendered."
+  },
+  {
+   "term": "Death Pickle",
+   "definition": "Nickname for the now-unobtainable ship Iwaki Alpha."
+  },
+  {
+   "term": "Death snail",
+   "definition": "A squadron of ships - often a smoke destroyer and two cruisers - sent up a flank to establish or prevent crossfires, or to roll up the flank. May not be effective against radar stationed on the flank."
+  },
+  {
+   "term": "Deleted / Deletion",
+   "definition": "When a healthy ship is destroyed instantly; see \"Devstrike,\" \"One-shot\"."
+  },
+  {
+   "term": "Derp",
+   "definition": "Acting without skill or critical thought. Typically used by players to acknowledge a silly mistake (either in the battle or in chat)."
+  },
+  {
+   "term": "Derpitz",
+   "definition": "Nickname for Tier VIII premium KM battleship Tirpitz."
+  },
+  {
+   "term": "Des Memes",
+   "definition": "Nickname for Tier X USN cruiser Des Moines."
+  },
+  {
+   "term": "Detected / Detection",
+   "definition": "Obtaining enough location information to target a ship."
+  },
+  {
+   "term": "Detonation",
+   "definition": "[With Update 13.11, Detonation has been removed from the game."
+  },
+  {
+   "term": "Devstrike",
+   "definition": "Short for \"Devastating Strike\"."
+  },
+  {
+   "term": "DFAA",
+   "definition": "Incorrect but common abbreviation of DAAF."
+  },
+  {
+   "term": "Disconnect / DC",
+   "definition": "When a player disconnects from the battle, whether accidentally or intentionally. Often results in AFK. If the disconnect is unintentional, the player may be able to re-enter the battle."
+  },
+  {
+   "term": "Disengage",
+   "definition": "Break contact with the enemy."
+  },
+  {
+   "term": "Dispersion",
+   "definition": "The spread of shells fired in a salvo, typically described by the lengths of the axes of a containing ellipse. Vertical dispersion (the major axis) being the distance between the farthest and the closest shellfall (re: the firing ship), and horizontal dispersion (the minor axis) being the distance between farthest shellfall left and right."
+  },
+  {
+   "term": "Division",
+   "definition": "One to three (and in Scenarios up to seven) players grouped together so that MatchMaker places them into the same battle. A division also has a private in-game chat channel."
+  },
+  {
+   "term": "Doubloons",
+   "definition": "A currency in World of Warships."
+  },
+  {
+   "term": "DOT",
+   "definition": "Damage Over Time. Damage caused by Fire or Flood. 100% repairable if the repair parties have enough action time."
+  },
+  {
+   "term": "DPM",
+   "definition": "Damage (health points) per minute. Usually refers to the damage output of anti-ship batteries."
+  },
+  {
+   "term": "DPS",
+   "definition": "Damage per second. Usually refers to the damage output of AA batteries."
+  },
+  {
+   "term": "Draft",
+   "definition": "How deep the ship sits in the water. The distance from the waterline to the lowest point of the ship."
+  },
+  {
+   "term": "Dutch oven",
+   "definition": "A synonym for focus fire."
+  },
+  {
+   "term": "Earn your trusty flags",
+   "definition": "obs. Detonation no longer earns Juliet Charlie signal flags."
+  },
+  {
+   "term": "Economy",
+   "definition": "The acquisition and spending of the many in-game currencies."
+  },
+  {
+   "term": "ECXP",
+   "definition": "Elite Commander XP - a form of Commander Experience (CXP) that goes into a common pool where it is spendable by all commanders."
+  },
+  {
+   "term": "Elite ship",
+   "definition": "A ship that has all of its modules, and all dependent ships, researched or unlocked. The term refers to tech tree ships as premium ships are all Elite. Ship XP earned on an Elite ship has no use other than to convert to FXP for Doubloons ."
+  },
+  {
+   "term": "EXP",
+   "definition": "Elite XP, or ship experience on Elite ships."
+  },
+  {
+   "term": "Farming",
+   "definition": "Taking advantage of a situation to accumulate a desired result. e.g. damage farming, farming fires."
+  },
+  {
+   "term": "Fighter",
+   "definition": "An aircraft designed and tasked to destroy enemy aircraft."
+  },
+  {
+   "term": "Fish",
+   "definition": "Torpedoes."
+  },
+  {
+   "term": "Flank",
+   "definition": "An outermost side of a team's battle line."
+  },
+  {
+   "term": "Flanker",
+   "definition": "A ship whose attributes make it ideal for holding or exploiting a flank."
+  },
+  {
+   "term": "Float",
+   "definition": "v. The opposite of sink. A desired practice for a ship and her crew. (Except for those strange submarine thingies.)"
+  },
+  {
+   "term": "Focus Fire",
+   "definition": "Repeated fire by direction or opportunity by several ships against a single target in an attempt to sink it or force it to run away. The WoWs equivalent to \"capping the T\"."
+  },
+  {
+   "term": "Frag ratio / KD",
+   "definition": "Kill/Death Ratio. How many kills (frags) you have vs. how many times you fail to float in battle."
+  },
+  {
+   "term": "Freeboard",
+   "definition": "The height of a ship's side above the waterline."
+  },
+  {
+   "term": "Fun and Engaging",
+   "definition": "Traditional phrase expressing frustration over a game mechanic. \"Being dev struck is so fun and engaging.\""
+  },
+  {
+   "term": "Furry Taco",
+   "definition": "Nickname for Tier V IJN cruiser Furutaka."
+  },
+  {
+   "term": "FXP",
+   "definition": "Free XP or Free Experience. Ship XP held in a common pool for use by any ship."
+  },
+  {
+   "term": "G2G / GTG",
+   "definition": "1) \"Got to Go.\"2) ('GTG' or 'GtG') The commander skill Grease the Gears."
+  },
+  {
+   "term": "GG",
+   "definition": "\"Good Game\". Also Big Grin."
+  },
+  {
+   "term": "GLHF",
+   "definition": "\"Good Luck and Have Fun!\""
+  },
+  {
+   "term": "Go Dark",
+   "definition": "To disengage or go back into concealment."
+  },
+  {
+   "term": "Gold",
+   "definition": "A World of Tanks currency. The equivalent in World of Warships is Doubloons. Gold was a shared currency and may still be use to purchase a form of Premium Time."
+  },
+  {
+   "term": "Grind",
+   "definition": "The amount of time and effort it takes to play and progress through the tech tree, missions, or campaigns."
+  },
+  {
+   "term": "Gun Bloom",
+   "definition": "When firing the main guns there is a \"bloom\" of fire and smoke that can be seen from afar. As a result, the ship's detection range \"blooms\" to the maximum range of the guns for 20 seconds. (Secondary and AA batteries do not bloom.)"
+  },
+  {
+   "term": "Hard Cover",
+   "definition": "An object, such as an island, that breaks line of sight and protects ships from incoming shells and torpedoes."
+  },
+  {
+   "term": "Hard Spotted",
+   "definition": "Being spotted by a ship within the player ship's detection range."
+  },
+  {
+   "term": "HE",
+   "definition": "High-Explosive shells or bombs."
+  },
+  {
+   "term": "Hold",
+   "definition": "A hold position is usually near the center of the map near an island that is selected for supporting fire on one or more capture points."
+  },
+  {
+   "term": "HUD",
+   "definition": "Heads Up Display. Alternative versions are available in the Settings. 'Full' is recommended."
+  },
+  {
+   "term": "Hull",
+   "definition": "The part of the ship that makes it float."
+  },
+  {
+   "term": "Hydro",
+   "definition": "The consumable."
+  },
+  {
+   "term": "IFHE",
+   "definition": "Inertia Fuse for HE Shells, a commander skill increasing the armor penetration of High Explosive shells by 25% while reducing their base fire starting chance by half."
+  },
+  {
+   "term": "IGN",
+   "definition": "In Game Name."
+  },
+  {
+   "term": "IJN",
+   "definition": "Imperial Japanese Navy."
+  },
+  {
+   "term": "Island Hugging",
+   "definition": "Hiding behind an island for cover. Usually in an Anchoring or Holding position."
+  },
+  {
+   "term": "Karma",
+   "definition": "The sum of a player's in-game compliments (positive) and reports (negative). It cannot go below zero. You can see your current Karma rating in the Player Menu of the in-game Port screen - the little number next to your game name. Karma has no effect other than to allow more compliments and reports per day."
+  },
+  {
+   "term": "Kek",
+   "definition": "Alternative to \"LOL,\" indicating amusement."
+  },
+  {
+   "term": "Kiting",
+   "definition": "The act of moving away from a superior chasing enemy while engaging them, thereby maximizing the risk/reward factor."
+  },
+  {
+   "term": "Knot (Kt)",
+   "definition": "A unit used to measure the speed of ships on the water. 1 knot is equal to 1 nautical mile per hour. 1 nmi = 1.15 mi = 1.85 km. So 1.0kt = 1.15mph."
+  },
+  {
+   "term": "KM",
+   "definition": "Kriegsmarine (Germany)"
+  },
+  {
+   "term": "KMS",
+   "definition": "A ship of the Kriegsmarine. \"KMS\" is not used in German. Presumably from an Anglophone source attempting to simulate the non-existent German term \"Kriegsmarineschiff\" or \"Kriegsmarines Schiff\"."
+  },
+  {
+   "term": "KS / Kill Steal",
+   "definition": "A misguided accusation for the act of eliminating an enemy ship without \"earning\" the kill."
+  },
+  {
+   "term": "Lead",
+   "definition": "v. To aim a distance in front of or behind the target to counter its speed and direction. n. the amount offset."
+  },
+  {
+   "term": "Lemming",
+   "definition": "A small rodent that inhabits arctic and sub-arctic tundra and taiga environments. Lemmings are believed to migrate as a large, mindless horde."
+  },
+  {
+   "term": "Lemming Train",
+   "definition": "A group of ships that travel together in close proximity to one area or objective, often neglecting the capture of strategic points and leaving other ships without support."
+  },
+  {
+   "term": "Lighthouse",
+   "definition": "n. On the coast, a tall building with a big light on top designed to illuminate ships as they run aground.adj. A type of ship build where the near-mandatory Concealment Expert skill and/or Concealment Systems Modification 1 upgrade is dropped in favor of other skills and upgrades, usually in favor of firepower."
+  },
+  {
+   "term": "Lit up",
+   "definition": "Spotted by the enemy, usually with radar."
+  },
+  {
+   "term": "LL / Load Lock",
+   "definition": "\"Late Load\" A frustrating glitch where the ship gets hung up on the battle load screen instead of entering battle with the team. The hang-up can last several seconds or the entire match. Killing the game client and restarting will usually bypass the glitch, but takes a while itself.Do not voluntarily Exit the Battle lest you become pink. Kill the client. Failing to enter battle can result in an unsportsmanlike conduct warning."
+  },
+  {
+   "term": "lol / LOL",
+   "definition": "\"Laughing Out Loud\"."
+  },
+  {
+   "term": "Lolibote",
+   "definition": "(derived from Japanese slang) A destroyer."
+  },
+  {
+   "term": "LOLcit / LOLpen",
+   "definition": "Receiving a citadel or penetrating hit from an unlikely angle."
+  },
+  {
+   "term": "LoS",
+   "definition": "\"Line of Sight\"."
+  },
+  {
+   "term": "Luck-chuck",
+   "definition": "To launch torpedoes into an area where an unspotted enemy ship is likely to be. Hey! Sometimes it works."
+  },
+  {
+   "term": "Magazine",
+   "definition": "The area where explosives and ammunition are stored, usually in close proximity to the guns. Hits on this armored storage room are understandably deadly."
+  },
+  {
+   "term": "Main",
+   "definition": "Usually prefixed with a type of ship, e.g. \"DD main\", \"PVE main\": A player who prefers and mostly plays a certain type of ship or battle mode."
+  },
+  {
+   "term": "Main battery, main guns",
+   "definition": "The largest caliber guns carried by a gunship."
+  },
+  {
+   "term": "Meta",
+   "definition": "The common practice in selecting and outfitting ships and fighting them in battle. \"Ship X is ineffective in the current meta.\" Can refer to a map strategy such as camping or island hugging."
+  },
+  {
+   "term": "MM / MatchMaker",
+   "definition": "The game's matchmaking system that groups players together for battle."
+  },
+  {
+   "term": "MN",
+   "definition": "Marine Nationale (France)."
+  },
+  {
+   "term": "Mods",
+   "definition": "1) Moderators - Forum or stream moderators who maintain order in chat. 2) Modifications - 3rd party game modifications that alter the game in some way. Some are illegal. Legal mods are often bundled in such as WoWS' [https://world-warships.com/world-of-warships-modstation-the-official-installer-of-mods-from-wargaming/ ModStation] and Aslain's [https://aslain.com/index.php?/topic/2020-0730-aslains-wows-modpack-installer-wpicture-preview/ Modpack]."
+  },
+  {
+   "term": "Nerf",
+   "definition": "Decrease the effectiveness of a ship, a characteristic, or a mechanism."
+  },
+  {
+   "term": "Newbie, Noob",
+   "definition": "A player new to the game. 'Noob' has a faintly disdainful flavor. Players are often considered newbies for their first 1000 battles, though protected mode and access level advancement cut off after 200."
+  },
+  {
+   "term": "NS",
+   "definition": "\"Nice Shot.\""
+  },
+  {
+   "term": "NVM, nvm",
+   "definition": "\"Never Mind.\""
+  },
+  {
+   "term": "o7, <o",
+   "definition": "A text emoji representing a salute, typically used as a sign of respect."
+  },
+  {
+   "term": "o/",
+   "definition": "A text emoji representing a wave, typically used as a friendly greeting."
+  },
+  {
+   "term": "OBT",
+   "definition": "Open Beta Test -ing -er - An early period in the game's development, after CBT."
+  },
+  {
+   "term": "OOR",
+   "definition": "\"Out Of Range.\""
+  },
+  {
+   "term": "OMW",
+   "definition": "\"On My Way.\""
+  },
+  {
+   "term": "One-Shot",
+   "definition": "To destroy a healthy ship with a single salvo."
+  },
+  {
+   "term": "Op",
+   "definition": "Operation, syn. scenario, one of the choices in the Scenarios battle mode."
+  },
+  {
+   "term": "OP",
+   "definition": "1) Original Post -er in a forum thread. 2) Overpowered - Said of a game vehicle or mechanism that is unfairly powerful. 3) Over-Penetration."
+  },
+  {
+   "term": "Open-Water Fighter",
+   "definition": "A ship who's gun arrangement or survivability is better suited for fighting in the open ocean, vs. using terrain."
+  },
+  {
+   "term": "Ordnance",
+   "definition": "Generally, weapons. Usually, what is delivered by weapons: shells, torpedoes, bombs."
+  },
+  {
+   "term": "Overmatch",
+   "definition": "A game mechanic in which large-caliber armor-piercing projectiles ignore thin armor on impact, regardless of angle. A shell overmatches a piece of armor if its caliber exceeds 14.3x the armor's thickness."
+  },
+  {
+   "term": "Overpen",
+   "definition": "Over-penetration - A shell hit that passes straight through a ship without doing significant damage. See penetration mechanism. Awards a hit ribbon."
+  },
+  {
+   "term": "PA",
+   "definition": "Pan-Asia - A composite nation for World of Warships."
+  },
+  {
+   "term": "Paint Scraper",
+   "definition": "The mythical torpedo that passes close enough to scrape paint from the hull. Real torpedoes just explode."
+  },
+  {
+   "term": "Pen / Penetration",
+   "definition": "When a shell passes through the target's armor and explodes inside for significant damage."
+  },
+  {
+   "term": "Perma-booster",
+   "definition": "A set of permanent bonuses for a specific ship. Perma-booster and perma-camos are commonly purchasable for and are usually included with the purchase or award of a premium ship."
+  },
+  {
+   "term": "Perma-camo",
+   "definition": "A camouflage or skin that is not expended on use."
+  },
+  {
+   "term": "Perma-firePerma-flood",
+   "definition": "Not actually permanent, Fire or flooding on a ship that has recently used its consumable. The fire/flood will continue to do damage ("
+  },
+  {
+   "term": "Pink, pinked",
+   "definition": "The result of a penalty for unsportsmanlike conduct: the player's IGN and ship icons are colored pink."
+  },
+  {
+   "term": "Poi",
+   "definition": "The infamous tic of an animé character.Taken from Kantai Collection, a franchise that imagines historical warships as young women. Poi is the (in)famous verbal tic of Yuudachi, a personification of the 4th ship of the Shiratsuyu-class destroyers. The word has no meaning."
+  },
+  {
+   "term": "Pop",
+   "definition": "-ped -ping To use or activate a consumable (Ex: \"I just popped DAAF\")."
+  },
+  {
+   "term": "Port",
+   "definition": "1) Nautical term for the left side (facing the bow) of the ship. 2) A protected place to park and admire your ship. 3) A fortified wine originating in northern Portugal. Created to withstand shipping by sea to England."
+  },
+  {
+   "term": "Port screen",
+   "definition": "The main screen of the World of Warships user interface."
+  },
+  {
+   "term": "Port Slot",
+   "definition": "A place in your port to park your ship. A tech tree ship may not be acquired without a vacant Port Slot to park it in. (Premium ships come with slots.) Port slots may be purchased with Doubloons ."
+  },
+  {
+   "term": "Potato",
+   "definition": "An un- or poorly-skilled player. Not always pejorative."
+  },
+  {
+   "term": "Preemptive launch",
+   "definition": "A salvo of torpedoes toward where an unseen target is predicted to go. Often used for area denial."
+  },
+  {
+   "term": "Premium time / Premium account",
+   "definition": "A purchasable bonus to rewards in all battles for a set duration."
+  },
+  {
+   "term": "Pressure",
+   "definition": "Attacking an enemy ship to achieve a desired outcome. That outcome includes but is not limited to; stopping a push, distraction, etc."
+  },
+  {
+   "term": "Proximity Spotting",
+   "definition": "Detecting an enemy by being within the assured detection range, which overrides all concealment.The term 'Proxy Spot' is often used incorrectly with this meaning."
+  },
+  {
+   "term": "Proxy Spot",
+   "definition": "The spotting (literally by proxy) of an enemy ship that makes it visible to a ship that could not otherwise detect it."
+  },
+  {
+   "term": "PT / Public Test",
+   "definition": "A test game opened to players during the previous release. Requires the installation of a PT game client."
+  },
+  {
+   "term": "PTS",
+   "definition": "The server on which the Public Test is conducted."
+  },
+  {
+   "term": "Pulling a Notser",
+   "definition": "Grounding the ship on an island, sometimes intentionally. Coined for ex-CC and sometime YouTuber Notser."
+  },
+  {
+   "term": "Push",
+   "definition": "Moving closer to the enemy in an attempt to gain control of ground (or sea water) against them."
+  },
+  {
+   "term": "PvE",
+   "definition": "Player vs. Environment; refers to Co-Op battles or Scenarios, where players fights game entities rather than other players."
+  },
+  {
+   "term": "PvP",
+   "definition": "Player vs. Player; refers to Random, Ranked, Brawls, Clan Battles, etc. modes, where players fight other players rather than game entities."
+  },
+  {
+   "term": "Railgun",
+   "definition": "A semi-joking term used to describe guns with very good ballistic performance and penetration, esp. Russian."
+  },
+  {
+   "term": "Ram",
+   "definition": "To perform an intentional collision with an enemy, usually resulting in the destruction of both ships. Can be an effective tactic."
+  },
+  {
+   "term": "Random Torp(s)",
+   "definition": "An unexpected encounter with torpedoes, though said torpedoes may not have been aimed at the encounterer. Too often, wayward torps encounter an ally."
+  },
+  {
+   "term": "Rekt",
+   "definition": "Wrecked. Badly damaged or destroyed. \"I pushed around the corner and got rekt.\""
+  },
+  {
+   "term": "Reverse Push",
+   "definition": "Reversing toward the enemy in a way that all of your firepower can be used while also giving your ship a viable escape. A form of kiting."
+  },
+  {
+   "term": "Reserve Slot",
+   "definition": "A place in your commander reserve barracks. A new commander generally may not be acquired without a vacant Reserve Slot. (Some commanders come with slots.) Reserve slots are shared among nations."
+  },
+  {
+   "term": "RL, RDF, RPF",
+   "definition": "Commander skill Radio Location, a.k.a. Radio Direction Finding, (incorrectly) Radio Position Finding."
+  },
+  {
+   "term": "RM",
+   "definition": "Regia Marina (Italy)"
+  },
+  {
+   "term": "RN",
+   "definition": "Royal Navy (UK)"
+  },
+  {
+   "term": "RNG",
+   "definition": "Random Number Generator, the output of which determines many occurrences in World of Warships."
+  },
+  {
+   "term": "RNGeebus, RNGesus",
+   "definition": "The embodiment of RNG. Praying to him for good luck in battle has a 50% chance of not working against one."
+  },
+  {
+   "term": "Robocop",
+   "definition": "v. To focus-fire a ship from many angles."
+  },
+  {
+   "term": "Rounds",
+   "definition": "Shells. Ammunition."
+  },
+  {
+   "term": "Rudder",
+   "definition": "A large flat surface used for steering a ship to port and starboard, usually located beneath the stern and behind or among the propellers."
+  },
+  {
+   "term": "Salt",
+   "definition": "-y What an angry player spews in chat."
+  },
+  {
+   "term": "SAP",
+   "definition": "Semi-Armor-Piercing shells."
+  },
+  {
+   "term": "Screening",
+   "definition": "Advance ships scouting threats for larger ships. Sometimes, providing a smoke screen to help another ship break contact."
+  },
+  {
+   "term": "Seal Clubbing",
+   "definition": "When a veteran player ventures into low tiers to fight inexperienced players - a controversial, if fun, practice."
+  },
+  {
+   "term": "Shadow",
+   "definition": "Following an allied or enemy ship using concealment to remain undetected."
+  },
+  {
+   "term": "Shiny Horse",
+   "definition": "Nickname for Tier VII Battleship Scharnhorst."
+  },
+  {
+   "term": "Shooting the Bow",
+   "definition": "Passing close in front of another ship's bow."
+  },
+  {
+   "term": "Shooting the Stern",
+   "definition": "Passing close behind another ship's stern."
+  },
+  {
+   "term": "Shotgunning",
+   "definition": "As a submarine, getting up close and personal with a target and dumping torps into it. This is what submarines are supposed to do, but expect salt."
+  },
+  {
+   "term": "Shove",
+   "definition": "In competitive modes, a tactic involving a push up a flank, typically with cruisers."
+  },
+  {
+   "term": "Sigma",
+   "definition": "A number representing the probability of a gun's shells falling close to the center of the dispersion ellipse, that is, the point of aim. The higher the value the tighter the cluster."
+  },
+  {
+   "term": "Silver",
+   "definition": "Credits."
+  },
+  {
+   "term": "Smoke Camping",
+   "definition": "Sitting still inside a smoke screen."
+  },
+  {
+   "term": "Sniping",
+   "definition": "Typically, a battleship far from the heart of the engagement trying to hit enemy ships that are more than 15&ndash;20 km away. Not a popular tactic with teammates as part of a battleship's job is to attract fire that would otherwise be aimed at them."
+  },
+  {
+   "term": "Snowflake",
+   "definition": "A Battle Performance Bonus commonly associated with Christmas events. Playing each ship can \"melt the Snowflake\" gaining a bonus. The term is also used for similar bonuses."
+  },
+  {
+   "term": "Soft Cover",
+   "definition": "Something that obscures a ship from detection but does not protect from ordnance. Ex: smoke screens, weather."
+  },
+  {
+   "term": "Spawn",
+   "definition": "Where on the map a ship or team starts a battle. \"RNGeebus has not been kind to me. I keep spawning somewhere off in left field, alone.\""
+  },
+  {
+   "term": "Spec",
+   "definition": "-ced 'fm. specialized' What a ship/captain is specialized for. \"This ship is specced [or spec'd] for AAA.\""
+  },
+  {
+   "term": "Squat",
+   "definition": "-ing Hold a position, undetected, early in a battle to exploit a hole in the enemy lines mid-game."
+  },
+  {
+   "term": "ST",
+   "definition": "Super Tester, a player who has volunteered to assist Wargaming in testing the game. STs are given access to unreleased ships and other goodies - but they signed a Non-Disclosure Agreement and thus cannot tell you about them."
+  },
+  {
+   "term": "Starboard / STBD",
+   "definition": "Facing forward toward the bow, the right side of the ship."
+  },
+  {
+   "term": "Stats",
+   "definition": "Usually, player statistics. Sometimes ship or game statistics."
+  },
+  {
+   "term": "Stealth Torp",
+   "definition": "Launching torpedoes while undetected. (The best way to launch torps.)"
+  },
+  {
+   "term": "Stern",
+   "definition": "The rear of the ship. The propeller(s) and rudder are located under the stern."
+  },
+  {
+   "term": "Strats",
+   "definition": "Battle strategy."
+  },
+  {
+   "term": "Stream Sniping",
+   "definition": "Following the live streams of Community Contributors (or any streamer) to report their view of the game to the other team, or in the hopes of ending up in the same match as them. The ultimate goal is to find and sink them. Usually considered poor sportsmanship."
+  },
+  {
+   "term": "Sub",
+   "definition": "Submarine. You may call these \"boats\"."
+  },
+  {
+   "term": "Supership",
+   "definition": "A Tier ★ (\"Tier XI\") ship. A Super Battleship/Cruiser/Destroyer/Carrier is a Tier ★ Battleship/Cruiser/Destroyer/Carrier. Superships are tech tree ships that can be acquired for vast sums of Credits, and that bleed Credits when played."
+  },
+  {
+   "term": "Superstructure",
+   "definition": "Structures on the deck of a ship."
+  },
+  {
+   "term": "Sync Drop",
+   "definition": "Clicking the \"Battle\" button at the same time as another player in the hopes of being loaded into the same battle."
+  },
+  {
+   "term": "Teamkill, TK",
+   "definition": "-ing -er Destruction of an ally, resulting in penalties."
+  },
+  {
+   "term": "Tech tree",
+   "definition": "The ships of a nation organized by type and tier. Higher tier ships are more powerful. A player progresses upward through the tiers."
+  },
+  {
+   "term": "\"That's a Paddlin'\"",
+   "definition": "Phrase used by streamer 'The Mighty Jingles' to describe the often poor results of thinly-armored ships presenting their sides to hostile battleships."
+  },
+  {
+   "term": "Torpedo Belt / Blister / Bulge",
+   "definition": "A specialized armor zone on the lower hull of a ship designed to mitigate torpedo damage. It also has some effect against shell."
+  },
+  {
+   "term": "Torpedo Soup",
+   "definition": "A bunch of torpedoes churning up the sea."
+  },
+  {
+   "term": "Torpedobeat / Torpbeat",
+   "definition": "Skillfully maneuvering through torpedo soup without being rekt, especially to the sound of eighties European dance music. Seek streamer Yuro, a master of this dance."
+  },
+  {
+   "term": "Torps! / Torps out!",
+   "definition": "Often, a desperate chat warning to friendly ships that a ship has launched torpedoes behind friendly lines, and to take care to avoid them if possible. [With changes to team-killing, this cry is rarely uttered now.]"
+  },
+  {
+   "term": "Turn-Out",
+   "definition": "When a ship reaches a certain position on the map, putting itself at an angle where it can begin kiting once contact is made with enemy forces."
+  },
+  {
+   "term": "TY",
+   "definition": "\"Thank you\""
+  },
+  {
+   "term": "U2",
+   "definition": "\"You too.\""
+  },
+  {
+   "term": "Unicum",
+   "definition": "A highly skilled player, as evidenced by remarkable stats."
+  },
+  {
+   "term": "Unlock",
+   "definition": "To take a step in progressing through a tech tree by applying Experience Points (XP) to research a ship or module, thus making it available for purchase and play."
+  },
+  {
+   "term": "USN",
+   "definition": "United States Navy"
+  },
+  {
+   "term": "VMF",
+   "definition": "Voenno-Morskoj Flot (USSR/Russian Navy)"
+  },
+  {
+   "term": "Wall of Skill",
+   "definition": "A large wave of torpedoes, usually from a Japanese torpedo destroyer. Ironic."
+  },
+  {
+   "term": "Warcanoe",
+   "definition": "Nickname for Tier V premium destroyer Okhotnik."
+  },
+  {
+   "term": "WASD",
+   "definition": "The principle keys controlling the direction and speed of a ship in combat. Often used to refer to maneuvering to avoid damage. \"I used WASD hacks to dodge that wall of skill.\""
+  },
+  {
+   "term": "Waterline",
+   "definition": "The perimeter area of the ship just above and below water."
+  },
+  {
+   "term": "WG / WeeGee",
+   "definition": "[https://na.wargaming.net/en/ Wargaming.net]."
+  },
+  {
+   "term": "WeeVee",
+   "definition": "Nickname for Tier VI premium battleship West Virginia."
+  },
+  {
+   "term": "Wide / Narrow spread",
+   "definition": "The choice of spacing between torpedoes. Typically a narrow spread is preferred against a specific target. Wide spread is used for area denial or hunting destroyers in smoke screens, or for very close salvos against a large ship in hopes of distributing damage between sections and causing multiple floods. (On some DDs the choice is between wide-ish and single-shot.)"
+  },
+  {
+   "term": "Wiki Team",
+   "definition": "Player volunteers obsessed with keeping the Wiki up to date. In the more complete Wikis this involves evaluating and describing new ships. In less complete Wikis it mostly involves translation."
+  },
+  {
+   "term": "WITNESS ME",
+   "definition": "\"I'm going for the ram!\""
+  },
+  {
+   "term": "WITNESSED",
+   "definition": "Acknowledging a successful ramming attempt."
+  },
+  {
+   "term": "WoT",
+   "definition": "World of Tanks. The existence of this game has not been confirmed."
+  },
+  {
+   "term": "WoWs",
+   "definition": "World of Warships, the world's premier naval game."
+  },
+  {
+   "term": "WP",
+   "definition": "\"Well-Played.\""
+  },
+  {
+   "term": "XP",
+   "definition": "Experience Points, usually ship XP used to research (unlock) ships and modules. Also used to aggregate the main forms of Experience - Ship XP, Commander XP, and Free XP."
+  },
+  {
+   "term": "YOLO",
+   "definition": "\"You Only Live Once\" - the necessary battle cry to let the team know that the player who just typed it into chat is about to do something very brave or very dumb, i.e. a suicide charge. Equivalent to \"Banzai!\"."
+  },
+  {
+   "term": "Yolo Emilio",
+   "definition": "Nickname for Tier IX Premium destroyer Paolo Emilio, who specializes in the practice."
+  },
+  {
+   "term": "Zone-Out",
+   "definition": "Using islands to prevent certain enemy ships from engaging your ship."
+  }
+ ]
+}

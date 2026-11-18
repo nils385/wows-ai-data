@@ -1,0 +1,5950 @@
+{
+ "about": "Armor thickness from the official World of Warships wiki ARMOR DETAIL tables (the game data used for the rest of this site has no armor values). Maximum value per area; *_min_mm is given where the wiki lists a range. The wiki is edited by hand, so values can lag behind game changes.",
+ "source": "https://wiki.worldofwarships.com",
+ "retrieved": "2026-11-18",
+ "ships": {
+  "PSSD510": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:%C3%81lvaro%20de%C2%A0Baz%C3%A1n",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PGSC519": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:%C3%84gir",
+   "belt_mm": 190,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PFSC105": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:%C3%89mile%20Bertin",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PBSC718": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:%C3%89rne",
+   "belt_mm": 83,
+   "deck_mm": 27,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PWSD108": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:%C3%96land",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PWSD109": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:%C3%96sterg%C3%B6tland",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PVSD010": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:20%20de%20Julio",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PGSC899": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:AL%20%C3%84gir",
+   "belt_mm": 190,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PRSC523": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:AL%20Avrora",
+   "belt_mm": 9,
+   "deck_mm": 6,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PJSC519": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:AL%20Azuma",
+   "belt_mm": 178,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PGSB898": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:AL%20Bismarck",
+   "belt_mm": 320,
+   "deck_mm": 50,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PBSC558": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:AL%20Cheshire",
+   "belt_mm": 152,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PISC897": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:AL%20Gorizia",
+   "belt_mm": 30,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PZSC918": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:AL%20Harbin",
+   "belt_mm": 100,
+   "deck_mm": 16,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PGSC890": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:AL%20Hindenburg",
+   "belt_mm": 100,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PASA898": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:AL%20Hornet",
+   "belt_mm": 102,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PASB889": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:AL%20Kearsarge",
+   "belt_mm": 330,
+   "deck_mm": 38,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PISB708": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:AL%20Littorio",
+   "belt_mm": 70,
+   "deck_mm": 45,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PISB909": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:AL%20Marco%20Polo",
+   "belt_mm": 320,
+   "deck_mm": 55,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PASB918": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:AL%20Massachusetts",
+   "belt_mm": 32,
+   "deck_mm": 38,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PASC718": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:AL%20Montpelier",
+   "belt_mm": 127,
+   "deck_mm": 27,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PFSB908": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:AL%20Richelieu",
+   "belt_mm": 32,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PJSD890": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:AL%20Shimakaze",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PJSA920": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:AL%20Shinano",
+   "belt_mm": 400,
+   "belt_min_mm": 160,
+   "deck_mm": 75,
+   "superstructure_mm": 13,
+   "extremities_mm": 27
+  },
+  "PRSB709": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:AL%20Sov.%20Rossiya",
+   "belt_mm": 375,
+   "deck_mm": 60,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PRSD919": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:AL%20Tashkent",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PJSD718": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:AL%20Yukikaze",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PJSC707": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:ARP%20Ashigara",
+   "belt_mm": 102,
+   "deck_mm": 32,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PJSC709": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:ARP%20Haguro",
+   "belt_mm": 102,
+   "deck_mm": 32,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PJSB707": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:ARP%20Haruna",
+   "belt_mm": 203,
+   "deck_mm": 38,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PJSB708": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:ARP%20Hiei",
+   "belt_mm": 203,
+   "deck_mm": 38,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PJSB706": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:ARP%20Kirishima",
+   "belt_mm": 203,
+   "deck_mm": 38,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PJSB705": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:ARP%20Kong%C5%8D",
+   "belt_mm": 203,
+   "deck_mm": 38,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PJSC718": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:ARP%20Maya",
+   "belt_mm": 102,
+   "deck_mm": 41,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PJSC705": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:ARP%20My%C5%8Dk%C5%8D",
+   "belt_mm": 102,
+   "deck_mm": 32,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PJSC737": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:ARP%20Nachi",
+   "belt_mm": 102,
+   "deck_mm": 32,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PJSC708": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:ARP%20Takao",
+   "belt_mm": 102,
+   "deck_mm": 41,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PJSB700": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:ARP%20Yamato",
+   "belt_mm": 410,
+   "deck_mm": 57,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PBSC719": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Aberdeen",
+   "belt_mm": 114,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PBSD105": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Acasta",
+   "belt_mm": 10,
+   "deck_mm": 10,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PJSB209": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Adatara",
+   "belt_mm": 305,
+   "deck_mm": 57,
+   "superstructure_mm": 19,
+   "extremities_mm": 25
+  },
+  "PISD109": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Adriatico",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PISB011": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Affondatore",
+   "belt_mm": 420,
+   "deck_mm": 55,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PJSC205": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Agano",
+   "belt_mm": 60,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PBSB505": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Agincourt",
+   "belt_mm": 229,
+   "deck_mm": 38,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PFSD506": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Aigle",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PJSD107": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Akatsuki",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PJSB720": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Aki",
+   "belt_mm": 410,
+   "deck_mm": 57,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PJSD108": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Akizuki",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PASB818": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Alabama%20B",
+   "belt_mm": 310,
+   "deck_mm": 38,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PASB708": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Alabama%20ST",
+   "belt_mm": 310,
+   "deck_mm": 38,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PASB528": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Alabama%20VL",
+   "belt_mm": 310,
+   "deck_mm": 38,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PASB508": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Alabama",
+   "belt_mm": 310,
+   "deck_mm": 38,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PASC599": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Alaska%20B",
+   "belt_mm": 229,
+   "deck_mm": 36,
+   "superstructure_mm": 19,
+   "extremities_mm": 27
+  },
+  "PASC510": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Alaska",
+   "belt_mm": 229,
+   "deck_mm": 36,
+   "superstructure_mm": 19,
+   "extremities_mm": 27
+  },
+  "PASC003": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Albany",
+   "belt_mm": 16,
+   "deck_mm": 10,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PBSC208": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Albemarle",
+   "belt_mm": 152,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PFSC107": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Alg%C3%A9rie",
+   "belt_mm": 110,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PBSS508": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Alliance",
+   "belt_mm": 25,
+   "deck_mm": 16,
+   "superstructure_mm": 19,
+   "extremities_mm": 19
+  },
+  "PFSB109": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Alsace",
+   "belt_mm": 350,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PJSB013": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Amagi",
+   "belt_mm": 254,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PISC108": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Amalfi",
+   "belt_mm": 150,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PFSC730": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Amiral%20Lartigue",
+   "belt_mm": 190,
+   "deck_mm": 32,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PASC518": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Anchorage",
+   "belt_mm": 27,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PSSC109": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Andaluc%C3%ADa",
+   "belt_mm": 140,
+   "deck_mm": 27,
+   "superstructure_mm": 19,
+   "extremities_mm": 25
+  },
+  "PISB106": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Andrea%20Doria",
+   "belt_mm": 220,
+   "deck_mm": 44,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PGSB528": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Anhalt",
+   "belt_mm": 350,
+   "deck_mm": 50,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PASC111": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Annapolis",
+   "belt_mm": 170,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PZSD506": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Anshan",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PVSD015": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Antioquia",
+   "belt_mm": 10,
+   "deck_mm": 10,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PJSC007": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Aoba",
+   "belt_mm": 76,
+   "deck_mm": 48,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PISA508": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Aquila",
+   "belt_mm": 19,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PSSC729": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Arag%C3%B3n",
+   "belt_mm": null,
+   "deck_mm": null,
+   "superstructure_mm": null,
+   "extremities_mm": null
+  },
+  "PASS710": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Archerfish",
+   "belt_mm": 19,
+   "deck_mm": 16,
+   "superstructure_mm": 19,
+   "extremities_mm": 19
+  },
+  "PASB506": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Arizona",
+   "belt_mm": 343,
+   "deck_mm": 26,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PBSA518": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Ark%20Royal",
+   "belt_mm": 114,
+   "deck_mm": 19,
+   "superstructure_mm": 10,
+   "extremities_mm": 19
+  },
+  "PRSB717": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Arkhangelsk",
+   "belt_mm": 330,
+   "belt_min_mm": 16,
+   "deck_mm": 26,
+   "superstructure_mm": 16,
+   "extremities_mm": 16
+  },
+  "PJSD598": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Asashio%20B",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PJSD518": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Asashio",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PJSB507": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Ashitaka",
+   "belt_mm": 254,
+   "deck_mm": 26,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PSSC107": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Asturias",
+   "belt_mm": 150,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PJSC598": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Atago%20B",
+   "belt_mm": 102,
+   "deck_mm": 41,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PJSC038": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Atago",
+   "belt_mm": 102,
+   "deck_mm": 41,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PVSB508": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Atl%C3%A2ntico",
+   "belt_mm": 356,
+   "deck_mm": 51,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PASC587": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Atlanta%20B",
+   "belt_mm": 86,
+   "deck_mm": 13,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PASC006": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Atlanta",
+   "belt_mm": 86,
+   "deck_mm": 13,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PUSC018": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Auckland",
+   "belt_mm": 152,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PBSA210": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Audacious",
+   "belt_mm": 114,
+   "belt_min_mm": 25,
+   "deck_mm": 102,
+   "deck_min_mm": 38,
+   "superstructure_mm": 13,
+   "extremities_mm": 21
+  },
+  "PRSC001": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Aurora",
+   "belt_mm": 9,
+   "deck_mm": 6,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PASC810": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Austin",
+   "belt_mm": 95,
+   "deck_mm": 16,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PISD106": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Aviere",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PJSC829": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Azuma%20B",
+   "belt_mm": 178,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PJSC510": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Azuma",
+   "belt_mm": 178,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PFSA506": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:B%C3%A9arn",
+   "belt_mm": 83,
+   "deck_mm": 24,
+   "superstructure_mm": 10,
+   "extremities_mm": 19
+  },
+  "PBSC707": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:B%C3%B3inn",
+   "belt_mm": null,
+   "deck_mm": null,
+   "superstructure_mm": null,
+   "extremities_mm": null
+  },
+  "PWSD708": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:B%C5%82yskawica%20%2744",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PWSD719": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:B%C5%82yskawica%20%2752",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PWSD501": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:B%C5%82yskawica",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PJSS820": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:BA%20Arona%27s%20Whale",
+   "belt_mm": 19,
+   "deck_mm": 16,
+   "superstructure_mm": 19,
+   "extremities_mm": 19
+  },
+  "PISB818": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:BA%20Binah",
+   "belt_mm": 300,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 25
+  },
+  "PRSB819": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:BA%20Hovercraft",
+   "belt_mm": 406,
+   "deck_mm": 50,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PASB820": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:BA%20Montana",
+   "belt_mm": 409,
+   "deck_mm": 38,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PJSC819": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:BA%20Takahashi",
+   "belt_mm": 105,
+   "deck_mm": 27,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PGSB818": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:BA%20Tirpitz",
+   "belt_mm": 315,
+   "deck_mm": 50,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PZSB509": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Bajie",
+   "belt_mm": 356,
+   "deck_mm": 57,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PASS210": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Balao",
+   "belt_mm": 25,
+   "deck_mm": 16,
+   "superstructure_mm": 19,
+   "extremities_mm": 19
+  },
+  "PSSC106": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Baleares",
+   "belt_mm": 51,
+   "deck_mm": 38,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PASC108": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Baltimore",
+   "belt_mm": 152,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PZSC729": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Baotou",
+   "belt_mm": 140,
+   "deck_mm": 30,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PBSD719": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Barfleur",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PFSC508": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Bayard",
+   "belt_mm": 105,
+   "deck_mm": 27,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PGSB106": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Bayern",
+   "belt_mm": 350,
+   "deck_mm": 40,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PBSC528": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Belfast%20%2743",
+   "belt_mm": 114,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PBSC507": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Belfast",
+   "belt_mm": 114,
+   "deck_mm": 19,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PBSB103": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Bellerophon",
+   "belt_mm": 254,
+   "deck_mm": 19,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PASD509": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Benham",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PASD008": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Benson",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PASB909": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Bird%20Cry",
+   "belt_mm": 307,
+   "deck_mm": 38,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PGSB708": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Bismarck%C2%A0%2741",
+   "belt_mm": 315,
+   "deck_mm": 50,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PGSB108": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Bismarck",
+   "belt_mm": 320,
+   "deck_mm": 50,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PGSC729": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Bl%C3%BCcher",
+   "belt_mm": 80,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PASD529": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Black%20B",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PBSC101": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Black%20Swan",
+   "belt_mm": 10,
+   "deck_mm": 10,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PASD709": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Black",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PRSC103": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Bogatyr",
+   "belt_mm": 13,
+   "deck_mm": 11,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PASC597": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Boise",
+   "belt_mm": 127,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PRSB528": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Borodino",
+   "belt_mm": 220,
+   "deck_mm": 50,
+   "superstructure_mm": 19,
+   "extremities_mm": 25
+  },
+  "PFSC101": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Bougainville",
+   "belt_mm": 13,
+   "deck_mm": 10,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PFSB510": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Bourgogne",
+   "belt_mm": 32,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PFSD104": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Bourrasque",
+   "belt_mm": 10,
+   "deck_mm": 10,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PGSB538": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Brandenburg%20B",
+   "belt_mm": 350,
+   "deck_mm": 50,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PGSB518": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Brandenburg",
+   "belt_mm": 350,
+   "deck_mm": 50,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PGSC720": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Bremen",
+   "belt_mm": 130,
+   "deck_mm": 30,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PFSC710": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Brennus",
+   "belt_mm": 140,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PFSC209": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Brest",
+   "belt_mm": 190,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PFSB105": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Bretagne",
+   "belt_mm": 250,
+   "deck_mm": 30,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PASC708": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Bridgeport",
+   "belt_mm": 152,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PISC109": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Brindisi",
+   "belt_mm": 150,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PUSC810": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Brisbane%20B",
+   "belt_mm": 101,
+   "deck_mm": 16,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PUSC510": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Brisbane",
+   "belt_mm": 101,
+   "deck_mm": 16,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PRSC106": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Budyonny",
+   "belt_mm": 115,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PASC109": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Buffalo",
+   "belt_mm": 152,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PJSB210": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Bungo",
+   "belt_mm": 343,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 25
+  },
+  "PASD040": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Burrows",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PVSC104": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:C%C3%B3rdoba",
+   "belt_mm": 76,
+   "deck_mm": 19,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PASS206": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Cachalot",
+   "belt_mm": 19,
+   "deck_mm": 13,
+   "superstructure_mm": 16,
+   "extremities_mm": 16
+  },
+  "PBSC103": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Caledon",
+   "belt_mm": 76,
+   "deck_mm": 16,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PASB707": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:California",
+   "belt_mm": 343,
+   "deck_mm": 26,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PASC719": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Cambridge",
+   "belt_mm": 152,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PBSD503": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Campbeltown",
+   "belt_mm": 13,
+   "deck_mm": 13,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PSSC506": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Canarias",
+   "belt_mm": 51,
+   "deck_mm": 38,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PUSC013": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Caradoc",
+   "belt_mm": 76,
+   "deck_mm": 16,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PFSC509": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Carnot",
+   "belt_mm": 180,
+   "deck_mm": 36,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PFSD010": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Cassard",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PSSC110": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Castilla",
+   "belt_mm": 150,
+   "deck_mm": 30,
+   "superstructure_mm": 19,
+   "extremities_mm": 25
+  },
+  "PSSC108": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Catalu%C3%B1a",
+   "belt_mm": 150,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PUSD709": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Cayuga",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PHSC105": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Celebes",
+   "belt_mm": 75,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PUSC010": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Cerberus",
+   "belt_mm": 203,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PVSD016": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Cervantes",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PFSD710": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Ch%C3%A2teaurenault",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PFSB528": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Champagne",
+   "belt_mm": 32,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 25
+  },
+  "PRSC108": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Chapayev",
+   "belt_mm": 100,
+   "deck_mm": 27,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PFSC108": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Charles%20Martel",
+   "belt_mm": 100,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PASC503": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Charleston",
+   "belt_mm": 102,
+   "deck_mm": 13,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PZSC101": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Chengan",
+   "belt_mm": 13,
+   "deck_mm": 10,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PFSC208": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Cherbourg",
+   "belt_mm": 170,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PBSC508": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Cheshire",
+   "belt_mm": 152,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PASC002": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Chester",
+   "belt_mm": 38,
+   "deck_mm": 22,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PJSC929": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Chikuma%20Sh%C5%8D-G%C5%8D",
+   "belt_mm": 145,
+   "belt_min_mm": 100,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PJSC719": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Chikuma%C2%A0II",
+   "belt_mm": 145,
+   "belt_min_mm": 100,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PJSC035": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Chikuma",
+   "belt_mm": 11,
+   "deck_mm": 20,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PWSB017": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Chios",
+   "belt_mm": 270,
+   "deck_mm": 50,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PRSA598": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Chkalov%C2%A0B",
+   "belt_mm": 100,
+   "deck_mm": 30,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PRSA508": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Chkalov",
+   "belt_mm": 100,
+   "deck_mm": 30,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PASD039": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Christopher",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PZSC107": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Chumphon",
+   "belt_mm": 89,
+   "deck_mm": 13,
+   "superstructure_mm": 13,
+   "extremities_mm": 13
+  },
+  "PZSD109": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Chung%20Mu",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PZSC105": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Chungking",
+   "belt_mm": 70,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PGSC111": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Clausewitz",
+   "belt_mm": 130,
+   "deck_mm": 50,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PASD019": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Clemson",
+   "belt_mm": 13,
+   "deck_mm": 13,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PASC208": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Cleveland",
+   "belt_mm": 127,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PFSC510": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Colbert",
+   "belt_mm": 80,
+   "deck_mm": 50,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PBSB537": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Collingwood",
+   "belt_mm": 26,
+   "deck_mm": 26,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PASB008": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Colorado",
+   "belt_mm": 26,
+   "deck_mm": 26,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PBSA528": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Colossus",
+   "belt_mm": 21,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PFSC111": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Cond%C3%A9",
+   "belt_mm": 130,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PASC528": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Congress",
+   "belt_mm": 229,
+   "deck_mm": 36,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PBSB110": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Conqueror",
+   "belt_mm": 406,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PASB538": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Constellation",
+   "belt_mm": 178,
+   "deck_mm": 57,
+   "superstructure_mm": 19,
+   "extremities_mm": 27
+  },
+  "PISB720": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Conte%20Verde",
+   "belt_mm": 457,
+   "belt_min_mm": 350,
+   "deck_mm": 50,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PBSD598": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Cossack%20B",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PBSD517": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Cossack",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PFSB104": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Courbet",
+   "belt_mm": 250,
+   "deck_mm": 40,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PGSC718": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Cross%20of%20Dorn",
+   "belt_mm": 80,
+   "deck_mm": 27,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PVSD018": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Cuauht%C3%A9moc",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PBSC909": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Cursed%20Fang",
+   "belt_mm": 102,
+   "deck_mm": 16,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PISD102": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Curtatone",
+   "belt_mm": 6,
+   "deck_mm": 6,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PASD704": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:DD%C2%A0214",
+   "belt_mm": 13,
+   "deck_mm": 13,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PJSB539": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Daisen",
+   "belt_mm": 305,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PWSD111": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Dalarna",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PZSC509": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Dalian",
+   "belt_mm": 100,
+   "deck_mm": 16,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PASC206": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Dallas",
+   "belt_mm": 89,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PBSC104": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Danae",
+   "belt_mm": 76,
+   "deck_mm": 19,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PBSB747": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Danu",
+   "belt_mm": 381,
+   "deck_mm": 25,
+   "superstructure_mm": 19,
+   "extremities_mm": 25
+  },
+  "PBSD110": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Daring",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PZSD728": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Datong",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PFSC506": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:De%20Grasse",
+   "belt_mm": 100,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PHSC104": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:De%20Ruyter",
+   "belt_mm": 50,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PBSC810": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Defence",
+   "belt_mm": 229,
+   "deck_mm": 40,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PASB209": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Delaware",
+   "belt_mm": 307,
+   "deck_mm": 38,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PUSC015": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Delhi",
+   "belt_mm": 100,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PRSD410": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Delny",
+   "belt_mm": 50,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PGSB205": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Derfflinger",
+   "belt_mm": 300,
+   "deck_mm": 35,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PRSD103": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Derzki",
+   "belt_mm": 12,
+   "deck_mm": 10,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PASC020": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Des%20Moines",
+   "belt_mm": 152,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PJSC905": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Desert%20Falcon",
+   "belt_mm": 76,
+   "deck_mm": 48,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PGSC016": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Deutschland",
+   "belt_mm": 100,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PBSB111": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Devastation",
+   "belt_mm": 432,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PBSC206": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Devonshire",
+   "belt_mm": 114,
+   "deck_mm": 27,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PRSC002": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Diana",
+   "belt_mm": 9,
+   "deck_mm": 6,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PBSC526": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Dido",
+   "belt_mm": 89,
+   "deck_mm": 13,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PBSC209": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Drake",
+   "belt_mm": 177,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PBSB503": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Dreadnought",
+   "belt_mm": 203,
+   "deck_mm": 19,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PGSC002": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Dresden",
+   "belt_mm": 9,
+   "deck_mm": 9,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PBSD510": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Druid",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PISC506": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Duca%20d%27Aosta",
+   "belt_mm": 20,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PFSD016": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Duchaffault",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PFSC104": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Duguay-Trouin",
+   "belt_mm": 16,
+   "deck_mm": 20,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PBSB527": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Duke%20of%20York",
+   "belt_mm": 381,
+   "deck_mm": 25,
+   "superstructure_mm": 19,
+   "extremities_mm": 25
+  },
+  "PBSB209": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Duncan",
+   "belt_mm": 32,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 25
+  },
+  "PUSC014": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Dunedin",
+   "belt_mm": 76,
+   "deck_mm": 19,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PFSB596": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Dunkerque%C2%A0B",
+   "belt_mm": 225,
+   "deck_mm": 26,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PFSB506": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Dunkerque",
+   "belt_mm": 225,
+   "deck_mm": 26,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PFSC516": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Dupleix",
+   "belt_mm": 60,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PBSA111": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Eagle",
+   "belt_mm": 102,
+   "deck_mm": 102,
+   "deck_min_mm": 38,
+   "superstructure_mm": 13,
+   "extremities_mm": 21
+  },
+  "PBSC111": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Edgar",
+   "belt_mm": 102,
+   "deck_mm": 38,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PBSC108": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Edinburgh",
+   "belt_mm": 114,
+   "deck_mm": 51,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PHSC107": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Eendracht",
+   "belt_mm": 75,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PGSB928": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Eiserner%20Kanzler",
+   "belt_mm": 315,
+   "deck_mm": 50,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PGSD210": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Elbing",
+   "belt_mm": 25,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PWSC506": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Elli",
+   "belt_mm": 70,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PGSC502": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Emden",
+   "belt_mm": 9,
+   "deck_mm": 9,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PBSC105": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Emerald",
+   "belt_mm": 76,
+   "deck_mm": 40,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PUSC019": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Encounter",
+   "belt_mm": 152,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PWSB018": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Enigheten",
+   "belt_mm": 220,
+   "deck_mm": 40,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PASA518": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Enterprise",
+   "belt_mm": 40,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 21
+  },
+  "PASC001": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Erie",
+   "belt_mm": 88,
+   "deck_mm": 6,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PISC101": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Eritrea",
+   "belt_mm": 6,
+   "deck_mm": 6,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PBSD718": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Eskimo",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PASA020": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Essex",
+   "belt_mm": 102,
+   "deck_mm": 30,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PBSC505": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Exeter",
+   "belt_mm": 76,
+   "deck_mm": 19,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PJSD017": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:F%C5%ABjin",
+   "belt_mm": 14,
+   "deck_mm": 14,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PISD507": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:FR25",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PASD005": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Farragut",
+   "belt_mm": 15,
+   "deck_mm": 13,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PZSD518": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Fenyang",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PBSC107": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Fiji",
+   "belt_mm": 114,
+   "deck_mm": 51,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PISC717": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Fiume",
+   "belt_mm": 30,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PFSB918": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Flandre%C2%A0B",
+   "belt_mm": null,
+   "deck_mm": null,
+   "superstructure_mm": null,
+   "extremities_mm": null
+  },
+  "PFSB538": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Flandre",
+   "belt_mm": 32,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PASD021": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Fletcher",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PASC707": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Flint",
+   "belt_mm": 89,
+   "deck_mm": 13,
+   "superstructure_mm": 13,
+   "extremities_mm": 13
+  },
+  "PASB517": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Florida",
+   "belt_mm": 285,
+   "deck_mm": 37,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PISS106": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Foca",
+   "belt_mm": 16,
+   "deck_mm": 10,
+   "superstructure_mm": 13,
+   "extremities_mm": 13
+  },
+  "PASC729": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Fort%20Worth",
+   "belt_mm": 191,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PFSC103": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Friant",
+   "belt_mm": 13,
+   "deck_mm": 20,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PGSB719": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Friedrich%20Carl",
+   "belt_mm": 330,
+   "deck_mm": 35,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PWSD510": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Friesland",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PJSD106": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Fubuki",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PBSA106": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Furious",
+   "belt_mm": 76,
+   "deck_mm": 21,
+   "superstructure_mm": 10,
+   "extremities_mm": 19
+  },
+  "PJSC005": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Furutaka",
+   "belt_mm": 76,
+   "deck_mm": 48,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PJSB006": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Fus%C5%8D",
+   "belt_mm": 305,
+   "belt_min_mm": 229,
+   "deck_mm": 35,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PZSD106": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Fushun",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PFSD103": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Fusilier",
+   "belt_mm": 9,
+   "deck_mm": 9,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PJSD710": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Fuyutsuki",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PGSD103": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:G-101",
+   "belt_mm": 10,
+   "deck_mm": 10,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PASD819": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:GQ%20Johnny",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PZSD107": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Gadjah%20Mada",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PSSC105": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Galicia",
+   "belt_mm": 76,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PBSD506": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Gallant",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PUSC717": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Gambia",
+   "belt_mm": 114,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PRSB104": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Gangut",
+   "belt_mm": 225,
+   "deck_mm": 38,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PFSB508": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Gascogne",
+   "belt_mm": 32,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PASS510": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Gato",
+   "belt_mm": 19,
+   "deck_mm": 16,
+   "superstructure_mm": 19,
+   "extremities_mm": 19
+  },
+  "PWSD210": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Gda%C5%84sk",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PASD013": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Gearing",
+   "belt_mm": 21,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PHSC102": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Gelderland",
+   "belt_mm": 13,
+   "deck_mm": 13,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PISC505": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Genova",
+   "belt_mm": 70,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PASB729": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Georgia",
+   "belt_mm": 310,
+   "deck_mm": 38,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PBSC610": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Gibraltar",
+   "belt_mm": 178,
+   "deck_mm": 40,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PISB505": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Giulio%20Cesare",
+   "belt_mm": 220,
+   "deck_mm": 43,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PISB519": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Giuseppe%20Verdi",
+   "belt_mm": 320,
+   "deck_mm": 55,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PGSB107": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Gneisenau",
+   "belt_mm": 350,
+   "deck_mm": 50,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PRSD206": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Gnevny",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PJSC206": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Gokase",
+   "belt_mm": 76,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PBSC210": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Goliath",
+   "belt_mm": 203,
+   "deck_mm": 40,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PISC607": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Gorizia",
+   "belt_mm": 30,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PHSC110": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Gouden%20Leeuw",
+   "belt_mm": 40,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 40
+  },
+  "PGSA598": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Graf%20Zeppelin%20B",
+   "belt_mm": 80,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 21
+  },
+  "PGSA518": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Graf%20Zeppelin",
+   "belt_mm": 80,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 21
+  },
+  "PRSD001": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Gremyashchy",
+   "belt_mm": 10,
+   "deck_mm": 10,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PWSD207": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Grom",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PHSD509": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Groningen",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PRSD210": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Grozovoi",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PWSC101": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Gryf",
+   "belt_mm": 6,
+   "deck_mm": 6,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PFSD106": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Gu%C3%A9pard",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PWSB019": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Gustav%20den%20Store",
+   "belt_mm": 200,
+   "deck_mm": 40,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PVSC101": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:H%C3%A9rcules",
+   "belt_mm": 6,
+   "deck_mm": 6,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PJSA104": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:H%C5%8Dsh%C5%8D",
+   "belt_mm": 20,
+   "deck_mm": 13,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PJSD528": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:HSF%20Harekaze%20II",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PJSD708": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:HSF%20Harekaze",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PJSB715": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:HSF%20Hiei",
+   "belt_mm": 203,
+   "deck_mm": 38,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PHSC108": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Haarlem",
+   "belt_mm": 40,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PUSD507": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Haida",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PJSA110": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Hakury%C5%AB",
+   "belt_mm": 130,
+   "deck_mm": 95,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PASD519": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Halford",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PWSD110": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Halland",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PBSC538": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Hampshire",
+   "belt_mm": 152,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PGSB111": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Hannover",
+   "belt_mm": 420,
+   "deck_mm": 50,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PZSC108": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Harbin",
+   "belt_mm": 100,
+   "deck_mm": 16,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PJSD210": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Harugumo",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PJSC037": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Hashidate",
+   "belt_mm": 10,
+   "deck_mm": 10,
+   "superstructure_mm": 6,
+   "extremities_mm": 10
+  },
+  "PJSD206": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Hatsuharu",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PASC720": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Hawaii",
+   "belt_mm": 229,
+   "deck_mm": 36,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PBSB208": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Hawke",
+   "belt_mm": 32,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 25
+  },
+  "PBSC205": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Hawkins",
+   "belt_mm": 76,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PJSD510": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Hayate",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PUSC509": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Hector",
+   "belt_mm": 114,
+   "deck_mm": 27,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PASC207": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Helena",
+   "belt_mm": 127,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PFSC110": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Henri%20IV",
+   "belt_mm": 140,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PGSC001": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Hermelin",
+   "belt_mm": 35,
+   "deck_mm": 9,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PBSA204": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Hermes",
+   "belt_mm": 76,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PGSC710": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Hildebrand",
+   "belt_mm": 190,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PASD505": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Hill",
+   "belt_mm": 10,
+   "deck_mm": 10,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PGSC110": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Hindenburg",
+   "belt_mm": 100,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PGSC108": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Hipper",
+   "belt_mm": 80,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PJSB519": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Hizen",
+   "belt_mm": 356,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PUSC016": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Hobart",
+   "belt_mm": 100,
+   "deck_mm": 32,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PFSD718": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Hoche",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PBSB507": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Hood",
+   "belt_mm": 178,
+   "deck_mm": 51,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PASA918": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Hornet%20B",
+   "belt_mm": null,
+   "deck_mm": null,
+   "superstructure_mm": null,
+   "extremities_mm": null
+  },
+  "PASA538": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Hornet",
+   "belt_mm": 102,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PZSD108": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Hsienyang",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PZSC506": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Huanghe",
+   "belt_mm": 70,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PASD037": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Hughes",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PASD720": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Hull",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PUSD517": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Huron",
+   "belt_mm": 16,
+   "deck_mm": 19,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PJSB517": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Hy%C5%ABga",
+   "belt_mm": 149,
+   "deck_mm": 35,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PJSS720": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:I-56%20%2744",
+   "belt_mm": 19,
+   "deck_mm": 16,
+   "superstructure_mm": 19,
+   "extremities_mm": 19
+  },
+  "PJSS518": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:I-56",
+   "belt_mm": 19,
+   "deck_mm": 16,
+   "superstructure_mm": 19,
+   "extremities_mm": 19
+  },
+  "PJSC012": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Ibuki",
+   "belt_mm": 100,
+   "deck_mm": 32,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PBSD106": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Icarus",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PJSB878": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Ignis%20Purgatio",
+   "belt_mm": 254,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PASB539": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Illinois",
+   "belt_mm": 38,
+   "deck_mm": 38,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PBSA108": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Implacable",
+   "belt_mm": 114,
+   "belt_min_mm": 21,
+   "deck_mm": 76,
+   "deck_min_mm": 38,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PZSC910": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Incheon%20B",
+   "belt_mm": null,
+   "deck_mm": null,
+   "superstructure_mm": null,
+   "extremities_mm": null
+  },
+  "PZSC710": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Incheon",
+   "belt_mm": 152,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PBSB610": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Incomparable",
+   "belt_mm": 152,
+   "deck_mm": 51,
+   "superstructure_mm": 19,
+   "extremities_mm": 25
+  },
+  "PBSB203": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Indefatigable",
+   "belt_mm": 152,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PASA026": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Independence",
+   "belt_mm": 16,
+   "deck_mm": 13,
+   "superstructure_mm": 10,
+   "extremities_mm": 19
+  },
+  "PVSA710": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Independencia",
+   "belt_mm": 21,
+   "deck_mm": 30,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PASB719": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Indiana",
+   "belt_mm": 38,
+   "deck_mm": 38,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PASC507": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Indianapolis",
+   "belt_mm": 100,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PBSA508": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Indomitable",
+   "belt_mm": 114,
+   "deck_mm": 76,
+   "deck_min_mm": 38,
+   "superstructure_mm": 13,
+   "extremities_mm": 21
+  },
+  "PASB018": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Iowa",
+   "belt_mm": 38,
+   "deck_mm": 38,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PVSB018": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Ipiranga",
+   "belt_mm": 305,
+   "deck_mm": 51,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PZSC508": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Irian",
+   "belt_mm": 100,
+   "deck_mm": 27,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PBSB105": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Iron%20Duke",
+   "belt_mm": 305,
+   "deck_mm": 44,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PUSB710": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Irresistible",
+   "belt_mm": 381,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PJSB526": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Ise",
+   "belt_mm": 299,
+   "deck_mm": 35,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PJSB008": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Ishizuchi",
+   "belt_mm": 203,
+   "deck_mm": 38,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PJSD003": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Isokaze",
+   "belt_mm": 14,
+   "deck_mm": 14,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PJSB559": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Iwami%20B",
+   "belt_mm": 356,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PJSB529": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Iwami",
+   "belt_mm": 356,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PRSB106": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Izmail",
+   "belt_mm": 300,
+   "deck_mm": 36,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PJSB021": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Izumo",
+   "belt_mm": 356,
+   "deck_mm": 57,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PRSD104": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Izyaslav",
+   "belt_mm": 14,
+   "deck_mm": 10,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PWSD519": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:J%C3%A4ger",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PSSC101": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:J%C3%BApiter",
+   "belt_mm": 6,
+   "deck_mm": 6,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PHSC018": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Jaarsveld",
+   "belt_mm": 50,
+   "deck_mm": 16,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PASC011": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Jacksonville",
+   "belt_mm": 152,
+   "deck_mm": 30,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PFSD105": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Jaguar",
+   "belt_mm": 10,
+   "deck_mm": 10,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PHSC103": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Java",
+   "belt_mm": 75,
+   "deck_mm": 10,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PFSB599": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Jean%20Bart%20B",
+   "belt_mm": 32,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PFSB518": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Jean%20Bart",
+   "belt_mm": 32,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PBSD107": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Jervis",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PZSD105": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Jianwei",
+   "belt_mm": 10,
+   "deck_mm": 10,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PZSC110": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Jinan",
+   "belt_mm": 95,
+   "deck_mm": 16,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PHSC109": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Johan%20de%20Witt",
+   "belt_mm": 40,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 40
+  },
+  "PASD719": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Johnston",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PBSD717": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Jupiter%C2%A0%2742",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PVSD506": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Juru%C3%A1",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PBSD109": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Jutland",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PGSB105": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:K%C3%B6nig",
+   "belt_mm": 350,
+   "deck_mm": 30,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PGSC105": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:K%C3%B6nigsberg",
+   "belt_mm": 50,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PRSS110": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:K-1",
+   "belt_mm": 19,
+   "deck_mm": 16,
+   "superstructure_mm": 19,
+   "extremities_mm": 19
+  },
+  "PJSA598": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kaga%20B",
+   "belt_mm": 152,
+   "deck_mm": 21,
+   "superstructure_mm": 13,
+   "extremities_mm": 21
+  },
+  "PJSA518": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kaga",
+   "belt_mm": 152,
+   "deck_mm": 21,
+   "superstructure_mm": 13,
+   "extremities_mm": 21
+  },
+  "PJSD208": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kager%C5%8D",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PGSB104": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kaiser",
+   "belt_mm": 350,
+   "deck_mm": 30,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PWSD705": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kalmar",
+   "belt_mm": 10,
+   "deck_mm": 10,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PJSD026": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kamikaze%20R",
+   "belt_mm": 14,
+   "deck_mm": 14,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PJSD025": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kamikaze",
+   "belt_mm": 14,
+   "deck_mm": 14,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PASB108": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kansas",
+   "belt_mm": 343,
+   "deck_mm": 19,
+   "superstructure_mm": 32,
+   "extremities_mm": 32
+  },
+  "PWSB909": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Karl%20XIV%20Johan%20B",
+   "belt_mm": 275,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PWSB509": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Karl%C2%A0XIV%20Johan",
+   "belt_mm": 275,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PGSC104": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Karlsruhe",
+   "belt_mm": 60,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PJSC503": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Katori",
+   "belt_mm": 6,
+   "deck_mm": 6,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PJSB001": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kawachi",
+   "belt_mm": 305,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PASB599": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kearsarge%C2%A0B",
+   "belt_mm": 330,
+   "deck_mm": 38,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PASB519": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kearsarge",
+   "belt_mm": 330,
+   "deck_mm": 38,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PRSD110": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Khabarovsk",
+   "belt_mm": 50,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PASB908": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kheper",
+   "belt_mm": 305,
+   "deck_mm": 38,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PRSC818": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kiberpankov",
+   "belt_mm": 100,
+   "deck_mm": 27,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PASD508": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kidd",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PRSD308": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kiev",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PJSB508": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kii",
+   "belt_mm": 292,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PHSC106": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kijkduin",
+   "belt_mm": 75,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PBSB107": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:King%20George%20V",
+   "belt_mm": 381,
+   "deck_mm": 26,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PRSC525": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kirov",
+   "belt_mm": 50,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PJSC610": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kitakami",
+   "belt_mm": 65,
+   "deck_mm": 30,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PJSD219": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kitakaze",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PFSD810": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kl%C3%A9ber%20CLR",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PFSD110": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kl%C3%A9ber",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PWSD104": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Klas%20Horn",
+   "belt_mm": 10,
+   "deck_mm": 10,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PGSC018": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Knesebeck",
+   "belt_mm": 120,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PRSB103": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Knyaz%20Suvorov",
+   "belt_mm": 203,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PGSC103": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kolberg",
+   "belt_mm": 10,
+   "deck_mm": 10,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PRSC810": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Komissar",
+   "belt_mm": 115,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PRSA104": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Komsomolets",
+   "belt_mm": 16,
+   "belt_min_mm": 13,
+   "deck_mm": 19,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PJSB007": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kong%C5%8D",
+   "belt_mm": 203,
+   "deck_mm": 38,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PRSC215": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kotovsky",
+   "belt_mm": 35,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PRSC719": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kozma%20Minin",
+   "belt_mm": 100,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PRSC505": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Krasny%20Krym",
+   "belt_mm": 75,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PRSB110": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kremlin",
+   "belt_mm": 430,
+   "deck_mm": 60,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PRSC509": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kronshtadt",
+   "belt_mm": 230,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PJSC013": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kuma",
+   "belt_mm": 65,
+   "deck_mm": 30,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PZSD111": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kunming",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PJSC021": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kurama",
+   "belt_mm": 150,
+   "deck_mm": 40,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PJSC720": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Kushiro",
+   "belt_mm": 105,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PFSD015": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:L%27Adroit",
+   "belt_mm": 10,
+   "deck_mm": 10,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PFSD018": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:L%27Aventurier",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PZSD910": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:L%C3%BCshun%20B",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PZSD510": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:L%C3%BCshun",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PRSS108": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:L-20",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 19,
+   "extremities_mm": 19
+  },
+  "PFSC106": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:La%20Galissonni%C3%A8re",
+   "belt_mm": 105,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PVSD710": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:La%20Pampa",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PISC739": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:La%20Spezia",
+   "belt_mm": 150,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PVSC105": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:La%C2%A0Argentina",
+   "belt_mm": 69,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PASD710": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Laffey",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PASA104": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Langley",
+   "belt_mm": 13,
+   "deck_mm": 13,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PZSC717": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Lanzhou",
+   "belt_mm": 115,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PWSB016": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Laudon",
+   "belt_mm": 310,
+   "deck_mm": 36,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PRSC568": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Lazo%20B",
+   "belt_mm": 100,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PRSC518": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Lazo",
+   "belt_mm": 100,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PFSD108": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Le%20Fantasque",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PFSC719": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Le%20Havre",
+   "belt_mm": 190,
+   "deck_mm": 32,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PFSD017": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Le%C2%A0Hardi",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PFSD508": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Le%C2%A0Terrible",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PBSC106": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Leander",
+   "belt_mm": 114,
+   "deck_mm": 51,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PGSC516": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Leipzig",
+   "belt_mm": 40,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PRSB518": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Lenin",
+   "belt_mm": 350,
+   "deck_mm": 45,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PRSD507": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Leningrad",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PISD506": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Leone",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PISB109": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Lepanto",
+   "belt_mm": 350,
+   "deck_mm": 55,
+   "superstructure_mm": 19,
+   "extremities_mm": 80
+  },
+  "PASA108": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Lexington",
+   "belt_mm": 178,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PVSB010": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Libertad",
+   "belt_mm": 406,
+   "deck_mm": 51,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PBSD108": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Lightning",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PBSB109": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Lion",
+   "belt_mm": 381,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PBSC516": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:London",
+   "belt_mm": 114,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PZSD102": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Longjiang",
+   "belt_mm": 6,
+   "deck_mm": 9,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PVSB019": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Los%20Andes",
+   "belt_mm": 330,
+   "deck_mm": 51,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PZSB539": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Louchuan",
+   "belt_mm": 381,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PASB210": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Louisiana",
+   "belt_mm": 409,
+   "deck_mm": 38,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PZSD598": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Loyang%20B",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PZSD508": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Loyang",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PWSB707": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Lugdunum",
+   "belt_mm": 240,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PFSB107": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Lyon",
+   "belt_mm": 300,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PSSC102": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:M%C3%A9ndez%20N%C3%BA%C3%B1ez",
+   "belt_mm": 75,
+   "deck_mm": 25,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PGSC817": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:M%C3%BCnchen%20B",
+   "belt_mm": 50,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PGSC507": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:M%C3%BCnchen",
+   "belt_mm": 50,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PGSB206": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Mackensen",
+   "belt_mm": 270,
+   "deck_mm": 50,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PISD105": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Maestrale",
+   "belt_mm": 10,
+   "deck_mm": 10,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PASD006": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Mahan",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PRSB909": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Mahtaga",
+   "belt_mm": 340,
+   "deck_mm": 35,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PASB111": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Maine",
+   "belt_mm": 38,
+   "deck_mm": 38,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PGSC598": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Mainz%C2%A0B",
+   "belt_mm": 80,
+   "deck_mm": 27,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PGSC518": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Mainz",
+   "belt_mm": 80,
+   "deck_mm": 27,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PBSA510": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Malta",
+   "belt_mm": 102,
+   "deck_mm": 102,
+   "deck_min_mm": 38,
+   "superstructure_mm": 13,
+   "extremities_mm": 21
+  },
+  "PGSC019": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Manteuffel",
+   "belt_mm": 190,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PASC044": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Marblehead",
+   "belt_mm": 76,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PVSD017": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Marc%C3%ADlio%20Dias",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PFSD210": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Marceau",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PISB509": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Marco%20Polo",
+   "belt_mm": 320,
+   "deck_mm": 55,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PBSB909": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Marlborough%20B",
+   "belt_mm": 381,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PBSB509": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Marlborough",
+   "belt_mm": 381,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PFSC210": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Marseille",
+   "belt_mm": 210,
+   "deck_mm": 36,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PASB598": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Massachusetts%20B",
+   "belt_mm": 32,
+   "deck_mm": 38,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PASB518": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Massachusetts",
+   "belt_mm": 32,
+   "deck_mm": 38,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PJSC517": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Maya",
+   "belt_mm": 102,
+   "deck_mm": 29,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PGSB610": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Mecklenburg",
+   "belt_mm": 350,
+   "deck_mm": 50,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PBSD102": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Medea",
+   "belt_mm": 6,
+   "deck_mm": 6,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PZSC529": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Mengchong",
+   "belt_mm": 190,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PISC729": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Messina",
+   "belt_mm": 150,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PISC519": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Michelangelo",
+   "belt_mm": 100,
+   "deck_mm": 40,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PASA110": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Midway",
+   "belt_mm": 178,
+   "deck_mm": 87,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PJSB011": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Mikasa",
+   "belt_mm": 229,
+   "deck_mm": 32,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PRSC515": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Mikoyan",
+   "belt_mm": 35,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PJSD719": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Minegumo",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PJSD004": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Minekaze",
+   "belt_mm": 14,
+   "deck_mm": 14,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PASB109": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Minnesota",
+   "belt_mm": 343,
+   "deck_mm": 38,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PBSC110": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Minotaur",
+   "belt_mm": 101,
+   "deck_mm": 16,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PRSD207": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Minsk",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PASB509": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Missouri",
+   "belt_mm": 307,
+   "deck_mm": 38,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PFSD109": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Mogador",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PJSC009": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Mogami",
+   "belt_mm": 100,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PRSC506": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Molotov",
+   "belt_mm": 70,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PGSB204": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Moltke",
+   "belt_mm": 200,
+   "deck_mm": 35,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PASD506": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Monaghan",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PBSB108": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Monarch",
+   "belt_mm": 381,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PBSC020": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Monmouth",
+   "belt_mm": 178,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PASB017": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Montana",
+   "belt_mm": 409,
+   "deck_mm": 38,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PFSC716": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Montcalm",
+   "belt_mm": 105,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PRSC110": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Moskva",
+   "belt_mm": 155,
+   "deck_mm": 50,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PWSD205": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Muavenet",
+   "belt_mm": 0,
+   "deck_mm": 0,
+   "superstructure_mm": 0,
+   "extremities_mm": 0
+  },
+  "PRSC003": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Murmansk",
+   "belt_mm": 76,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PJSB509": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Musashi",
+   "belt_mm": 410,
+   "deck_mm": 57,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PJSB506": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Mutsu",
+   "belt_mm": 305,
+   "deck_mm": 26,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PJSD105": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Mutsuki",
+   "belt_mm": 14,
+   "deck_mm": 14,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PJSB003": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:My%C5%8Dgi",
+   "belt_mm": 203,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PJSC008": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:My%C5%8Dk%C5%8D",
+   "belt_mm": 102,
+   "deck_mm": 32,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PUSC516": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Mysore",
+   "belt_mm": 114,
+   "deck_mm": 51,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PGSC717": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:N%C3%BCrnberg%20%2744",
+   "belt_mm": 20,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PGSC106": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:N%C3%BCrnberg",
+   "belt_mm": 50,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PJSB010": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Nagato",
+   "belt_mm": 305,
+   "deck_mm": 26,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PZSD719": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Nanning",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PISC590": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Napoli%C2%A0B",
+   "belt_mm": 220,
+   "belt_min_mm": 60,
+   "deck_mm": 40,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PISC510": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Napoli",
+   "belt_mm": 220,
+   "belt_min_mm": 60,
+   "deck_mm": 40,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PZSC718": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Narai",
+   "belt_mm": 93,
+   "deck_mm": 27,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PGSB103": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Nassau",
+   "belt_mm": 270,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PRSB509": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Navarin",
+   "belt_mm": 340,
+   "deck_mm": 35,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PSSC103": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Navarra",
+   "belt_mm": 76,
+   "deck_mm": 6,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PASB208": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Nebraska",
+   "belt_mm": 305,
+   "deck_mm": 32,
+   "superstructure_mm": 32,
+   "superstructure_min_mm": 19,
+   "extremities_mm": 32
+  },
+  "PBSB517": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Nelson",
+   "belt_mm": 32,
+   "deck_mm": 32,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PBSC109": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Neptune",
+   "belt_mm": 102,
+   "deck_mm": 16,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PRSD909": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Neustrashimy%20B",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PRSD709": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Neustrashimy",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PASB034": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:New%20Mexico",
+   "belt_mm": 26,
+   "deck_mm": 26,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PASC107": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:New%20Orleans",
+   "belt_mm": 127,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PASB006": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:New%20York",
+   "belt_mm": 25,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PASD014": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Nicholas",
+   "belt_mm": 15,
+   "deck_mm": 13,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PZSC503": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Ning%20Hai",
+   "belt_mm": 25,
+   "deck_mm": 19,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PISC102": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Nino%20Bixio",
+   "belt_mm": 6,
+   "deck_mm": 6,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PWSB719": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Niord",
+   "belt_mm": 220,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PFSB106": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Normandie",
+   "belt_mm": 280,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PBSC548": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Nottingham",
+   "belt_mm": 152,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PRSC102": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Novik",
+   "belt_mm": 10,
+   "deck_mm": 10,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PRSB516": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Novorossiysk",
+   "belt_mm": 220,
+   "deck_mm": 43,
+   "superstructure_mm": 16,
+   "extremities_mm": 16
+  },
+  "PRSC111": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Novosibirsk",
+   "belt_mm": 210,
+   "deck_mm": 50,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PVSD019": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Nueva%20Esparta",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PVSC507": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Nueve%20de%20Julio",
+   "belt_mm": 127,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PSSC508": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Numancia",
+   "belt_mm": 127,
+   "deck_mm": 38,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PBSA710": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Ocean",
+   "belt_mm": 19,
+   "deck_mm": 30,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PRSC528": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Ochakov",
+   "belt_mm": 70,
+   "deck_mm": 27,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PGSB508": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Odin",
+   "belt_mm": 320,
+   "deck_mm": 50,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PRSD208": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Ognevoi",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PASB510": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Ohio",
+   "belt_mm": 409,
+   "deck_mm": 38,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PRSD505": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Okhotnik",
+   "belt_mm": 16,
+   "deck_mm": 13,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PASB505": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Oklahoma",
+   "belt_mm": 343,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PRSC503": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Oleg",
+   "belt_mm": 13,
+   "deck_mm": 11,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PASC005": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Omaha",
+   "belt_mm": 76,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PJSC207": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Omono",
+   "belt_mm": 76,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PISC707": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Optio",
+   "belt_mm": 52,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PFSD019": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Orage",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PBSC716": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Orion%C2%A0%2744",
+   "belt_mm": 100,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PBSB104": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Orion",
+   "belt_mm": 305,
+   "deck_mm": 38,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PWSD508": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Orkan",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PRSC101": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Orlan",
+   "belt_mm": 10,
+   "deck_mm": 10,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PWSS710": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Orze%C5%82",
+   "belt_mm": 19,
+   "deck_mm": 16,
+   "superstructure_mm": 16,
+   "extremities_mm": 19
+  },
+  "PASD038": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Osborne",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PRSC920": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:PTRPVLSK",
+   "belt_mm": 180,
+   "deck_mm": 40,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PISD509": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Paolo%20Emilio",
+   "belt_mm": 60,
+   "deck_mm": 20,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PFSB111": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Patrie",
+   "belt_mm": 420,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PASC106": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Pensacola",
+   "belt_mm": 102,
+   "belt_min_mm": 76,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PUSC506": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Perth",
+   "belt_mm": 100,
+   "deck_mm": 32,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PRSC310": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Petropavlovsk",
+   "belt_mm": 180,
+   "deck_mm": 40,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PASC024": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Phoenix",
+   "belt_mm": 76,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PZSD103": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Phra%20Ruang",
+   "belt_mm": 6,
+   "deck_mm": 6,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PZSC908": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Pi%C3%B1atian",
+   "belt_mm": 100,
+   "deck_mm": 27,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PFSB548": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Picardie",
+   "belt_mm": 180,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 19
+  },
+  "PISC111": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Piemonte",
+   "belt_mm": 165,
+   "deck_mm": 40,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PISS110": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Pietro%20Calvi",
+   "belt_mm": 25,
+   "deck_mm": 16,
+   "superstructure_mm": 19,
+   "extremities_mm": 19
+  },
+  "PISS108": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Pietro%20Micca",
+   "belt_mm": 25,
+   "deck_mm": 16,
+   "superstructure_mm": 16,
+   "extremities_mm": 19
+  },
+  "PISB719": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Pilus%20Posterior",
+   "belt_mm": 320,
+   "deck_mm": 55,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PISB709": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Pilus%20Prior",
+   "belt_mm": 320,
+   "deck_mm": 55,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PUSC710": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Pioneer",
+   "belt_mm": 120,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PBSC510": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Plymouth",
+   "belt_mm": 114,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PRSA108": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Pobeda",
+   "belt_mm": 100,
+   "deck_mm": 30,
+   "superstructure_mm": 50,
+   "superstructure_min_mm": 13,
+   "extremities_mm": 19
+  },
+  "PRSD205": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Podvoisky",
+   "belt_mm": 13,
+   "deck_mm": 13,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PRSB508": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Poltava",
+   "belt_mm": 370,
+   "deck_mm": 40,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PGSB599": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Pommern%20B",
+   "belt_mm": 300,
+   "deck_mm": 80,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PGSB509": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Pommern",
+   "belt_mm": 300,
+   "deck_mm": 80,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PUSC012": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Port%20Jackson",
+   "belt_mm": 10,
+   "deck_mm": 10,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PGSB310": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Preussen",
+   "belt_mm": 380,
+   "deck_mm": 50,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PBSB708": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Prince%20of%20Wales",
+   "belt_mm": 356,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 25
+  },
+  "PHSC710": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Prins%20van%C2%A0Oranje",
+   "belt_mm": 225,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 40
+  },
+  "PGSC010": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Prinz%20Adalbert",
+   "belt_mm": 100,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PGSC508": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Prinz%20Eugen",
+   "belt_mm": 80,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PRSD718": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Provorny",
+   "belt_mm": 25,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PASC910": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Puerto%20Rico%20B",
+   "belt_mm": 254,
+   "deck_mm": 38,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PASC610": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Puerto%20Rico",
+   "belt_mm": 254,
+   "deck_mm": 38,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PRSB105": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Pyotr%20Velikiy",
+   "belt_mm": 250,
+   "deck_mm": 38,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PBSB106": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Queen%20Elizabeth",
+   "belt_mm": 330,
+   "deck_mm": 38,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PBSB204": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Queen%20Mary",
+   "belt_mm": 229,
+   "deck_mm": 32,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PFSB110": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:R%C3%A9publique",
+   "belt_mm": 400,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PWSD710": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Ragnar",
+   "belt_mm": 25,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PJSB888": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Ragnarok",
+   "belt_mm": 254,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PZSC106": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Rahmat",
+   "belt_mm": 89,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PASA106": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Ranger",
+   "belt_mm": 21,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 19
+  },
+  "PASC505": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Rattlehead",
+   "belt_mm": 76,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PZSD729": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Red%20Hare",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PWSC718": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Regele%20Carol%20I",
+   "belt_mm": 102,
+   "deck_mm": 28,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PBSB547": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Renown%20%2744",
+   "belt_mm": 38,
+   "deck_mm": 29,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PBSB206": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Renown",
+   "belt_mm": 38,
+   "deck_mm": 29,
+   "superstructure_mm": 16,
+   "extremities_mm": 16
+  },
+  "PBSB536": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Repulse%20B",
+   "belt_mm": 152,
+   "deck_mm": 26,
+   "superstructure_mm": 16,
+   "extremities_mm": 16
+  },
+  "PBSB526": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Repulse",
+   "belt_mm": 152,
+   "deck_mm": 26,
+   "superstructure_mm": 16,
+   "extremities_mm": 16
+  },
+  "PGSA104": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Rhein",
+   "belt_mm": 25,
+   "deck_mm": 20,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PASB930": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Rhode%20Island%20B",
+   "belt_mm": 310,
+   "deck_mm": 38,
+   "superstructure_mm": 19,
+   "extremities_mm": 27
+  },
+  "PASB720": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Rhode%20Island",
+   "belt_mm": 310,
+   "deck_mm": 38,
+   "superstructure_mm": 19,
+   "extremities_mm": 27
+  },
+  "PFSB108": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Richelieu",
+   "belt_mm": 330,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PRSC209": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Riga",
+   "belt_mm": 140,
+   "deck_mm": 35,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PVSB505": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Rio%20de%C2%A0Janeiro",
+   "belt_mm": 229,
+   "deck_mm": 38,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PASC538": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Rochester",
+   "belt_mm": 152,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PBSB717": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Rodney",
+   "belt_mm": 32,
+   "deck_mm": 32,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PISB908": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Roma%20Aeterna",
+   "belt_mm": 70,
+   "deck_mm": 45,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PISB508": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Roma",
+   "belt_mm": 70,
+   "deck_mm": 45,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PWSD103": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Romulus",
+   "belt_mm": 6,
+   "deck_mm": 6,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PBSB207": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Rooke",
+   "belt_mm": 305,
+   "deck_mm": 26,
+   "superstructure_mm": 16,
+   "extremities_mm": 16
+  },
+  "PGSC809": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Roon%20CLR",
+   "belt_mm": 90,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PGSC109": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Roon",
+   "belt_mm": 90,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PFSB709": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Roussillon",
+   "belt_mm": 350,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 25
+  },
+  "PBSB737": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Royal%20Sovereign",
+   "belt_mm": 152,
+   "deck_mm": 26,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PJSA106": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Ry%C5%ABj%C5%8D",
+   "belt_mm": 25,
+   "belt_min_mm": 19,
+   "deck_mm": 13,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PRSS106": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:S-1",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 19,
+   "extremities_mm": 19
+  },
+  "PRSS508": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:S-189",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 19,
+   "extremities_mm": 19
+  },
+  "PBSC888": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:STAR%C2%A0Edinburgh",
+   "belt_mm": 114,
+   "deck_mm": 51,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PJSD889": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:STAR%C2%A0Kitakaze",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PFSC109": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Saint-Louis",
+   "belt_mm": 100,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PASA598": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Saipan%20B",
+   "belt_mm": 152,
+   "deck_mm": 16,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PASA528": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Saipan",
+   "belt_mm": 152,
+   "deck_mm": 16,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PASC710": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Salem",
+   "belt_mm": 152,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PASS208": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Salmon",
+   "belt_mm": 25,
+   "deck_mm": 16,
+   "superstructure_mm": 19,
+   "extremities_mm": 19
+  },
+  "PASD002": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Sampson",
+   "belt_mm": 13,
+   "deck_mm": 13,
+   "superstructure_mm": 6,
+   "extremities_mm": 13,
+   "extremities_min_mm": 6
+  },
+  "PASC548": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:San%20Diego",
+   "belt_mm": 89,
+   "deck_mm": 16,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PVSC110": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:San%C2%A0Mart%C3%ADn",
+   "belt_mm": 127,
+   "deck_mm": 30,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PVSC109": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Santander",
+   "belt_mm": 102,
+   "deck_mm": 27,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PZSA508": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Sanzang",
+   "belt_mm": 152,
+   "deck_mm": 16,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PJSB111": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Satsuma",
+   "belt_mm": 460,
+   "deck_mm": 57,
+   "deck_min_mm": 45,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PWSD907": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Scarlet%20Storm",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PGSB597": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Scharnhorst%20B",
+   "belt_mm": 350,
+   "deck_mm": 50,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PGSB717": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Scharnhorst%C2%A0%2743",
+   "belt_mm": 350,
+   "deck_mm": 50,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PGSB507": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Scharnhorst",
+   "belt_mm": 350,
+   "deck_mm": 50,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PGSC908": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Schill%20B",
+   "belt_mm": 120,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PGSC528": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Schill",
+   "belt_mm": 120,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PGSB210": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Schlieffen",
+   "belt_mm": 350,
+   "deck_mm": 50,
+   "superstructure_mm": 19,
+   "extremities_mm": 27
+  },
+  "PBSS710": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Seal",
+   "belt_mm": 25,
+   "deck_mm": 16,
+   "superstructure_mm": 16,
+   "extremities_mm": 19
+  },
+  "PASC209": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Seattle",
+   "belt_mm": 102,
+   "deck_mm": 27,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PZSC109": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Sejong",
+   "belt_mm": 95,
+   "deck_mm": 16,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PJSA111": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Sekiryu",
+   "belt_mm": 150,
+   "deck_mm": 95,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PRSA106": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Serov",
+   "belt_mm": 75,
+   "deck_mm": 21,
+   "superstructure_mm": 10,
+   "extremities_mm": 19
+  },
+  "PVSD014": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Serrano",
+   "belt_mm": 10,
+   "deck_mm": 10,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PVSB710": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Sete%20de%20Setembro",
+   "belt_mm": 343,
+   "deck_mm": 38,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PRSC710": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Sevastopol",
+   "belt_mm": 230,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PJSA108": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Sh%C5%8Dkaku",
+   "belt_mm": 215,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PGSD910": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Sharqi",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PRSC107": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Shchors",
+   "belt_mm": 75,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PZSD104": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Shenyang",
+   "belt_mm": 10,
+   "deck_mm": 10,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PJSD728": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Shigure",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 10,
+   "extremities_mm": 19
+  },
+  "PJSB510": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Shikishima",
+   "belt_mm": 410,
+   "deck_mm": 57,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PJSD012": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Shimakaze",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PJSC208": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Shimanto",
+   "belt_mm": 100,
+   "deck_mm": 27,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PJSA710": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Shinano",
+   "belt_mm": 400,
+   "belt_min_mm": 160,
+   "deck_mm": 75,
+   "superstructure_mm": 13,
+   "extremities_mm": 27
+  },
+  "PJSD596": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Shinonome%C2%A0B",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PJSD706": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Shinonome",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PZSD718": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Ship%20Smasha",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PJSD207": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Shiratsuyu",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PRSB710": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Sibir",
+   "belt_mm": 430,
+   "deck_mm": 40,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PISB710": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Sicilia",
+   "belt_mm": 375,
+   "deck_mm": 50,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PGSC509": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Siegfried",
+   "belt_mm": 190,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PZSD208": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Siliwangi",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PASD597": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Sims%20B",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PASD029": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Sims",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PRSB107": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Sinop",
+   "belt_mm": 300,
+   "deck_mm": 26,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PFSD504": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Siroco",
+   "belt_mm": 10,
+   "deck_mm": 10,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PWSD107": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Sk%C3%A5ne",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PRSB510": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Slava",
+   "belt_mm": 370,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 25
+  },
+  "PWSD610": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Sm%C3%A5land",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PASD502": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Smith",
+   "belt_mm": 10,
+   "deck_mm": 6,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PRSC530": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Smolensk%20B",
+   "belt_mm": 70,
+   "deck_mm": 16,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PRSC610": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Smolensk",
+   "belt_mm": 70,
+   "deck_mm": 16,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PASD510": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Somers",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PBSD519": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Somme",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PWSD208": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Split",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PASC004": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:St.%C2%A0Louis",
+   "belt_mm": 102,
+   "deck_mm": 6,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PBSB210": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:St.%C2%A0Vincent",
+   "belt_mm": 32,
+   "deck_mm": 40,
+   "superstructure_mm": 19,
+   "extremities_mm": 19
+  },
+  "PRSC510": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Stalingrad",
+   "belt_mm": 180,
+   "deck_mm": 50,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PWSD717": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Stord%C2%A0%2743",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PWSD206": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Stord",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PRSD102": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Storozhevoi",
+   "belt_mm": 13,
+   "deck_mm": 10,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PFSB507": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Strasbourg",
+   "belt_mm": 283,
+   "deck_mm": 26,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PBSS108": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Sturdy",
+   "belt_mm": 19,
+   "deck_mm": 16,
+   "superstructure_mm": 19,
+   "extremities_mm": 19
+  },
+  "PZSB529": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Sun%20Yat-Sen",
+   "belt_mm": 375,
+   "deck_mm": 60,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PFSS710": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Surcouf",
+   "belt_mm": 19,
+   "deck_mm": 16,
+   "superstructure_mm": 19,
+   "extremities_mm": 19
+  },
+  "PBSC207": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Surrey",
+   "belt_mm": 152,
+   "deck_mm": 27,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PUSC001": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Sutlej",
+   "belt_mm": 10,
+   "deck_mm": 10,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PJSC759": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Suzuya%20VL",
+   "belt_mm": 140,
+   "belt_min_mm": 100,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PJSC739": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Suzuya",
+   "belt_mm": 140,
+   "belt_min_mm": 100,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PWSC710": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Svea",
+   "belt_mm": 30,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PRSC104": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Svietlana",
+   "belt_mm": 75,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PWSD102": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:T%C3%A1tra",
+   "belt_mm": 6,
+   "deck_mm": 6,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PGSD105": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:T-22",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PGSD506": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:T-61",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PJSD001": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Tachibana",
+   "belt_mm": 6,
+   "deck_mm": 6,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PZSC730": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Taejong",
+   "belt_mm": 32,
+   "deck_mm": 16,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PZSB709": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Taihang",
+   "belt_mm": 356,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PJSC209": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Takahashi",
+   "belt_mm": 105,
+   "deck_mm": 27,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PRSC208": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Tallinn",
+   "belt_mm": 80,
+   "belt_min_mm": 25,
+   "deck_mm": 27,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PISC103": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Taranto",
+   "belt_mm": 60,
+   "deck_mm": 6,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PRSD517": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Tashkent%C2%A0%2739",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PRSD409": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Tashkent",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PWSB015": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Tegetthoff",
+   "belt_mm": 280,
+   "deck_mm": 30,
+   "superstructure_mm": 10,
+   "extremities_mm": 19
+  },
+  "PISB810": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Tempesta%20Nera",
+   "belt_mm": 350,
+   "deck_mm": 120,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PZSB707": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Teng%20She",
+   "belt_mm": 300,
+   "deck_mm": 26,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PASB718": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Tennessee",
+   "belt_mm": 343,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PJSC015": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Tenry%C5%AB",
+   "belt_mm": 63,
+   "deck_mm": 25,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PASB705": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Texas",
+   "belt_mm": 280,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PBSA718": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Theseus",
+   "belt_mm": 21,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PWSB010": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Thor",
+   "belt_mm": 350,
+   "deck_mm": 40,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PBSS110": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Thrasher",
+   "belt_mm": 25,
+   "deck_mm": 16,
+   "superstructure_mm": 16,
+   "extremities_mm": 19
+  },
+  "PBSB510": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Thunderer",
+   "belt_mm": 406,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PZSC719": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Tianjin",
+   "belt_mm": 140,
+   "deck_mm": 40,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PBSC518": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Tiger%20%2759",
+   "belt_mm": 83,
+   "deck_mm": 27,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PBSB205": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Tiger",
+   "belt_mm": 229,
+   "deck_mm": 38,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PGSB598": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Tirpitz%20B",
+   "belt_mm": 315,
+   "deck_mm": 50,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PGSB002": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Tirpitz",
+   "belt_mm": 315,
+   "deck_mm": 50,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PJSC507": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Tokachi",
+   "belt_mm": 76,
+   "deck_mm": 48,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PJSC018": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Tone",
+   "belt_mm": 100,
+   "deck_mm": 27,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PHSS710": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Tonijn",
+   "belt_mm": 19,
+   "deck_mm": 16,
+   "superstructure_mm": 19,
+   "extremities_mm": 19
+  },
+  "PFSC507": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Toulon",
+   "belt_mm": 170,
+   "deck_mm": 30,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PISC106": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Trento",
+   "belt_mm": 70,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PSSB709": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Triunfante",
+   "belt_mm": 356,
+   "deck_mm": 40,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PHSD610": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Tromp",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PJSB549": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Tsurugi",
+   "belt_mm": 305,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 25
+  },
+  "PASC519": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Tulsa",
+   "belt_mm": 152,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PISD104": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Turbine",
+   "belt_mm": 10,
+   "deck_mm": 10,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PFSB103": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Turenne",
+   "belt_mm": 250,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PWSB718": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Turgut%20Reis",
+   "belt_mm": 305,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PGSS208": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:U-190",
+   "belt_mm": 19,
+   "deck_mm": 16,
+   "superstructure_mm": 19,
+   "extremities_mm": 19
+  },
+  "PGSS210": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:U-2501",
+   "belt_mm": 19,
+   "deck_mm": 16,
+   "superstructure_mm": 19,
+   "extremities_mm": 19
+  },
+  "PGSS510": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:U-4501",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 19,
+   "extremities_mm": 19
+  },
+  "PGSS206": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:U-69",
+   "belt_mm": 16,
+   "deck_mm": 13,
+   "superstructure_mm": 16,
+   "extremities_mm": 16
+  },
+  "PRSD107": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Udaloi",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PUSC017": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Uganda",
+   "belt_mm": 114,
+   "deck_mm": 51,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PJSD002": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Umikaze",
+   "belt_mm": 25,
+   "deck_mm": 13,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PBSS106": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Undine",
+   "belt_mm": 25,
+   "deck_mm": 16,
+   "superstructure_mm": 19,
+   "extremities_mm": 19
+  },
+  "PASA111": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:United%20States",
+   "belt_mm": 19,
+   "deck_mm": 38,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PHSC010": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Utrecht",
+   "belt_mm": 19,
+   "deck_mm": 16,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PWSD106": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:V%C3%A4ster%C3%A5s",
+   "belt_mm": 16,
+   "deck_mm": 10,
+   "superstructure_mm": 16,
+   "extremities_mm": 16
+  },
+  "PGSD104": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:V-170",
+   "belt_mm": 13,
+   "deck_mm": 13,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PGSD102": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:V-25",
+   "belt_mm": 9,
+   "deck_mm": 9,
+   "superstructure_mm": 6,
+   "extremities_mm": 9
+  },
+  "PBSD103": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Valkyrie",
+   "belt_mm": 6,
+   "deck_mm": 6,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PASC509": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Vallejo",
+   "belt_mm": 102,
+   "deck_mm": 38,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PVSB719": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Valpara%C3%ADso",
+   "belt_mm": 343,
+   "deck_mm": 40,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PUSD510": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Vampire%20II",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PUSD503": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Vampire",
+   "belt_mm": 10,
+   "deck_mm": 10,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PHSC101": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Van%20Kinsbergen",
+   "belt_mm": 13,
+   "deck_mm": 20,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PHSC509": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Van%20Speijk",
+   "belt_mm": 50,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PBSB508": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Vanguard",
+   "belt_mm": 343,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PRSC513": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Varyag",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PFSD107": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Vauquelin",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PWSD509": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Velos",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PISC110": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Venezia",
+   "belt_mm": 165,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PASB110": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Vermont",
+   "belt_mm": 406,
+   "deck_mm": 51,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PSSB919": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Victoria%20B",
+   "belt_mm": null,
+   "deck_mm": null,
+   "superstructure_mm": null,
+   "extremities_mm": null
+  },
+  "PSSB719": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Victoria",
+   "belt_mm": 375,
+   "deck_mm": 45,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PWSB504": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Viribus%20Unitis",
+   "belt_mm": 280,
+   "deck_mm": 30,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PWSD105": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Visby",
+   "belt_mm": 10,
+   "deck_mm": 10,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PRSB108": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Vladivostok",
+   "belt_mm": 370,
+   "deck_mm": 40,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PGSB930": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Von%20Zuckerhoff",
+   "belt_mm": 350,
+   "deck_mm": 50,
+   "superstructure_mm": 19,
+   "extremities_mm": 27
+  },
+  "PGSB203": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Von%20der%20Tann",
+   "belt_mm": 200,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PHSC708": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Vrijheid",
+   "belt_mm": 75,
+   "deck_mm": 16,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PASB507": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:W.%20Virginia%20%2741",
+   "belt_mm": 343,
+   "deck_mm": 26,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PGSB908": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Wahnsinn",
+   "belt_mm": 250,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 27
+  },
+  "PJSD024": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Wakatake",
+   "belt_mm": 12,
+   "deck_mm": 12,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PBSD104": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Wakeful",
+   "belt_mm": 10,
+   "deck_mm": 10,
+   "superstructure_mm": 10,
+   "extremities_mm": 10
+  },
+  "PBSB002": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Warspite",
+   "belt_mm": 152,
+   "deck_mm": 26,
+   "superstructure_mm": 16,
+   "extremities_mm": 26
+  },
+  "PGSC517": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Weimar",
+   "belt_mm": 80,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PGSA106": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Weser",
+   "belt_mm": 25,
+   "deck_mm": 21,
+   "superstructure_mm": 10,
+   "extremities_mm": 70,
+   "extremities_min_mm": 19
+  },
+  "PBSC102": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Weymouth",
+   "belt_mm": 10,
+   "deck_mm": 10,
+   "superstructure_mm": 6,
+   "extremities_mm": 6
+  },
+  "PASC508": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Wichita",
+   "belt_mm": 152,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 27
+  },
+  "PASD027": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Wickes",
+   "belt_mm": 13,
+   "deck_mm": 13,
+   "superstructure_mm": 6,
+   "extremities_mm": 10,
+   "extremities_min_mm": 6
+  },
+  "PGSC728": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Wiesbaden",
+   "belt_mm": 80,
+   "deck_mm": 16,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PHSB710": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Willem%20de%20Eerste",
+   "belt_mm": 32,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PASB730": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Wisconsin",
+   "belt_mm": 307,
+   "deck_mm": 38,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PASC210": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Worcester",
+   "belt_mm": 127,
+   "deck_mm": 30,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PZSB519": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Wujing",
+   "belt_mm": 32,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PZSC518": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Wukong",
+   "belt_mm": 100,
+   "deck_mm": 27,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PASB004": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Wyoming",
+   "belt_mm": 165,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PZSS716": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Xin%20Zhong%20Guo%C2%A014",
+   "belt_mm": 16,
+   "deck_mm": 13,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PZSB909": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Xuan%20Ming",
+   "belt_mm": null,
+   "deck_mm": null,
+   "superstructure_mm": null,
+   "extremities_mm": null
+  },
+  "PZSB708": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Xuan%20Wu",
+   "belt_mm": 38,
+   "deck_mm": 38,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PJSC004": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Y%C5%ABbari",
+   "belt_mm": 57,
+   "deck_mm": 55,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PJSD507": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Y%C5%ABdachi",
+   "belt_mm": 16,
+   "deck_mm": 16,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PJSD209": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Y%C5%ABgumo",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PJSC505": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Yahagi",
+   "belt_mm": 60,
+   "deck_mm": 19,
+   "superstructure_mm": 10,
+   "extremities_mm": 13
+  },
+  "PJSD111": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Yamagiri",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PJSB710": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Yamato%20Kai",
+   "belt_mm": 410,
+   "deck_mm": 57,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PJSB018": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Yamato",
+   "belt_mm": 410,
+   "deck_mm": 57,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PZSB719": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Yimeng",
+   "belt_mm": 370,
+   "deck_mm": 40,
+   "superstructure_mm": 19,
+   "extremities_mm": 32
+  },
+  "PJSC210": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Yodo",
+   "belt_mm": 110,
+   "deck_mm": 30,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PGSC107": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Yorck",
+   "belt_mm": 80,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 25
+  },
+  "PASA028": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Yorktown",
+   "belt_mm": 102,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PJSC590": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Yoshino%20B",
+   "belt_mm": 178,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PJSC520": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Yoshino",
+   "belt_mm": 178,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PZSD110": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Yueyang",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PUSB507": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Yukon",
+   "belt_mm": 381,
+   "deck_mm": 26,
+   "superstructure_mm": 18,
+   "extremities_mm": 26
+  },
+  "PJSB208": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Yumihari",
+   "belt_mm": 229,
+   "deck_mm": 30,
+   "superstructure_mm": 19,
+   "extremities_mm": 25
+  },
+  "PGSD108": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Z-23",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PGSD207": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Z-31",
+   "belt_mm": 25,
+   "deck_mm": 25,
+   "superstructure_mm": 10,
+   "extremities_mm": 16
+  },
+  "PGSD518": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Z-35",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PGSD508": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Z-39",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PGSD610": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Z-42",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PGSD519": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Z-44",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PGSD109": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Z-46",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PGSD110": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Z-52",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PGSD111": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Z-57",
+   "belt_mm": null,
+   "deck_mm": null,
+   "superstructure_mm": null,
+   "extremities_mm": null
+  },
+  "PGSD529": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:ZF-6",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PGSD719": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:ZH-1",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PJSC890": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Za%C5%8D%20CLR",
+   "belt_mm": 30,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PJSC034": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Za%C5%8D",
+   "belt_mm": 30,
+   "deck_mm": 30,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PISC107": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Zara",
+   "belt_mm": 150,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 16
+  },
+  "PZSD708": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Zhu%20Que",
+   "belt_mm": 19,
+   "deck_mm": 19,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  },
+  "PZSC720": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Zhuge%20Liang",
+   "belt_mm": 210,
+   "deck_mm": 36,
+   "superstructure_mm": 16,
+   "extremities_mm": 25
+  },
+  "PGSB208": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Zieten",
+   "belt_mm": 250,
+   "deck_mm": 32,
+   "superstructure_mm": 19,
+   "extremities_mm": 27
+  },
+  "PRSD111": {
+   "wiki_page": "https://wiki.worldofwarships.com/Ship:Zorkiy",
+   "belt_mm": 50,
+   "deck_mm": 25,
+   "superstructure_mm": 13,
+   "extremities_mm": 19
+  }
+ }
+}

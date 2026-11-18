@@ -1,6 +1,6 @@
 name: Build and deploy
 on:
-  schedule: [{ cron: "17 4 * * *" }]   # daily, picks up new game patches
+  schedule: [{ cron: "17 */6 * * *" }]   # every 6 hours, picks up new game patches
   workflow_dispatch:
   push: { branches: [main] }
 permissions: { contents: read, pages: write, id-token: write }

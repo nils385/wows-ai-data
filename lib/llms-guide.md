@@ -6,7 +6,7 @@ Rankings list every released ship. Filtered versions add /class/{class}, /class/
 - "Fastest gun reload?" -> main_battery.reload_s. "Most damage per minute (DPM)?" -> main_battery.he_damage_per_minute, main_battery.ap_damage_per_minute, main_battery.sap_damage_per_minute. DPM is theoretical (every shell hits); also check penetration before calling a ship strong.
 - "Most fires?" -> main_battery.he_potential_fires_per_minute and main_battery.shells.he.fire_chance_pct.
 - "Longest range?" -> main_battery.range_km (base) or {BASE}/api/rankings-with-upgrades/main_battery.range_km.json (with range upgrade).
-- "Which ships have radar / hydro, and how far?" -> rankings named consumables.surveillance_radar.* and consumables.hydroacoustic_search.* (search {BASE}/api/rankings/index.json for "consumables."). Only ships that have the consumable appear in those lists.
+- "Which ships have radar / hydro, and how far?" -> rankings named consumables.surveillance_radar.* and consumables.hydroacoustic_search.* (list: {BASE}/rankings/groups/consumables.md). Only ships that have the consumable appear in those lists.
 - "What does a shell overmatch?" -> main_battery.shells.ap.overmatch_mm: plates thinner than this cannot bounce that shell (caliber / 14.3).
 - "AP penetration at X km / shell flight time?" -> ship file, configurations.top.main_battery.shells.ap.ballistics_by_range (every 1 km up to max range). HE/SAP penetration is fixed: shells.he.penetration_mm.
 - "Most HP / tankiest?" -> survivability.hit_points; torpedo protection: survivability.flooding.torpedo_protection_damage_reduction_pct; fire: survivability.fire.*.
@@ -15,7 +15,7 @@ Rankings list every released ship. Filtered versions add /class/{class}, /class/
 - "Best AA?" -> anti_air.total_continuous_damage_per_s, anti_air.long_range.flak_damage, anti_air.max_range_km.
 - "Turret turn speed?" -> main_battery.turret_180_turn_time_s.
 - "Which upgrades / captain skills / flags for ship X?" -> ship file: upgrades.slots (every option with exact stat changes), upgrades.best_possible_values, captain_skills.skills, signal_flags.flags. This site gives facts (what each option changes), not opinions on which build is best.
-- "Compare ship A and B" -> fetch both ship files and compare all_metrics_top_configuration (same metric names for every ship).
+- "Compare ship A and B" -> fetch {BASE}/ship/{a}.md and {BASE}/ship/{b}.md and compare the "All stats" lines (same metric names for every ship).
 - "Stock vs upgraded hull/guns?" -> ship file configurations.stock vs configurations.top, or every module combination at {BASE}/api/ships/{index}/configurations.json.
 
 Notes for correct answers:
