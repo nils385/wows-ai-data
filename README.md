@@ -1,8 +1,10 @@
-# WoWs data for AIs
+# WoWs Data
 
-An unofficial, non-commercial World of Warships encyclopedia: a page for every ship, a searchable ship list, rankings, a comparison tool and guides. All of it is also published as structured data (JSON, CSV, Markdown, `llms.txt`) for AI tools and developers, generated from the same records so the numbers can never disagree. It checks for new game data every 6 hours, so new patches show up automatically.
+An unofficial, non-commercial World of Warships encyclopedia for players: a page for every ship, a searchable ship list, rankings, a comparison tool and guides. The same records are also published as data files (JSON, CSV, Markdown) for fan tools and spreadsheets, so the numbers can never disagree. It checks for new game data every 6 hours, so new patches show up automatically.
 
-**Players: start at the homepage. AI agents and developers: start at `/llms.txt`.**
+**Start at the homepage.** Data files are listed on the About page.
+
+**AI use:** Wargaming's Player Content Policy (section 2.9) does not allow Wargaming IP to be used as training or input material for AI systems without Wargaming's written consent. This site does not have that consent, so it publishes a notice on the legal page, asks AI training crawlers not to collect it (`robots.txt`), and does not build AI-specific files. The code for them (`llms.txt`, `llms-full.txt`) is kept and can be switched on with `AI_GUIDE=1` only if Wargaming gives written permission.
 
 ## Pages for players
 

@@ -1,5 +1,8 @@
 #!/usr/bin/env node
-// Builds a static World of Warships data site made for AI agents (not people).
+// Builds WoWs Data, an unofficial World of Warships encyclopedia for players (static HTML),
+// plus structured data files (JSON, CSV, Markdown) generated from the same records.
+// AI-specific files (llms.txt, llms-full.txt) are only built with AI_GUIDE=1: Wargaming's Player
+// Content Policy (2.9) does not allow Wargaming IP as AI training or input material without written consent.
 //
 //   node build.mjs                    download the newest game data, build into ./dist
 //   node build.mjs --data-dir DIR     build from already downloaded data files
@@ -25,6 +28,8 @@ const FINAL_OUT = path.resolve(process.env.OUT_DIR || "dist");
 const OUT = `${FINAL_OUT}.staging`; // build here; replace FINAL_OUT only if everything succeeds
 const SITE_URL = (process.env.SITE_URL || "").replace(/\/$/, "");
 const SERVER = process.env.WOWS_SERVER || "live";
+const AI_GUIDE = process.env.AI_GUIDE === "1"; // off unless Wargaming has given written consent
+const AI_NOTICE = "No permission is granted to use this site's content as training or input material for AI models, platforms, tools or systems (Wargaming Player Content Policy, section 2.9).";
 const abs = (p) => `${SITE_URL}/${p}`;
 const t0 = Date.now();
 const log = (...a) => console.log(`[${((Date.now() - t0) / 1000).toFixed(0)}s]`, ...a);
@@ -70,6 +75,7 @@ const meta = {
   data_source: "WoWs ShipBuilder public game data (https://app.wowssb.com), extracted from the World of Warships game client every patch",
   calculations: "Stat formulas are a line-by-line port of WoWs ShipBuilder's open-source calculations (MIT license).",
   license_note: "Game data © Wargaming.net. Unofficial site, not affiliated with Wargaming or WoWs ShipBuilder.",
+  ai_use_notice: AI_NOTICE,
 };
 
 // ---------- ships ----------
@@ -321,7 +327,7 @@ for (const c of classes) for (const t of tiers) {
     statFiles.push({ c, t, n, count: list.length });
   }
 }
-await out("all-stats/index.md", md("All stats of all ships, split by class, tier and nation", `Each file lists every ship of one class, tier and nation with every stat as "metric: value" (small enough to read whole). URL pattern: ${abs("all-stats/{class}/tier-{n}/{nation}.txt")}. Everything in one file (very large): ${abs("llms-full.txt")}`,
+await out("all-stats/index.md", md("All stats of all ships, split by class, tier and nation", `Each file lists every ship of one class, tier and nation with every stat as "metric: value" (small enough to read whole). URL pattern: ${abs("all-stats/{class}/tier-{n}/{nation}.txt")}. ${AI_GUIDE ? `Everything in one file (very large): ${abs("llms-full.txt")}` : ""}`,
   classes.map((c) => `## ${c}\n\n${tiers.filter((t) => statFiles.some((f) => f.c === c && f.t === t)).map((t) => `- tier ${t}: ${statFiles.filter((f) => f.c === c && f.t === t).map((f) => `[${f.n}](${abs(`all-stats/${c}/tier-${t}/${f.n}.txt`)}) (${f.count})`).join(", ")}`).join("\n")}`).join("\n\n")));
 
 for (const [kind, key, values] of [["by-nation", "nation", nations], ["by-class", "class", classes], ["by-tier", "tier", tiers]]) {
@@ -392,7 +398,7 @@ await out("changes/index.md", changesMd);
 const llmsFull = `# All World of Warships ships with all their stats\n\nGame version ${ctx.gameVersion}. ${rows.length} ships. Top (fully researched) configuration, base values: ${COMMON_NOTE} Metric names are the same as in the rankings and ships.csv. Full details per ship: ${abs("api/ships/{index}.json")}\n\n` +
   rows.map((r) => `## ${r.name} | index ${r.index} | tier ${r.tier} | ${r.class} | ${r.nation} | ${r.category}\n\n${Object.entries(r.metrics).map(([k, v]) => `${k}: ${v}`).join("\n")}\n`).join("\n");
 const llmsFullBytes = Buffer.byteLength(llmsFull);
-await out("llms-full.txt", llmsFull);
+if (AI_GUIDE) await out("llms-full.txt", llmsFull);
 log("lists and bulk done");
 
 // ---------- rankings ----------
@@ -501,7 +507,7 @@ await out("api/validation.json", report);
 let verification = null;
 try { verification = JSON.parse(await readFile("verification/wiki-crosscheck.json", "utf8")); await out("api/verification.json", verification); } catch { /* optional */ }
 const statusDoc = {
-  about: "Read this to decide how much to trust the data right now.",
+  about: "Read this to decide how much to trust the data right now.", ai_use_notice: AI_NOTICE,
   schema_version: SCHEMA_VERSION, game_version: ctx.gameVersion, server: SERVER, generated_at: meta.generated_at,
   data_source: "game files via WoWs ShipBuilder, every file checksum-verified",
   validation: { passed: report.passed, errors: report.error_count, warnings: report.warning_count, report: abs("api/validation.json") },
@@ -571,7 +577,7 @@ await out("api/schema.json", {
 });
 
 await out("metrics/index.md", md("Metric dictionary", `What every stat name means, its unit and which direction is better. One page per topic. All in one JSON (large): ${abs("api/metrics.json")}`, metricGroups.map((g) => `- [${g}](${abs(`metrics/${g}.md`)})`).join("\n")));
-await out("llms.txt", await llmsTxt());
+if (AI_GUIDE) await out("llms.txt", await llmsTxt());
 async function llmsTxt() {
   const guide = (await readFile(new URL("./lib/llms-guide.md", import.meta.url), "utf8").catch(() => "")).replaceAll("{BASE}", SITE_URL);
   return `# World of Warships data for AI agents
@@ -632,9 +638,9 @@ ${verification ? `- [Wiki cross-check](${abs("api/verification.json")}): values 
   await out("guide.html", redirectPage({ to: abs("ships/"), title: "Ships" }));
   await out("compare.html", renderCompare({ layout, base: BASE_PATH }));
   await out("about/index.html", renderAbout({ layout, base: BASE_PATH, status: JSON.parse(JSON.stringify(statusDoc)), meta }));
-  await out("legal/index.html", renderLegal({ layout }));
+  await out("legal/index.html", renderLegal({ layout, aiNotice: AI_NOTICE }));
   await out("guides/index.html", renderGuidesIndex({ layout, base: BASE_PATH, nations }));
-  // In human pages, link to human pages instead of the Markdown files meant for AI tools.
+  // In human pages, link to human pages instead of the Markdown data files.
   const toHumanLinks = (t) => [["glossary.md", "guides/glossary/"], ["mechanics.md", "guides/mechanics/"], ["community.md", "guides/community/"], ["changes/index.md", "guides/changes/"], ["tech-tree/index.md", "guides/tech-tree/"], ["rankings/index.md", "rankings/"], ["ships.md", "ships/"]]
     .reduce((acc, [from, to]) => acc.replaceAll(abs(from), `${BASE_PATH}/${to}`), t)
     .replace(new RegExp(`${abs("ship/").replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}([a-z0-9_]+)\\.md`, "g"), (m0, n) => `${BASE_PATH}/ship/${n}/`)
@@ -670,13 +676,15 @@ ${verification ? `- [Wiki cross-check](${abs("api/verification.json")}): values 
   await out("api/human-pages.json", { about: "Every ship's human-readable page and its structured data, generated from the same record.", game_version: ctx.gameVersion,
     ships: shipPages.map((p) => ({ index: p.index, name: p.name, test_ship: p.test || undefined, html: `${SITE_URL}/ships/${slugByIndex[p.index]}/`, markdown: abs(`ships/${p.slug}.md`), json: abs(`api/ships/${p.index}.json`) })) });
 }
-await out("robots.txt", `# AI crawlers and agents are welcome.\nUser-agent: *\nAllow: /\n${SITE_URL ? `Sitemap: ${SITE_URL}/sitemap.xml\n` : ""}`);
-if (SITE_URL) await out("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${["", "llms.txt", "api/index.json", "api/schema.json", "api/rankings/index.json", ...rows.map((r) => `api/ships/${r.index}.json`), ...rows.map((r) => `ships/${r.slug}.md`), ...[...new Set(rows.map((r) => `ship/${slug(r.name) || r.index.toLowerCase()}.md`))], "ships.md", "rankings/index.md", "all-stats/index.md", "glossary.md", "mechanics.md", "community.md", "tech-tree/index.md", "changes/index.md", "api/metrics.json", "api/status.json", "ships/", "rankings/", "compare.html", "guides/", "guides/mechanics/", "guides/glossary/", "guides/tech-tree/", "guides/upgrades/", "guides/community/", "guides/changes/", "about/", "legal/", ...rows.map((r) => `ships/${slugByIndex[r.index]}/`), ...metricIndex.filter((r) => r.family === "rankings").map((r) => `rankings/${r.metric}/`)].map((u) => `<url><loc>${abs(u)}</loc></url>`).join("\n")}\n</urlset>\n`);
+// Search engines are welcome. AI training crawlers are asked not to collect this site (Wargaming Player Content Policy 2.9).
+const AI_TRAINING_BOTS = ["GPTBot", "ClaudeBot", "anthropic-ai", "Google-Extended", "CCBot", "Applebot-Extended", "Bytespider", "meta-externalagent", "PerplexityBot", "cohere-training-data-crawler", "Diffbot", "omgili"];
+await out("robots.txt", `# WoWs Data: unofficial World of Warships fan encyclopedia.\n# ${AI_NOTICE}\n\n${AI_TRAINING_BOTS.map((b) => `User-agent: ${b}\nDisallow: /\n`).join("\n")}\nUser-agent: *\nAllow: /\n${SITE_URL ? `\nSitemap: ${SITE_URL}/sitemap.xml\n` : ""}`);
+if (SITE_URL) await out("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${["", ...(AI_GUIDE ? ["llms.txt"] : []), "api/index.json", "api/schema.json", "api/rankings/index.json", ...rows.map((r) => `api/ships/${r.index}.json`), ...rows.map((r) => `ships/${r.slug}.md`), ...[...new Set(rows.map((r) => `ship/${slug(r.name) || r.index.toLowerCase()}.md`))], "ships.md", "rankings/index.md", "all-stats/index.md", "glossary.md", "mechanics.md", "community.md", "tech-tree/index.md", "changes/index.md", "api/metrics.json", "api/status.json", "ships/", "rankings/", "compare.html", "guides/", "guides/mechanics/", "guides/glossary/", "guides/tech-tree/", "guides/upgrades/", "guides/community/", "guides/changes/", "about/", "legal/", ...rows.map((r) => `ships/${slugByIndex[r.index]}/`), ...metricIndex.filter((r) => r.family === "rankings").map((r) => `rankings/${r.metric}/`)].map((u) => `<url><loc>${abs(u)}</loc></url>`).join("\n")}\n</urlset>\n`);
 await out(".nojekyll", "");
 
 log(`built ${rows.length} ships (+${testShips.length} test), ${metricIndex.length} rankings, ${fileCount} files into ${OUT}`);
 if (report.errors.length) { console.error(`VALIDATION FAILED: ${report.errors.length} errors, first: ${JSON.stringify(report.errors.slice(0, 5))}. Previous output in ${FINAL_OUT} left untouched.`); process.exit(1); }
-for (const must of ["llms.txt", "index.html", "api/index.json", "api/schema.json", "api/rankings/index.json", "ships.md"]) {
+for (const must of [...(AI_GUIDE ? ["llms.txt"] : []), "index.html", "api/index.json", "api/schema.json", "api/rankings/index.json", "ships.md"]) {
   try { await readFile(path.join(OUT, must)); } catch { console.error(`BUILD INCOMPLETE: ${must} missing. Previous output left untouched.`); process.exit(1); }
 }
 await rm(`${FINAL_OUT}.old`, { recursive: true, force: true });

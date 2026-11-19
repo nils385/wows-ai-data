@@ -54,13 +54,18 @@ for (const s of index) {
 ok(missing === 0, `${missing} ships missing an HTML page, Markdown or JSON`);
 
 // 3. Core pages exist and HTML pages have a title and one h1
-for (const p of ["index.html", "ships/index.html", "compare.html", "rankings/index.html", "guides/mechanics/index.html", "guides/glossary/index.html", "about/index.html", "legal/index.html", "llms.txt", "api/schema.json", "api/metrics.json", "api/status.json", "ships.jsonl", "ships.csv", "sitemap.xml", "robots.txt"]) ok(await exists(p), `missing ${p}`);
+for (const p of ["index.html", "ships/index.html", "compare.html", "rankings/index.html", "guides/mechanics/index.html", "guides/glossary/index.html", "about/index.html", "legal/index.html", "api/schema.json", "api/metrics.json", "api/status.json", "ships.jsonl", "ships.csv", "sitemap.xml", "robots.txt"]) ok(await exists(p), `missing ${p}`);
 for (const p of ["index.html", "ships/index.html", await relOf(humanBy.PJSB018.html, "index.html"), "rankings/main_battery.reload_s/index.html", "legal/index.html"]) {
   const t = await readFile(path.join(DIST, p), "utf8").catch(() => "");
   ok(/<title>[^<]+<\/title>/.test(t), `${p} has a title`);
   ok((t.match(/<h1[\s>]/g) ?? []).length === 1, `${p} has exactly one h1`);
   ok(t.includes("This work is unofficial and is not endorsed by Wargaming"), `${p} has the Wargaming disclaimer`);
 }
+
+// AI use: no llms.txt unless built with AI_GUIDE=1; legal page and robots.txt carry the notice
+if (process.env.AI_GUIDE !== "1") ok(!(await exists("llms.txt")), "llms.txt is not published without Wargaming's consent (AI_GUIDE=1)");
+ok((await readFile(path.join(DIST, "legal/index.html"), "utf8")).includes("Player Content Policy, section 2.9"), "legal page has the AI-use notice");
+ok(/User-agent: GPTBot\nDisallow: \//.test(await readFile(path.join(DIST, "robots.txt"), "utf8")), "robots.txt asks AI training crawlers not to collect the site");
 
 // 4. Validation passed and site size is within limits
 const status = await json("api/status.json");
