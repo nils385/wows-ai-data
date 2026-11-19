@@ -1,0 +1,566 @@
+{
+ "about": "This site's calculations compared with WoWs ShipBuilder's own C# code (compiled and run on the same game data), for every ship, every module combination and every eligible upgrade on its own.",
+ "cases": 19587,
+ "skipped": 0,
+ "values_compared": 1563422,
+ "values_different": 281,
+ "match_rate_pct": 99.98,
+ "fields_with_differences": [
+  {
+   "field": "anti_air.long_range.continuous_damage_per_s",
+   "compared": 15617,
+   "different": 158,
+   "examples": [
+    {
+     "ship": "PASC209",
+     "shipbuilder": 108.5,
+     "this_site": 105
+    },
+    {
+     "ship": "PASC209",
+     "shipbuilder": 108.5,
+     "this_site": 105
+    },
+    {
+     "ship": "PASC209",
+     "upgrade": "PCM039_CrashCrew_Mod_I",
+     "shipbuilder": 108.5,
+     "this_site": 105
+    }
+   ],
+   "explanation": "Ships whose hulls carry different gun mounts (e.g. Seattle, Benson): the game pairs each hull with its own mount, and this site uses that mount's AA. ShipBuilder's AA code always takes the first mount listed, so its AA for the other hull belongs to the wrong mount."
+  },
+  {
+   "field": "main_battery.shells.HE.fire_chance_per_salvo_pct",
+   "compared": 16443,
+   "different": 84,
+   "examples": [
+    {
+     "ship": "PISC717",
+     "shipbuilder": 72.8,
+     "this_site": 92.6
+    },
+    {
+     "ship": "PISC717",
+     "upgrade": "PCM039_CrashCrew_Mod_I",
+     "shipbuilder": 72.8,
+     "this_site": 92.6
+    },
+    {
+     "ship": "PISC717",
+     "upgrade": "PCM020_DamageControl_Mod_I",
+     "shipbuilder": 72.8,
+     "this_site": 92.6
+    }
+   ],
+   "explanation": "Alternative burst-fire HE shells: this site computes their per-salvo chance with the shots of a burst (as fired); ShipBuilder uses one shot unless burst mode is switched on in its UI."
+  },
+  {
+   "field": "anti_air.long_range.flak_damage",
+   "compared": 15617,
+   "different": 39,
+   "examples": [
+    {
+     "ship": "PASD008",
+     "shipbuilder": 1400,
+     "this_site": 1470
+    },
+    {
+     "ship": "PASD008",
+     "shipbuilder": 1400,
+     "this_site": 1470
+    },
+    {
+     "ship": "PASD008",
+     "shipbuilder": 1400,
+     "this_site": 1470
+    }
+   ],
+   "explanation": "Ships whose hulls carry different gun mounts (e.g. Seattle, Benson): the game pairs each hull with its own mount, and this site uses that mount's AA. ShipBuilder's AA code always takes the first mount listed, so its AA for the other hull belongs to the wrong mount."
+  }
+ ],
+ "fields_all_equal": [
+  {
+   "field": "survivability.hit_points",
+   "compared": 19587
+  },
+  {
+   "field": "survivability.fire.duration_s",
+   "compared": 19587
+  },
+  {
+   "field": "survivability.fire.max_simultaneous_fires",
+   "compared": 19587
+  },
+  {
+   "field": "survivability.fire.fire_chance_reduction_pct",
+   "compared": 19587
+  },
+  {
+   "field": "survivability.fire.damage_per_s",
+   "compared": 19587
+  },
+  {
+   "field": "survivability.fire.total_damage_per_fire",
+   "compared": 19587
+  },
+  {
+   "field": "survivability.flooding.duration_s",
+   "compared": 19587
+  },
+  {
+   "field": "survivability.flooding.torpedo_protection_damage_reduction_pct",
+   "compared": 19587
+  },
+  {
+   "field": "survivability.flooding.damage_per_s",
+   "compared": 19587
+  },
+  {
+   "field": "survivability.flooding.total_damage_per_flood",
+   "compared": 19587
+  },
+  {
+   "field": "survivability.hit_location_hp.citadel.hp",
+   "compared": 13995
+  },
+  {
+   "field": "survivability.hit_location_hp.bow.hp",
+   "compared": 19587
+  },
+  {
+   "field": "survivability.hit_location_hp.stern.hp",
+   "compared": 19587
+  },
+  {
+   "field": "survivability.hit_location_hp.casemate.hp",
+   "compared": 16325
+  },
+  {
+   "field": "survivability.hit_location_hp.superstructure.hp",
+   "compared": 18956
+  },
+  {
+   "field": "survivability.hit_location_hp.hull.hp",
+   "compared": 19587
+  },
+  {
+   "field": "survivability.hit_location_hp.auxiliaryrooms.hp",
+   "compared": 6213
+  },
+  {
+   "field": "maneuverability.max_speed_knots",
+   "compared": 18963
+  },
+  {
+   "field": "maneuverability.max_reverse_speed_knots",
+   "compared": 18963
+  },
+  {
+   "field": "maneuverability.rudder_shift_time_s",
+   "compared": 19587
+  },
+  {
+   "field": "maneuverability.turning_circle_radius_m",
+   "compared": 19587
+  },
+  {
+   "field": "maneuverability.time_to_full_speed_ahead_s",
+   "compared": 19587
+  },
+  {
+   "field": "maneuverability.time_to_full_speed_reverse_s",
+   "compared": 19587
+  },
+  {
+   "field": "concealment.detectability_by_ships_km",
+   "compared": 19587
+  },
+  {
+   "field": "concealment.detectability_by_planes_km",
+   "compared": 19587
+  },
+  {
+   "field": "concealment.detectability_when_firing_from_smoke_km",
+   "compared": 19587
+  },
+  {
+   "field": "concealment.detectability_by_ships_while_burning_km",
+   "compared": 19587
+  },
+  {
+   "field": "concealment.detectability_by_submarines_at_periscope_depth_km",
+   "compared": 19587
+  },
+  {
+   "field": "secondaries.range_km",
+   "compared": 16627
+  },
+  {
+   "field": "secondaries.gun_groups.reload_s",
+   "compared": 16627
+  },
+  {
+   "field": "secondaries.gun_groups.shots_per_min_all_barrels",
+   "compared": 16627
+  },
+  {
+   "field": "secondaries.gun_groups.damage_per_minute",
+   "compared": 16627
+  },
+  {
+   "field": "secondaries.gun_groups.potential_fires_per_minute",
+   "compared": 16084
+  },
+  {
+   "field": "secondaries.gun_groups.caliber_mm",
+   "compared": 16627
+  },
+  {
+   "field": "secondaries.gun_groups.total_barrels",
+   "compared": 16627
+  },
+  {
+   "field": "anti_air.long_range.range_km",
+   "compared": 15617
+  },
+  {
+   "field": "anti_air.long_range.hit_chance_pct",
+   "compared": 15617
+  },
+  {
+   "field": "anti_air.medium_range.continuous_damage_per_s",
+   "compared": 15801
+  },
+  {
+   "field": "anti_air.medium_range.range_km",
+   "compared": 15801
+  },
+  {
+   "field": "anti_air.medium_range.hit_chance_pct",
+   "compared": 15801
+  },
+  {
+   "field": "anti_air.short_range.continuous_damage_per_s",
+   "compared": 14397
+  },
+  {
+   "field": "anti_air.short_range.range_km",
+   "compared": 14397
+  },
+  {
+   "field": "anti_air.short_range.hit_chance_pct",
+   "compared": 14397
+  },
+  {
+   "field": "aircraft.plane_hp",
+   "compared": 4401
+  },
+  {
+   "field": "aircraft.squadron_hp",
+   "compared": 4401
+  },
+  {
+   "field": "aircraft.planes_in_squadron",
+   "compared": 4401
+  },
+  {
+   "field": "aircraft.planes_on_deck_max",
+   "compared": 4401
+  },
+  {
+   "field": "aircraft.plane_restoration_time_s",
+   "compared": 4401
+  },
+  {
+   "field": "aircraft.cruising_speed_knots",
+   "compared": 4401
+  },
+  {
+   "field": "aircraft.max_speed_knots",
+   "compared": 4401
+  },
+  {
+   "field": "aircraft.time_to_fully_aimed_s",
+   "compared": 4401
+  },
+  {
+   "field": "aircraft.detectability_by_ships_km",
+   "compared": 4401
+  },
+  {
+   "field": "airstrikes.anti_submarine_airstrike.plane_hp",
+   "compared": 11484
+  },
+  {
+   "field": "airstrikes.anti_submarine_airstrike.reload_s",
+   "compared": 11484
+  },
+  {
+   "field": "airstrikes.anti_submarine_airstrike.charges",
+   "compared": 11484
+  },
+  {
+   "field": "airstrikes.anti_submarine_airstrike.max_distance_km",
+   "compared": 11484
+  },
+  {
+   "field": "main_battery.range_km",
+   "compared": 18021
+  },
+  {
+   "field": "main_battery.reload_s",
+   "compared": 18021
+  },
+  {
+   "field": "main_battery.turret_180_turn_time_s",
+   "compared": 18021
+  },
+  {
+   "field": "main_battery.turret_traverse_speed_deg_per_s",
+   "compared": 18021
+  },
+  {
+   "field": "main_battery.ammo_switch_time_s",
+   "compared": 18021
+  },
+  {
+   "field": "main_battery.total_barrels",
+   "compared": 18021
+  },
+  {
+   "field": "main_battery.sigma",
+   "compared": 18021
+  },
+  {
+   "field": "main_battery.dispersion_at_max_range_horizontal_m",
+   "compared": 18021
+  },
+  {
+   "field": "main_battery.dispersion_at_max_range_vertical_m",
+   "compared": 18021
+  },
+  {
+   "field": "main_battery.he_damage_per_minute",
+   "compared": 16156
+  },
+  {
+   "field": "main_battery.ap_damage_per_minute",
+   "compared": 16772
+  },
+  {
+   "field": "main_battery.he_potential_fires_per_minute",
+   "compared": 16156
+  },
+  {
+   "field": "main_battery.shells.HE.damage",
+   "compared": 16443
+  },
+  {
+   "field": "main_battery.shells.HE.muzzle_velocity_m_s",
+   "compared": 16443
+  },
+  {
+   "field": "main_battery.shells.HE.mass_kg",
+   "compared": 16443
+  },
+  {
+   "field": "main_battery.shells.HE.penetration_mm (truncated)",
+   "compared": 16443
+  },
+  {
+   "field": "main_battery.shells.HE.fire_chance_pct",
+   "compared": 16443
+  },
+  {
+   "field": "main_battery.shells.HE.splash_damage",
+   "compared": 16443
+  },
+  {
+   "field": "main_battery.shells.HE.underwater_splash_radius_m",
+   "compared": 16443
+  },
+  {
+   "field": "main_battery.shells.AP.damage",
+   "compared": 17035
+  },
+  {
+   "field": "main_battery.shells.AP.muzzle_velocity_m_s",
+   "compared": 17035
+  },
+  {
+   "field": "main_battery.shells.AP.mass_kg",
+   "compared": 17035
+  },
+  {
+   "field": "main_battery.shells.AP.overmatch_mm",
+   "compared": 17035
+  },
+  {
+   "field": "main_battery.shells.AP.krupp",
+   "compared": 17035
+  },
+  {
+   "field": "main_battery.shells.AP.fuse_time_s",
+   "compared": 17035
+  },
+  {
+   "field": "main_battery.shells.AP.arming_threshold_mm",
+   "compared": 17035
+  },
+  {
+   "field": "main_battery.shells.AP.ricochet_start_angle_deg",
+   "compared": 17035
+  },
+  {
+   "field": "main_battery.shells.AP.splash_damage",
+   "compared": 17035
+  },
+  {
+   "field": "main_battery.shells.AP.underwater_splash_radius_m",
+   "compared": 17035
+  },
+  {
+   "field": "torpedoes.reload_s",
+   "compared": 11707
+  },
+  {
+   "field": "torpedoes.launcher_180_turn_time_s",
+   "compared": 11707
+  },
+  {
+   "field": "torpedoes.total_tubes",
+   "compared": 11707
+  },
+  {
+   "field": "torpedoes.torpedo_switch_time_s",
+   "compared": 11707
+  },
+  {
+   "field": "torpedoes.torpedoes.damage",
+   "compared": 12183
+  },
+  {
+   "field": "torpedoes.torpedoes.range_km",
+   "compared": 12183
+  },
+  {
+   "field": "torpedoes.torpedoes.speed_knots",
+   "compared": 12183
+  },
+  {
+   "field": "torpedoes.torpedoes.detectability_km",
+   "compared": 12183
+  },
+  {
+   "field": "torpedoes.torpedoes.reaction_time_s",
+   "compared": 12183
+  },
+  {
+   "field": "torpedoes.torpedoes.arming_distance_m",
+   "compared": 12183
+  },
+  {
+   "field": "torpedoes.torpedoes.flooding_chance_pct",
+   "compared": 12183
+  },
+  {
+   "field": "depth_charges.reload_s",
+   "compared": 6352
+  },
+  {
+   "field": "depth_charges.charges",
+   "compared": 6352
+  },
+  {
+   "field": "depth_charges.depth_charges_per_attack",
+   "compared": 6352
+  },
+  {
+   "field": "main_battery.sap_damage_per_minute",
+   "compared": 1436
+  },
+  {
+   "field": "main_battery.shells.SAP.damage",
+   "compared": 1458
+  },
+  {
+   "field": "main_battery.shells.SAP.muzzle_velocity_m_s",
+   "compared": 1458
+  },
+  {
+   "field": "main_battery.shells.SAP.mass_kg",
+   "compared": 1458
+  },
+  {
+   "field": "main_battery.shells.SAP.penetration_mm (truncated)",
+   "compared": 1458
+  },
+  {
+   "field": "main_battery.shells.SAP.overmatch_mm",
+   "compared": 1458
+  },
+  {
+   "field": "main_battery.shells.SAP.ricochet_start_angle_deg",
+   "compared": 1458
+  },
+  {
+   "field": "main_battery.shells.SAP.splash_damage",
+   "compared": 1458
+  },
+  {
+   "field": "main_battery.shells.SAP.underwater_splash_radius_m",
+   "compared": 1458
+  },
+  {
+   "field": "survivability.dive_capacity",
+   "compared": 624
+  },
+  {
+   "field": "maneuverability.max_speed_surface_knots",
+   "compared": 624
+  },
+  {
+   "field": "maneuverability.max_speed_periscope_depth_knots",
+   "compared": 624
+  },
+  {
+   "field": "maneuverability.dive_speed_m_per_s",
+   "compared": 624
+  },
+  {
+   "field": "sonar.range_km",
+   "compared": 601
+  },
+  {
+   "field": "sonar.reload_s",
+   "compared": 601
+  },
+  {
+   "field": "sonar.ping_speed_m_per_s",
+   "compared": 601
+  },
+  {
+   "field": "sonar.first_ping_duration_s",
+   "compared": 601
+  },
+  {
+   "field": "airstrikes.airstrike.plane_hp",
+   "compared": 577
+  },
+  {
+   "field": "airstrikes.airstrike.reload_s",
+   "compared": 577
+  },
+  {
+   "field": "airstrikes.airstrike.charges",
+   "compared": 577
+  },
+  {
+   "field": "airstrikes.airstrike.max_distance_km",
+   "compared": 577
+  }
+ ],
+ "game_version": "15.10.1",
+ "fields_all_equal_count": 120
+}

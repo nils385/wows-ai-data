@@ -32,6 +32,7 @@ Pages work without JavaScript; a small script (`/assets/site.js`) only adds filt
 
 - **Game data**: the public data files of [WoWs ShipBuilder](https://app.wowssb.com), which are extracted from the game client every patch. No account or key is needed, and every file's checksum is verified.
 - **Calculations**: a line-by-line JavaScript port of ShipBuilder's open-source (MIT) stat formulas, including its rounding, constants and upgrade/skill effect rules. Where ShipBuilder rounds away information, this site keeps more precision (for example HE penetration 54.9 mm instead of 54).
+- **Parity test with ShipBuilder's own code**: ShipBuilder's C# calculation code was compiled and run on the same game data for every ship, every module combination and every upgrade (19,587 cases, 1.56 million values); 99.98% are identical, and every remaining difference is explained in `verification/shipbuilder-parity.json` (re-run with `tools/shipbuilder_parity.mjs`).
 - **Cross-check**: every number in the stat tables of the official wiki (wiki.worldofwarships.com) is compared with this data. The report lists every difference, including the ones that come from outdated wiki pages.
 
 Game data © Wargaming.net. Unofficial; not affiliated with Wargaming or WoWs ShipBuilder.
