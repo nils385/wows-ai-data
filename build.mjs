@@ -10,7 +10,7 @@
 import { mkdir, writeFile, rm, readFile, rename } from "node:fs/promises";
 import path from "node:path";
 import { loadGameData } from "./lib/data.mjs";
-import { setConsumableTitles, allConfigurations, computeConfiguration, specialAbility, shellStats, weaponStats, cvPlane, describeModifier, slug, consumableSlots } from "./lib/ship.mjs";
+import { normalizeName, setConsumableTitles, allConfigurations, computeConfiguration, specialAbility, shellStats, weaponStats, cvPlane, describeModifier, slug, consumableSlots } from "./lib/ship.mjs";
 import { flatten, metricInfo } from "./lib/metrics.mjs";
 import { eligibleModernizations, skillsFor, signalFlags, changesWith, bestWithUpgrades, describeEffects, clean, upgradeName } from "./lib/analysis.mjs";
 import { toMarkdown } from "./lib/markdown.mjs";
@@ -291,7 +291,7 @@ await out("api/meta.json", meta);
 await out("api/index.json", { about: "Every released ship. Fetch url for full data.", ...meta, ships: rows.map(listEntry) });
 await out("api/test-ships.json", { about: "Ships marked as test ships in the game files: in development or not normally available. Kept out of all lists and rankings. Numbers may change.", ships: testShips.map(listEntry) });
 const names = {};
-const addName = (k, i) => { const key = k.toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g, "").trim(); if (!(names[key] ??= []).includes(i)) names[key].push(i); };
+const addName = (k, i) => { const key = normalizeName(k); if (!(names[key] ??= []).includes(i)) names[key].push(i); };
 for (const r of rows) addName(r.name, r.index);
 for (const s of Object.values(ctx.ships)) if (s.shipCategory !== "TestShip") addName(clean(L[`${s.index}_FULL`]) ?? shipName(s.index), s.index);
 await out("api/name-lookup.json", { about: "Lowercase ship name (accents removed) -> ship indexes. Several ships can share a name (event or alternate versions): check tier and category in api/index.json.", names });
