@@ -62,6 +62,8 @@ for (const p of ["index.html", "ships/index.html", await relOf(humanBy.PJSB018.h
   ok(t.includes("This work is unofficial and is not endorsed by Wargaming"), `${p} has the Wargaming disclaimer`);
 }
 
+ok((await readFile(path.join(DIST, "index.html"), "utf8")).includes('name="google-site-verification"'), "homepage has the Google Search Console verification tag");
+
 // AI use: no llms.txt unless built with AI_GUIDE=1; legal page and robots.txt carry the notice
 if (process.env.AI_GUIDE !== "1") ok(!(await exists("llms.txt")), "llms.txt is not published without Wargaming's consent (AI_GUIDE=1)");
 ok((await readFile(path.join(DIST, "legal/index.html"), "utf8")).includes("Player Content Policy, section 2.9"), "legal page has the AI-use notice");
