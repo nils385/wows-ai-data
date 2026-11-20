@@ -16,9 +16,13 @@ An unofficial, non-commercial World of Warships encyclopedia for players: a page
 | `/compare.html?ships=PJSB018,PASB018` | up to four ships side by side |
 | `/rankings/` and `/rankings/{metric}/` | leaderboards for every stat, filterable |
 | `/guides/…` | mechanics, glossary, tech trees, upgrades/skills/signals, changes, community opinion |
+| `/tools/build/?ship=PJSB018` | build tool: modules, upgrades, commander (incl. unique commanders and talents), skills, signals, conditional buffs (Adrenaline Rush HP, Furious fires, active consumables, special ability); every stat recalculated in the browser; optimizer for any stat |
+| `/tools/gunnery/` | gunnery lab: penetration check per armor area at any distance and angle, penetration-by-distance chart, shell flight path, 3D firing simulation with real dispersion |
 | `/about/`, `/legal/` | data sources, checks, legal notice and attribution |
 
-Pages work without JavaScript; a small script (`/assets/site.js`) only adds filtering and the comparison tool. No frameworks, no tracking, no cookies.
+Pages work without JavaScript; a small script (`/assets/site.js`) adds filtering and the comparison tool. The tools run the site's own calculation modules in the browser (`/assets/lib/`, the same files as `lib/*.mjs`), with per-ship input data in `/api/build/`. The 3D view uses three.js (MIT, in `vendor/three/`). No tracking, no cookies.
+
+The gunnery lab is a simplified model: armor is the thickest plate per area from the wiki, the ship shape is built from its real size, and there is no citadel, spaced armor or shell normalization (not in the game data). Wiki armor tables that fail a plausibility check (a battleship belt under 100 mm) are not used; they are listed in `/api/status.json`.
 
 ## What's in it
 

@@ -13,14 +13,15 @@
 import { mkdir, writeFile, rm, readFile, rename } from "node:fs/promises";
 import path from "node:path";
 import { loadGameData } from "./lib/data.mjs";
-import { normalizeName, setConsumableTitles, allConfigurations, computeConfiguration, specialAbility, shellStats, weaponStats, cvPlane, describeModifier, slug, consumableSlots } from "./lib/ship.mjs";
+import { moduleKey, normalizeName, setConsumableTitles, allConfigurations, computeConfiguration, specialAbility, shellStats, weaponStats, cvPlane, describeModifier, slug, consumableSlots } from "./lib/ship.mjs";
 import { flatten, metricInfo } from "./lib/metrics.mjs";
 import { eligibleModernizations, skillsFor, signalFlags, changesWith, bestWithUpgrades, describeEffects, clean, upgradeName } from "./lib/analysis.mjs";
 import { toMarkdown } from "./lib/markdown.mjs";
 import { makeLayout, renderShipPage, CSS, JS, esc, nationLabel as nationLabelOf } from "./lib/site.mjs";
-import { renderNotFound, renderHome, renderShipsIndex, renderRankingsIndex, renderRankingPage, renderTextPage, renderGuidesIndex, renderUpgradesPage, renderCompare, renderAbout, renderLegal, redirectPage } from "./lib/pages.mjs";
+import { renderNotFound, renderHome, renderShipsIndex, renderRankingsIndex, renderRankingPage, renderTextPage, renderGuidesIndex, renderUpgradesPage, renderCompare, renderAbout, renderLegal, redirectPage, renderToolsIndex, renderBuildToolPage, renderGunneryPage } from "./lib/pages.mjs";
 import { validate } from "./lib/validate.mjs";
 import { buildKnowledge } from "./lib/knowledge.mjs";
+import { shipToolData, commonToolData, captainToolData } from "./lib/tooldata.mjs";
 
 const args = process.argv.slice(2);
 const argVal = (n) => (args.includes(n) ? args[args.indexOf(n) + 1] : null);
@@ -81,7 +82,14 @@ const meta = {
 // ---------- ships ----------
 // Armor from the official wiki (snapshot committed in verification/, refreshed with tools/extract_wiki_armor.py)
 const wikiArmorFile = JSON.parse(await readFile(new URL("./verification/wiki-armor.json", import.meta.url), "utf8").catch(() => "{}"));
-const wikiArmor = Object.fromEntries(Object.entries(wikiArmorFile.ships ?? {}).map(([i, a]) => { const { wiki_page, ...rest } = a; return [i, { ...rest, source: wiki_page }]; }));
+// Plausibility check: some wiki armor tables are wrong (e.g. Iowa's lists a 38 mm "belt"; the real belt is about 307 mm).
+// No battleship has a belt under 100 mm, so such a record is not used at all; it is listed in status.json instead.
+const armorRejected = [];
+const wikiArmor = Object.fromEntries(Object.entries(wikiArmorFile.ships ?? {}).filter(([i, a]) => {
+  const bad = ctx.ships[i]?.shipClass === "Battleship" && typeof a.belt_mm === "number" && a.belt_mm < 100;
+  if (bad) armorRejected.push({ index: i, wiki_page: a.wiki_page, belt_mm: a.belt_mm, reason: "battleship belt under 100 mm: the wiki table is almost certainly wrong" });
+  return !bad;
+}).map(([i, a]) => { const { wiki_page, ...rest } = a; return [i, { ...rest, source: wiki_page }]; }));
 // Change tracking: only when the game data version differs from the previous build, and only for metrics present in both
 // (so renamed or new fields on this site are never reported as game changes).
 const prevBy = Object.fromEntries((previousRows ?? []).map((r) => [r.index, r]));
@@ -115,6 +123,12 @@ const BASE_PATH = SITE_URL ? new URL(SITE_URL).pathname.replace(/\/$/, "") : "";
 const shipHtml = (index) => `${BASE_PATH}/ships/${slugByIndex[index]}/`;
 const layout = makeLayout({ base: BASE_PATH, site: SITE_URL, gameVersion: ctx.gameVersion, updated: meta.generated_at.slice(0, 10) });
 const ships = Object.values(ctx.ships).sort((a, b) => a.index.localeCompare(b.index));
+const toolTargets = {}; // armor and hull size per ship, for the gunnery tools
+// main battery turrets in order from bow to stern (verticalPosition) and whether they face aft (baseAngle 180), to draw the 3D target
+function turretList(ship, cfg) {
+  const guns = ship.mainBatteryModuleList?.[moduleKey(cfg, "Artillery")]?.guns ?? [];
+  return guns.length ? guns.map((g) => ({ order: g.verticalPosition ?? 0, aft: Math.abs(g.baseAngle ?? 0) >= 90 })) : null;
+}
 let done = 0;
 for (const s of ships) {
   const sum = summaryBy[s.index] ?? {};
@@ -223,6 +237,9 @@ for (const s of ships) {
     if (JSON.stringify(c.stats).includes('"missing_data":true')) configWarnings.push(`${s.index} ${c.id}: a referenced projectile, aircraft or consumable is missing in the game data`);
   }
   configsChecked += allConfigs.length;
+  if (s.shipCategory !== "TestShip") toolTargets[s.index] = { name, tier: s.tier, class: s.shipClass, nation: nationId(s.shipNation), armor: armor ? { belt_mm: armor.belt_mm, deck_mm: armor.deck_mm, extremities_mm: armor.extremities_mm, superstructure_mm: armor.superstructure_mm } : null, size_m: top.stats.hull_size_m ?? null, guns: !!top.stats.main_battery, turrets: turretList(s, top.cfg) };
+  // input data for the interactive tools (the browser runs the same calculation code)
+  await out(`api/build/ships/${s.index}.json`, shipToolData(ctx, s, { name, gameVersion: ctx.gameVersion }));
   await out(`api/ships/${s.index}/configurations.json`, {
     about: `Every module combination for ${name} with full stats. ${COMMON_NOTE}`, game_version: ctx.gameVersion, index: s.index, name, configurations: allConfigs,
   });
@@ -510,6 +527,7 @@ const statusDoc = {
   about: "Read this to decide how much to trust the data right now.", ai_use_notice: AI_NOTICE,
   schema_version: SCHEMA_VERSION, game_version: ctx.gameVersion, server: SERVER, generated_at: meta.generated_at,
   data_source: "game files via WoWs ShipBuilder, every file checksum-verified",
+  wiki_armor_not_used: { about: "Wiki armor tables that failed a plausibility check and are not shown.", count: armorRejected.length, ships: armorRejected },
   validation: { passed: report.passed, errors: report.error_count, warnings: report.warning_count, report: abs("api/validation.json") },
   wiki_crosscheck: verification ? { checked_on: verification.checked_on ?? null, ships_compared: verification.ships_compared, values_compared: verification.values_compared,
     match_rate_any_module_pct: verification.match_rate_pct, match_rate_top_configuration_pct: verification.strict?.match_rate_pct ?? null, report: abs("api/verification.json"),
@@ -630,6 +648,19 @@ ${verification ? `- [Wiki cross-check](${abs("api/verification.json")}): values 
 {
   await out("assets/site.css", CSS);
   await out("assets/site.js", JS);
+  // Interactive tools: the calculation modules are served as-is (pure JavaScript, no Node APIs), plus the tool scripts.
+  for (const f of ["ship", "acceleration", "ballistics", "metrics", "builder", "site", "penetration"]) {
+    const src = await readFile(new URL(`./lib/${f}.mjs`, import.meta.url), "utf8");
+    await out(`assets/lib/${f}.js`, src.replace(/from "\.\/([a-z]+)\.mjs"/g, 'from "./$1.js"'));
+  }
+  for (const f of ["build-tool", "gunnery"]) await out(`assets/tools/${f}.js`, await readFile(new URL(`./lib/client/${f}.js`, import.meta.url), "utf8"));
+  await out("api/build/common.json", commonToolData(ctx));
+  await out("api/build/targets.json", { about: "Per ship: armor (thickest plate per area, from the official wiki), hull size and whether it has a main battery. Used by the gunnery tools.", game_version: ctx.gameVersion, ships: toolTargets });
+  for (const [nation, captains] of Object.entries(captainToolData(ctx))) await out(`api/build/captains/${nation}.json`, { about: "Unique commanders of this nation: skills that differ from the standard commander, and talents.", game_version: ctx.gameVersion, captains });
+  await out("tools/index.html", renderToolsIndex({ layout, base: BASE_PATH }));
+  await out("tools/build/index.html", renderBuildToolPage({ layout, base: BASE_PATH }));
+  await out("tools/gunnery/index.html", renderGunneryPage({ layout, base: BASE_PATH }));
+  for (const f of ["three.module.min.js", "OrbitControls.js", "LICENSE"]) await out(`assets/vendor/three/${f}`, await readFile(new URL(`./vendor/three/${f}`, import.meta.url), "utf8"));
   const date = meta.generated_at.slice(0, 10);
   await out("index.html", renderHome({ layout, base: BASE_PATH, rows, gameVersion: ctx.gameVersion, updated: date, nations, counts: { rankings: metricIndex.length } }));
   await out("ships/index.html", renderShipsIndex({ layout, base: BASE_PATH, rows, nations, shipUrl: shipHtml }));
@@ -679,7 +710,7 @@ ${verification ? `- [Wiki cross-check](${abs("api/verification.json")}): values 
 // Search engines are welcome. AI training crawlers are asked not to collect this site (Wargaming Player Content Policy 2.9).
 const AI_TRAINING_BOTS = ["GPTBot", "ClaudeBot", "anthropic-ai", "Google-Extended", "CCBot", "Applebot-Extended", "Bytespider", "meta-externalagent", "PerplexityBot", "cohere-training-data-crawler", "Diffbot", "omgili"];
 await out("robots.txt", `# WoWs Data: unofficial World of Warships fan encyclopedia.\n# ${AI_NOTICE}\n\n${AI_TRAINING_BOTS.map((b) => `User-agent: ${b}\nDisallow: /\n`).join("\n")}\nUser-agent: *\nAllow: /\n${SITE_URL ? `\nSitemap: ${SITE_URL}/sitemap.xml\n` : ""}`);
-if (SITE_URL) await out("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${["", ...(AI_GUIDE ? ["llms.txt"] : []), "api/index.json", "api/schema.json", "api/rankings/index.json", ...rows.map((r) => `api/ships/${r.index}.json`), ...rows.map((r) => `ships/${r.slug}.md`), ...[...new Set(rows.map((r) => `ship/${slug(r.name) || r.index.toLowerCase()}.md`))], "ships.md", "rankings/index.md", "all-stats/index.md", "glossary.md", "mechanics.md", "community.md", "tech-tree/index.md", "changes/index.md", "api/metrics.json", "api/status.json", "ships/", "rankings/", "compare.html", "guides/", "guides/mechanics/", "guides/glossary/", "guides/tech-tree/", "guides/upgrades/", "guides/community/", "guides/changes/", "about/", "legal/", ...rows.map((r) => `ships/${slugByIndex[r.index]}/`), ...metricIndex.filter((r) => r.family === "rankings").map((r) => `rankings/${r.metric}/`)].map((u) => `<url><loc>${abs(u)}</loc></url>`).join("\n")}\n</urlset>\n`);
+if (SITE_URL) await out("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${["", ...(AI_GUIDE ? ["llms.txt"] : []), "api/index.json", "api/schema.json", "api/rankings/index.json", ...rows.map((r) => `api/ships/${r.index}.json`), ...rows.map((r) => `ships/${r.slug}.md`), ...[...new Set(rows.map((r) => `ship/${slug(r.name) || r.index.toLowerCase()}.md`))], "ships.md", "rankings/index.md", "all-stats/index.md", "glossary.md", "mechanics.md", "community.md", "tech-tree/index.md", "changes/index.md", "api/metrics.json", "api/status.json", "ships/", "rankings/", "compare.html", "tools/", "tools/build/", "tools/gunnery/", "guides/", "guides/mechanics/", "guides/glossary/", "guides/tech-tree/", "guides/upgrades/", "guides/community/", "guides/changes/", "about/", "legal/", ...rows.map((r) => `ships/${slugByIndex[r.index]}/`), ...metricIndex.filter((r) => r.family === "rankings").map((r) => `rankings/${r.metric}/`)].map((u) => `<url><loc>${abs(u)}</loc></url>`).join("\n")}\n</urlset>\n`);
 await out(".nojekyll", "");
 
 log(`built ${rows.length} ships (+${testShips.length} test), ${metricIndex.length} rankings, ${fileCount} files into ${OUT}`);

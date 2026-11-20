@@ -69,7 +69,33 @@ if (process.env.AI_GUIDE !== "1") ok(!(await exists("llms.txt")), "llms.txt is n
 ok((await readFile(path.join(DIST, "legal/index.html"), "utf8")).includes("Player Content Policy, section 2.9"), "legal page has the AI-use notice");
 ok(/User-agent: GPTBot\nDisallow: \//.test(await readFile(path.join(DIST, "robots.txt"), "utf8")), "robots.txt asks AI training crawlers not to collect the site");
 
-// 4. Validation passed and site size is within limits
+// 4. Interactive tools: pages, data files, and the browser data reproduces known values with the same code
+for (const p of ["tools/index.html", "tools/build/index.html", "tools/gunnery/index.html", "assets/tools/build-tool.js", "assets/tools/gunnery.js", "assets/lib/ship.js", "assets/lib/builder.js", "assets/lib/penetration.js", "assets/vendor/three/three.module.min.js", "assets/vendor/three/LICENSE", "api/build/common.json", "api/build/targets.json", "api/build/captains/Usa.json"]) ok(await exists(p), `missing ${p}`);
+{
+  const { computeConfiguration, upgradeGroups, setConsumableTitles } = await import("../lib/ship.mjs");
+  const { flatten } = await import("../lib/metrics.mjs");
+  const { captainSkills, buildModifiers } = await import("../lib/builder.mjs");
+  const common = await json("api/build/common.json"), d = await json("api/build/ships/PJSB018.json").catch(() => null);
+  ok(!!d, "tool data for PJSB018");
+  if (d) {
+    setConsumableTitles(common.consumable_titles);
+    const L = { ...common.L, ...d.L };
+    const ctx = { projectiles: d.projectiles, aircraft: d.aircraft, abilities: d.abilities, L, name: (k) => (k ? L[String(k).toUpperCase()] ?? null : null) };
+    const groups = upgradeGroups(d.ship), cfg = Object.fromEntries(Object.entries(groups).map(([t, l]) => [t, l[l.length - 1]]));
+    const base = flatten(computeConfiguration(ctx, d.ship, cfg, [], { tables: false, accel: true }));
+    ok(base["main_battery.reload_s"] === 30 && base["survivability.hit_points"] === 97200, "tool data: Yamato base reload 30 s, 97200 HP");
+    const mbm3 = d.upgrades.flatMap((s) => s.options).find((o) => o.name === "Main Battery Modification 3");
+    const ar = captainSkills(common.default_captain, "Battleship", L).find((s) => s.name === "Adrenaline Rush");
+    const mods = buildModifiers({ upgrades: [mbm3], skills: [ar], cls: "Battleship", arHpPct: 20 });
+    const v = flatten(computeConfiguration(ctx, d.ship, cfg, mods, { tables: false, accel: false }))["main_battery.reload_s"];
+    ok(v === 22.18, `tool data: Yamato reload with MBM3 + Adrenaline Rush at 20% HP = ${v}, expected 22.18 (30 x 0.88 x 0.84)`);
+  }
+  const t = (await json("api/build/targets.json")).ships.PJSB018;
+  ok((await json("api/build/targets.json")).ships.PASB018?.armor === null, "Iowa's wrong wiki armor table (38 mm belt) is not used");
+  ok(t?.armor?.belt_mm === 410 && t?.size_m?.length > 200 && t?.turrets?.length === 3, "targets.json: Yamato armor, size, 3 turrets");
+}
+
+// 5. Validation passed and site size is within limits
 const status = await json("api/status.json");
 ok(status.validation?.passed === true, "build validation passed");
 async function size(dir) { let n = 0; for (const e of await readdir(dir, { withFileTypes: true })) n += e.isDirectory() ? await size(path.join(dir, e.name)) : (await stat(path.join(dir, e.name))).size; return n; }

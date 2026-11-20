@@ -1,0 +1,2 @@
+three.js r160 (https://threejs.org), MIT License (see LICENSE). Downloaded from the npm package three@0.160.0.
+OrbitControls.js: import path changed to ./three.module.min.js.
